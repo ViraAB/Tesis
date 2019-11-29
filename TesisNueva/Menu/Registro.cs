@@ -40,27 +40,7 @@ namespace Menu
 
             //Ocultamos la columna de id gallo, pero se agrega para poder eliminar los registros con el id del mismo
             this.dgvGallos.Columns["ID Gallo"].Visible = false;
-        }
-
-        ////Mostrar en el DataGrid solo los gallos de un partido
-        //public void CargarDatosPorPartido()
-        //{
-        //    conexion2 = new SQLiteConnection(cadenaConexion);
-        //    conexion2.Open();
-        //    SQLiteDataAdapter adaptador = new SQLiteDataAdapter("" +
-        //        "SELECT g.Id_Partido AS 'ID Partido', g.Id_Gallo AS 'ID Gallo', NomPartido AS 'Nombre del Partido', Peso AS 'Peso del Gallo', Anillo AS 'Número de Anillo' " +
-        //        "FROM Gallos as g " +
-        //        "JOIN Partido as p " +
-        //        "on g.Id_Partido = p.Id_Partido " +
-        //        "WHERE NomPartido = 'Los chidos'" +
-        //        "ORDER by g.Id_Partido", conexion2);
-        //    DataTable tabla = new DataTable("Datos");
-        //    adaptador.Fill(tabla);
-        //    dgvGallos.DataSource = tabla;
-
-        //    //Ocultamos la columna de id gallo, pero se agrega para poder eliminar los registros con el id del mismo
-        //    this.dgvGallos.Columns["ID Gallo"].Visible = false;
-        //}        
+        }      
 
         //Guardamos los partidos nuevos
         private void btnGuardarNomPartido_Click(object sender, EventArgs e)
