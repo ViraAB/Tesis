@@ -1,0 +1,14 @@
+C:\Users\Joaquin\Desktop\Tesis Cambio\TesisNueva\Menu\bin\Debug\Menu.exe.config
+C:\Users\Joaquin\Desktop\Tesis Cambio\TesisNueva\Menu\bin\Debug\Menu.exe
+C:\Users\Joaquin\Desktop\Tesis Cambio\TesisNueva\Menu\bin\Debug\Menu.pdb
+C:\Users\Joaquin\Desktop\Tesis Cambio\TesisNueva\Menu\obj\Debug\Tesis.csprojAssemblyReference.cache
+C:\Users\Joaquin\Desktop\Tesis Cambio\TesisNueva\Menu\obj\Debug\Menu.Form1.resources
+C:\Users\Joaquin\Desktop\Tesis Cambio\TesisNueva\Menu\obj\Debug\Menu.Login.resources
+C:\Users\Joaquin\Desktop\Tesis Cambio\TesisNueva\Menu\obj\Debug\Menu.Properties.Resources.resources
+C:\Users\Joaquin\Desktop\Tesis Cambio\TesisNueva\Menu\obj\Debug\Tesis.csproj.GenerateResource.cache
+C:\Users\Joaquin\Desktop\Tesis Cambio\TesisNueva\Menu\obj\Debug\Tesis.csproj.CoreCompileInputs.cache
+C:\Users\Joaquin\Desktop\Tesis Cambio\TesisNueva\Menu\obj\Debug\Tesis.csproj.CopyComplete
+C:\Users\Joaquin\Desktop\Tesis Cambio\TesisNueva\Menu\obj\Debug\Menu.exe
+C:\Users\Joaquin\Desktop\Tesis Cambio\TesisNueva\Menu\obj\Debug\Menu.pdb
+C:\Users\Joaquin\Desktop\Tesis Cambio\TesisNueva\Menu\obj\Debug\Menu.Derby.resources
+C:\Users\Joaquin\Desktop\Tesis Cambio\TesisNueva\Menu\obj\Debug\Menu.Registro.resources

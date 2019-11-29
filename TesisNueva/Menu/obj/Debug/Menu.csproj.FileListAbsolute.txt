@@ -1,0 +1,12 @@
+C:\Users\Joaquin\Desktop\Tesis Cambio\Menu\Menu\bin\Debug\Menu.exe.config
+C:\Users\Joaquin\Desktop\Tesis Cambio\Menu\Menu\bin\Debug\Menu.exe
+C:\Users\Joaquin\Desktop\Tesis Cambio\Menu\Menu\bin\Debug\Menu.pdb
+C:\Users\Joaquin\Desktop\Tesis Cambio\Menu\Menu\obj\Debug\Menu.csprojAssemblyReference.cache
+C:\Users\Joaquin\Desktop\Tesis Cambio\Menu\Menu\obj\Debug\Menu.Form1.resources
+C:\Users\Joaquin\Desktop\Tesis Cambio\Menu\Menu\obj\Debug\Menu.Login.resources
+C:\Users\Joaquin\Desktop\Tesis Cambio\Menu\Menu\obj\Debug\Menu.Properties.Resources.resources
+C:\Users\Joaquin\Desktop\Tesis Cambio\Menu\Menu\obj\Debug\Menu.csproj.GenerateResource.cache
+C:\Users\Joaquin\Desktop\Tesis Cambio\Menu\Menu\obj\Debug\Menu.csproj.CoreCompileInputs.cache
+C:\Users\Joaquin\Desktop\Tesis Cambio\Menu\Menu\obj\Debug\Menu.csproj.CopyComplete
+C:\Users\Joaquin\Desktop\Tesis Cambio\Menu\Menu\obj\Debug\Menu.exe
+C:\Users\Joaquin\Desktop\Tesis Cambio\Menu\Menu\obj\Debug\Menu.pdb
