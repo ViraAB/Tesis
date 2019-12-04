@@ -11,11 +11,16 @@ namespace Menu
 {
     class Matrices
     {
+        SQLiteConnection conexion = new SQLiteConnection("Data Source=BD_Tesis.db");
         private string cadena = "Data Source=BD_Tesis.db";
+        public SQLiteDataReader dr;
+        public SQLiteDataReader dr1;
         public SQLiteConnection cn;
         public SQLiteCommand cmb;
         public DataSet ds = new DataSet();
         public SQLiteDataAdapter da;
+        public string ValNPD = ""; //numero de partidos que tiene l derby
+        public string ValNGD = ""; //numero de gallos con los que se llebara acabo el derby
 
         private void conectar()
         {
@@ -31,14 +36,27 @@ namespace Menu
 
         public void consultar(string sql2, string tabla)
         {
-//#pragma warning disable CS1690 // El acceso a un miembro en un campo de una clase de serialización por referencia puede causar una excepción en tiempo de ejecución.
-      //      int gallos1 = Convert.ToInt32( gallos.indice.ToString());
-//#pragma warning restore CS1690 // El acceso a un miembro en un campo de una clase de serialización por referencia puede causar una excepción en tiempo de ejecución.
+            //obtenemos el total de partidos y el numero de gallos con que se realizara el derby
+            conexion.Open();
+            cmb = new SQLiteCommand("SELECT Id_Partido FROM Partido ORDER BY Id_Partido DESC  LIMIT 1;", conexion);
+            dr = cmb.ExecuteReader();
+            cmb = new SQLiteCommand("SELECT NumGallos FROM Derby ORDER BY NumGallos DESC LIMIT 1;", conexion);
+            dr1 = cmb.ExecuteReader();
 
-            //  int gallos1; 
-            // int NG = 16;
-            int NG = 16;
-            string sql = "select Id_Partido,Peso from Gallos order by Id_Partido, Peso";
+            while (dr.Read())
+            {
+                ValNPD = dr.GetInt16(0) + " ";
+            }
+            int IntValNP = Int16.Parse(ValNPD);//Convertimos el ValNP a entero (int)
+
+            while (dr1.Read())
+            {
+                ValNGD = dr1.GetInt16(0) + " ";
+            }
+            int IntValNG = Int16.Parse(ValNGD);//Convertimos el ValNG a entero (int)
+
+            int NG = (IntValNG * IntValNP); //Multiplicamos NGD*NPD para saber el total de gallos
+            string sql = "select Id_Partido,Peso from Gallos order by Id_Partido, Peso"; //Se ordenade menor a mayor los gallos de cada partido
             int[,] arreglo = { };
             int[,] matrizPesos = { };
             bool[,] peleaPeso = { };
@@ -70,15 +88,16 @@ namespace Menu
                 arryColumns = 2;
                 arreglo = new int[arryRows, arryColumns];
 
+                //Aqui llenamos la MatrizPesos
                 for (i = 0; i < arryRows; i++)
                 {
                     for (j = 0; j < arryColumns; j++)
                     {
                         arreglo[i, j] = int.Parse(ds.Tables["Gallos"].Rows[i][j].ToString());
-
                     }
                 }
 
+                //Aqui llenamos las matrices PeleaPeso y PeleaPartido
                 for (x = 0; x <= NG - 1; x++)
                 {
                     for (y = 0; y <= NG - 1; y++)
@@ -96,16 +115,9 @@ namespace Menu
                         else peleaPartido[x, y] = true;
                     }
                 }
-
-
                 //aqui simplemente puse un mensaje para que me de el total de gallos o bien el total de filas
                 MessageBox.Show("Total de Gallos:" + NG.ToString());
-
-
             }
-
-
         }
-
     }
 }
