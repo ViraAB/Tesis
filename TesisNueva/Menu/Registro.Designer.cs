@@ -60,6 +60,7 @@
             this.txtMosPG = new System.Windows.Forms.TextBox();
             this.Actualizar = new System.Windows.Forms.Button();
             this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.AgreRest = new System.Windows.Forms.Button();
             this.grBoxPartidos.SuspendLayout();
             this.grBoxGallos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -222,9 +223,9 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(894, 772);
+            this.btnEliminar.Location = new System.Drawing.Point(718, 774);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(161, 27);
+            this.btnEliminar.Size = new System.Drawing.Size(162, 27);
             this.btnEliminar.TabIndex = 28;
             this.btnEliminar.Text = "Eliminar Gallo";
             this.btnEliminar.UseVisualStyleBackColor = true;
@@ -347,7 +348,7 @@
             // 
             // Actualizar
             // 
-            this.Actualizar.Location = new System.Drawing.Point(584, 772);
+            this.Actualizar.Location = new System.Drawing.Point(505, 774);
             this.Actualizar.Name = "Actualizar";
             this.Actualizar.Size = new System.Drawing.Size(162, 27);
             this.Actualizar.TabIndex = 29;
@@ -359,12 +360,23 @@
             // 
             this.errorProvider3.ContainerControl = this;
             // 
+            // AgreRest
+            // 
+            this.AgreRest.Location = new System.Drawing.Point(930, 774);
+            this.AgreRest.Name = "AgreRest";
+            this.AgreRest.Size = new System.Drawing.Size(162, 27);
+            this.AgreRest.TabIndex = 30;
+            this.AgreRest.Text = "Agregar Restricciones";
+            this.AgreRest.UseVisualStyleBackColor = true;
+            this.AgreRest.Click += new System.EventHandler(this.AgreRest_Click);
+            // 
             // Registro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1111, 811);
+            this.Controls.Add(this.AgreRest);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.grBoxEditRegis);
             this.Controls.Add(this.dgvGallos);
@@ -421,5 +433,6 @@
         private System.Windows.Forms.Button btnGuardarActu;
         private System.Windows.Forms.Button Cancelar;
         private System.Windows.Forms.ErrorProvider errorProvider3;
+        private System.Windows.Forms.Button AgreRest;
     }
 }

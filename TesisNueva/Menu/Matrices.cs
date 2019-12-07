@@ -72,6 +72,7 @@ namespace Menu
             bool[,] peleaPeso = { };
             bool[,] peleaPartido = { };
             bool[,] yaPelearon = { };
+            bool[,] puedenPelear = { };
             int[,,] rondas = { };
             da = new SQLiteDataAdapter(sql, cn);
             cmb = new SQLiteCommand();
@@ -90,10 +91,12 @@ namespace Menu
                 //  NG = matrizPesos.GetLength(0);
                 arryRows = ds.Tables["Gallos"].Rows.Count;
                 //se asigna a matrizPesos el numero de filas x numero de filas de la Tabla Gallos [NG,NG]
+                //Al crear una matriz booleana, esta se inicializa en falso automanticamente.
                 matrizPesos = new int[arryRows, arryRows];
                 peleaPeso = new bool[NG, NG];
                 peleaPartido = new bool[NG, NG];
                 yaPelearon = new bool[NG, NG];
+                puedenPelear = new bool[NG, NG];
 
                 //AQUI HICE UNA PRUEBA DE NUMERO DE FILAS POR NUMERO DE COLUMNAS DE LA TABLA GALLOS
                 arryColumns = 2;
