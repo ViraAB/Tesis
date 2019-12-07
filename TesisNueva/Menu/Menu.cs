@@ -60,5 +60,13 @@ namespace Menu
                 MessageBox.Show("Debe iniciar sesión");
             }
         }
+
+        private void restricciones()
+        {
+            Restricciones rest = new Restricciones();
+            rest.MdiParent = this;
+            rest.Show();
+        }
+
     }
 }

@@ -19,6 +19,7 @@ namespace Menu
         public SQLiteConnection cn;
         public SQLiteCommand cmb;
         public DataSet ds = new DataSet();
+        public DataSet dsron = new DataSet();
         public SQLiteDataAdapter da;
         public string ValNPD = ""; //numero de partidos que tiene l derby
         public string ValNGD = ""; //numero de gallos con los que se llebara acabo el derby
@@ -36,7 +37,8 @@ namespace Menu
 
         Derby gallos = new Derby();
 
-        public void consultar(string sql2, string tabla)
+        //public void Consultar(string sql2, string tabla)
+        public Boolean Consultar(string sql2, string tabla)
         {
             //obtenemos el total de partidos, el numero de gallos y la tolerancia con que se realizara el derby
             conexion.Open();
@@ -66,48 +68,71 @@ namespace Menu
             int IntValNT = Int16.Parse(ValNTD);//Convertimos el ValNTD a entero (int)
 
             int NG = (IntValNG * IntValNP); //Multiplicamos NGD*NPD para saber el total de gallos
-            string sql = "select Id_Partido,Peso from Gallos order by Id_Partido, Peso"; //Se ordenade menor a mayor los gallos de cada partido
-            int[,] arreglo = { };
-            int[,] matrizPesos = { };
-            bool[,] peleaPeso = { };
-            bool[,] peleaPartido = { };
-            bool[,] yaPelearon = { };
-            bool[,] puedenPelear = { };
-            int[,,] rondas = { };
+            string sql = "select Id_Partido, Peso from Gallos order by Id_Partido, Peso"; //Se ordenade menor a mayor los gallos de cada partido
             da = new SQLiteDataAdapter(sql, cn);
             cmb = new SQLiteCommand();
             cmb.CommandText = sql;
             da.Fill(ds, tabla);
 
+            //string sqlron = "SELECT Peso AS 'Peso del Gallo (Gr)', g.Id_Gallo AS 'ID Gallo', g.Id_Partido AS 'ID Partido' FROM Gallos as g JOIN Partido as p on g.Id_Partido = p.Id_Partido ORDER by g.Id_Partido, g.Peso;";
+            //da = new SQLiteDataAdapter(sqlron, cn);
+            //DataTable tablaRon = new DataTable("Datos");
+            //cmb = new SQLiteCommand();
+            //cmb.CommandText = sqlron;
+            //da.Fill(dsron, tablaRon);
+
+            //Declaracion de matrices
+            int[,] matrizGallos = { };
+            int[,] matrizPesos = { };
+            bool[,] peleaPeso = { };
+            bool[,] peleaPartido = { };
+            bool[,] yaPelearon = { };
+            bool[,] puedenPelear = { };
+            int[,,] rondas = { };          
+
             int arryRows = 0;
-            int arryColumns = 0;
             int i = 0, j = 0;
             int x = 0, y = 0;
             int tolerancia = IntValNT;
+            int rx = 0, ry = 0, rz = 0;
+
+            //if (dsron.Tables["Gallos"].Rows.Count > 0)
+            //{
+            //    //Llenar las rondas
+            //    int incre = 0;
+            //    for (rx = 0; rx < IntValNG; rx++)
+            //    {
+            //        for (ry = 0; ry < IntValNP; ry++)
+            //        {
+            //            for (rz = 0; rz < 3; rz++)
+            //            {
+            //                rondas[rx, ry, rz] = int.Parse(dsron.Tables["Gallos"].Rows[incre][rz].ToString());
+            //            }
+            //            incre = incre + IntValNG;
+            //        }
+            //    }
+            //}
 
             //aqui cuenta las columnas que hay en la tabla Gallos y se compara para que entre a manipular el arreglo
             if (ds.Tables["Gallos"].Rows.Count > 0)
             {
-                //  NG = matrizPesos.GetLength(0);
                 arryRows = ds.Tables["Gallos"].Rows.Count;
                 //se asigna a matrizPesos el numero de filas x numero de filas de la Tabla Gallos [NG,NG]
                 //Al crear una matriz booleana, esta se inicializa en falso automanticamente.
+                matrizGallos = new int[arryRows, 2];
                 matrizPesos = new int[arryRows, arryRows];
                 peleaPeso = new bool[NG, NG];
                 peleaPartido = new bool[NG, NG];
                 yaPelearon = new bool[NG, NG];
                 puedenPelear = new bool[NG, NG];
+                rondas = new int[IntValNG, IntValNP, 3];
 
-                //AQUI HICE UNA PRUEBA DE NUMERO DE FILAS POR NUMERO DE COLUMNAS DE LA TABLA GALLOS
-                arryColumns = 2;
-                arreglo = new int[arryRows, arryColumns];
-
-                //Aqui llenamos la MatrizPesos
+                //Aqui llenamos la matrizGallos
                 for (i = 0; i < arryRows; i++)
                 {
-                    for (j = 0; j < arryColumns; j++)
+                    for (j = 0; j < 2; j++)
                     {
-                        arreglo[i, j] = int.Parse(ds.Tables["Gallos"].Rows[i][j].ToString());
+                        matrizGallos[i, j] = int.Parse(ds.Tables["Gallos"].Rows[i][j].ToString());
                     }
                 }
 
@@ -116,21 +141,31 @@ namespace Menu
                 {
                     for (y = 0; y <= NG - 1; y++)
                     {
-                        matrizPesos[x, y] = arreglo[x, 1] - arreglo[y, 1];
+                        matrizPesos[x, y] = matrizGallos[x, 1] - matrizGallos[y, 1];
                         if (Math.Abs(matrizPesos[x, y]) < tolerancia)
                         {
                             peleaPeso[x, y] = true;
                         }
                         else peleaPeso[x, y] = false;
-                        if (arreglo[x, 0] == arreglo[y, 0])
+                        if (matrizGallos[x, 0] == matrizGallos[y, 0])
                         {
                             peleaPartido[x, y] = false;
                         }
                         else peleaPartido[x, y] = true;
                     }
                 }
+
                 //aqui simplemente puse un mensaje para que me de el total de gallos o bien el total de filas
-                MessageBox.Show("Total de Gallos:" + NG.ToString());
+                MessageBox.Show("Total de Gallos:" + NG.ToString());                
+            }
+
+            if (string.IsNullOrEmpty(ValNGD))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }

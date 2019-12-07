@@ -67,30 +67,12 @@ namespace Menu
             }            
         }
 
-        //Autocompleta el campo de texto "Nombre Del Partido"
+        //Autocompleta los campos de texto "Nombre Del Partido"
         private void Registro_Load(object sender, EventArgs e)
         {
             BaseDatos bd = new BaseDatos();
             bd.autoCompletar(textNomPartido2);
             bd.autoCompletar2(txtMosNP2);
-
-            conexion2 = new SQLiteConnection(cadenaConexion);
-            conexion2.Open();
-            SQLiteCommand cmd;
-            SQLiteDataReader dr;
-            try
-            {
-                cmd = new SQLiteCommand("SELECT Peso FROM Gallos", conexion2);
-                dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    Console.WriteLine(dr.GetValue(0).GetType());
-                }
-            }
-            catch
-            {
-
-            }
         }
 
         //Los siguientes dos metodos borrar los datos de los registros para poder ingresar otro 
@@ -116,7 +98,7 @@ namespace Menu
             dgvGallos.CurrentCell.Selected = true;
             Valor1 = dgvGallos.Rows[e.RowIndex].Cells["ID Gallo"].FormattedValue.ToString();
             ActuPartido = dgvGallos.Rows[e.RowIndex].Cells["Nombre del Partido"].FormattedValue.ToString();
-            ActuPeso = dgvGallos.Rows[e.RowIndex].Cells["Peso del Gallo"].FormattedValue.ToString();
+            ActuPeso = dgvGallos.Rows[e.RowIndex].Cells["Peso del Gallo (Gr)"].FormattedValue.ToString();
             ActuAnillo = dgvGallos.Rows[e.RowIndex].Cells["Número de Anillo"].FormattedValue.ToString();
         }
 
@@ -205,8 +187,10 @@ namespace Menu
 
         private void AgreRest_Click(object sender, EventArgs e)
         {
+            //Matrices mat = new Matrices();
+            //Boolean re = mat.Consultar();
             Restricciones rest = new Restricciones();
-            rest.MdiParent = this;
+            rest.MdiParent = this.MdiParent;
             rest.Show();
         }
 
