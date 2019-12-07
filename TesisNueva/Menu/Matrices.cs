@@ -15,12 +15,14 @@ namespace Menu
         private string cadena = "Data Source=BD_Tesis.db";
         public SQLiteDataReader dr;
         public SQLiteDataReader dr1;
+        public SQLiteDataReader dr2;
         public SQLiteConnection cn;
         public SQLiteCommand cmb;
         public DataSet ds = new DataSet();
         public SQLiteDataAdapter da;
         public string ValNPD = ""; //numero de partidos que tiene l derby
         public string ValNGD = ""; //numero de gallos con los que se llebara acabo el derby
+        public string ValNTD = ""; //numero de la tolerancia entre gallos del derby 
 
         private void conectar()
         {
@@ -36,12 +38,14 @@ namespace Menu
 
         public void consultar(string sql2, string tabla)
         {
-            //obtenemos el total de partidos y el numero de gallos con que se realizara el derby
+            //obtenemos el total de partidos, el numero de gallos y la tolerancia con que se realizara el derby
             conexion.Open();
             cmb = new SQLiteCommand("SELECT Id_Partido FROM Partido ORDER BY Id_Partido DESC  LIMIT 1;", conexion);
             dr = cmb.ExecuteReader();
             cmb = new SQLiteCommand("SELECT NumGallos FROM Derby ORDER BY NumGallos DESC LIMIT 1;", conexion);
             dr1 = cmb.ExecuteReader();
+            cmb = new SQLiteCommand("SELECT ToleranciaGr FROM Derby ORDER BY ToleranciaGr DESC LIMIT 1;", conexion);
+            dr2 = cmb.ExecuteReader();
 
             while (dr.Read())
             {
@@ -55,12 +59,19 @@ namespace Menu
             }
             int IntValNG = Int16.Parse(ValNGD);//Convertimos el ValNG a entero (int)
 
+            while (dr2.Read())
+            {
+                ValNTD = dr2.GetInt16(0) + " ";
+            }
+            int IntValNT = Int16.Parse(ValNTD);//Convertimos el ValNTD a entero (int)
+
             int NG = (IntValNG * IntValNP); //Multiplicamos NGD*NPD para saber el total de gallos
             string sql = "select Id_Partido,Peso from Gallos order by Id_Partido, Peso"; //Se ordenade menor a mayor los gallos de cada partido
             int[,] arreglo = { };
             int[,] matrizPesos = { };
             bool[,] peleaPeso = { };
             bool[,] peleaPartido = { };
+            bool[,] yaPelearon = { };
             int[,,] rondas = { };
             da = new SQLiteDataAdapter(sql, cn);
             cmb = new SQLiteCommand();
@@ -71,8 +82,7 @@ namespace Menu
             int arryColumns = 0;
             int i = 0, j = 0;
             int x = 0, y = 0;
-            int tolerancia = 80;
-           // gallos1 = gallos.indice.ToString
+            int tolerancia = IntValNT;
 
             //aqui cuenta las columnas que hay en la tabla Gallos y se compara para que entre a manipular el arreglo
             if (ds.Tables["Gallos"].Rows.Count > 0)
@@ -83,8 +93,9 @@ namespace Menu
                 matrizPesos = new int[arryRows, arryRows];
                 peleaPeso = new bool[NG, NG];
                 peleaPartido = new bool[NG, NG];
-                //AQUI HICE UNA PRUEBA DE NUMERO DE FILAS POR NUMERO DE COLUMNAS DE LA TABLA GALLOS
+                yaPelearon = new bool[NG, NG];
 
+                //AQUI HICE UNA PRUEBA DE NUMERO DE FILAS POR NUMERO DE COLUMNAS DE LA TABLA GALLOS
                 arryColumns = 2;
                 arreglo = new int[arryRows, arryColumns];
 
@@ -97,7 +108,7 @@ namespace Menu
                     }
                 }
 
-                //Aqui llenamos las matrices PeleaPeso y PeleaPartido
+                //Aqui llenamos las matrices matrizPesos, PeleaPeso y PeleaPartido
                 for (x = 0; x <= NG - 1; x++)
                 {
                     for (y = 0; y <= NG - 1; y++)
