@@ -18,9 +18,11 @@ namespace Menu
         public SQLiteDataReader dr2;
         public SQLiteConnection cn;
         public SQLiteCommand cmb;
+        public SQLiteCommand cmb2;
         public DataSet ds = new DataSet();
         public DataSet dsron = new DataSet();
         public SQLiteDataAdapter da;
+        public SQLiteDataAdapter da2;
         public string ValNPD = ""; //numero de partidos que tiene l derby
         public string ValNGD = ""; //numero de gallos con los que se llebara acabo el derby
         public string ValNTD = ""; //numero de la tolerancia entre gallos del derby 
@@ -37,10 +39,9 @@ namespace Menu
 
         Derby gallos = new Derby();
 
-        //public void Consultar(string sql2, string tabla)
-        public Boolean Consultar(string sql2, string tabla)
+        public Boolean Consultar(string tabla, string tablaRon)
         {
-            //obtenemos el total de partidos, el numero de gallos y la tolerancia con que se realizara el derby
+            //obtenemos el total de partidos, el número de gallos y la tolerancia con que se realizara el derby
             conexion.Open();
             cmb = new SQLiteCommand("SELECT Id_Partido FROM Partido ORDER BY Id_Partido DESC  LIMIT 1;", conexion);
             dr = cmb.ExecuteReader();
@@ -65,21 +66,21 @@ namespace Menu
             {
                 ValNTD = dr2.GetInt16(0) + " ";
             }
-            int IntValNT = Int16.Parse(ValNTD);//Convertimos el ValNTD a entero (int)
+            int IntValNT = Int16.Parse(ValNTD);//Convertimos el ValNTD a entero (int)            
 
-            int NG = (IntValNG * IntValNP); //Multiplicamos NGD*NPD para saber el total de gallos
+            //obtenemos los datos de la base de datos para armar las matrices matrizGallos
             string sql = "select Id_Partido, Peso from Gallos order by Id_Partido, Peso"; //Se ordenade menor a mayor los gallos de cada partido
             da = new SQLiteDataAdapter(sql, cn);
             cmb = new SQLiteCommand();
             cmb.CommandText = sql;
             da.Fill(ds, tabla);
 
-            //string sqlron = "SELECT Peso AS 'Peso del Gallo (Gr)', g.Id_Gallo AS 'ID Gallo', g.Id_Partido AS 'ID Partido' FROM Gallos as g JOIN Partido as p on g.Id_Partido = p.Id_Partido ORDER by g.Id_Partido, g.Peso;";
-            //da = new SQLiteDataAdapter(sqlron, cn);
-            //DataTable tablaRon = new DataTable("Datos");
-            //cmb = new SQLiteCommand();
-            //cmb.CommandText = sqlron;
-            //da.Fill(dsron, tablaRon);
+            //obtenemos los datos de la base de datos para armar la matriz Rondas
+            string sqlron = "SELECT Peso AS 'Peso del Gallo (Gr)', g.Id_Gallo AS 'ID Gallo', g.Id_Partido AS 'ID Partido' FROM Gallos as g JOIN Partido as p on g.Id_Partido = p.Id_Partido ORDER by g.Id_Partido, g.Peso;";
+            da2 = new SQLiteDataAdapter(sqlron, cn);
+            cmb2 = new SQLiteCommand();
+            cmb2.CommandText = sqlron;
+            da2.Fill(dsron, tablaRon);
 
             //Declaracion de matrices
             int[,] matrizGallos = { };
@@ -88,36 +89,39 @@ namespace Menu
             bool[,] peleaPartido = { };
             bool[,] yaPelearon = { };
             bool[,] puedenPelear = { };
-            int[,,] rondas = { };          
+            int[,,] rondas = { };
 
+            int NG = (IntValNG * IntValNP); //Multiplicamos NGD*NPD para saber el total de gallos
             int arryRows = 0;
             int i = 0, j = 0;
             int x = 0, y = 0;
             int tolerancia = IntValNT;
             int rx = 0, ry = 0, rz = 0;
 
-            //if (dsron.Tables["Gallos"].Rows.Count > 0)
-            //{
-            //    //Llenar las rondas
-            //    int incre = 0;
-            //    for (rx = 0; rx < IntValNG; rx++)
-            //    {
-            //        for (ry = 0; ry < IntValNP; ry++)
-            //        {
-            //            for (rz = 0; rz < 3; rz++)
-            //            {
-            //                rondas[rx, ry, rz] = int.Parse(dsron.Tables["Gallos"].Rows[incre][rz].ToString());
-            //            }
-            //            incre = incre + IntValNG;
-            //        }
-            //    }
-            //}
+            if (dsron.Tables["Rondas"].Rows.Count > 0)
+            {
+                //Llenar las rondas
+                rondas = new int[IntValNG, IntValNP, 3];
+                int incre = 0;
+                for (rx = 0; rx < IntValNG; rx++)
+                {
+                    incre = rx;
+                    for (ry = 0; ry < IntValNP; ry++) 
+                    {
+                        for (rz = 0; rz < 3; rz++)
+                        {
+                            rondas[rx, ry, rz] = int.Parse(dsron.Tables["Rondas"].Rows[incre][rz].ToString());
+                        }
+                        incre = incre + IntValNG; 
+                    }                    
+                }
+            }
 
             //aqui cuenta las columnas que hay en la tabla Gallos y se compara para que entre a manipular el arreglo
             if (ds.Tables["Gallos"].Rows.Count > 0)
             {
                 arryRows = ds.Tables["Gallos"].Rows.Count;
-                //se asigna a matrizPesos el numero de filas x numero de filas de la Tabla Gallos [NG,NG]
+                //se asigna a las matrices el numero de filas x numero de columnas de la Tabla Gallos [NG,NG]
                 //Al crear una matriz booleana, esta se inicializa en falso automanticamente.
                 matrizGallos = new int[arryRows, 2];
                 matrizPesos = new int[arryRows, arryRows];
@@ -125,7 +129,6 @@ namespace Menu
                 peleaPartido = new bool[NG, NG];
                 yaPelearon = new bool[NG, NG];
                 puedenPelear = new bool[NG, NG];
-                rondas = new int[IntValNG, IntValNP, 3];
 
                 //Aqui llenamos la matrizGallos
                 for (i = 0; i < arryRows; i++)

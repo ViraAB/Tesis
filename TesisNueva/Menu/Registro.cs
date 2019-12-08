@@ -187,8 +187,8 @@ namespace Menu
 
         private void AgreRest_Click(object sender, EventArgs e)
         {
-            //Matrices mat = new Matrices();
-            //Boolean re = mat.Consultar();
+            Matrices mat = new Matrices();
+            mat.Consultar("Gallos","Rondas");
             Restricciones rest = new Restricciones();
             rest.MdiParent = this.MdiParent;
             rest.Show();

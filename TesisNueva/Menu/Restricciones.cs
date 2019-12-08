@@ -17,13 +17,9 @@ namespace Menu
             InitializeComponent();
         }
 
-        Matrices restr = new Matrices();
-
         private void Restricciones_Load(object sender, EventArgs e)
         {
-            //restr.Consultar("SELECT Id_Partido, Peso, Anillo FROM Gallos Order by Id_Partido, Peso", "Gallos");
-            //dataGridView1.DataSource = restr.ds.Tables["Gallos"];
-            //dataGridView1.Refresh();
+            MessageBox.Show("Estoy en restricciones");
         }
 
         private void salir_Click(object sender, EventArgs e)
