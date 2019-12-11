@@ -41,3 +41,4 @@ C:\Users\Rafa\Desktop\Tesis\Tesis\TesisNueva\Menu\obj\Debug\Tesis.csproj.CopyCom
 C:\Users\Rafa\Desktop\Tesis\Tesis\TesisNueva\Menu\obj\Debug\Menu.exe
 C:\Users\Rafa\Desktop\Tesis\Tesis\TesisNueva\Menu\obj\Debug\Menu.pdb
 C:\Users\Rafa\Desktop\Tesis\Tesis\TesisNueva\Menu\obj\Debug\Menu.Restricciones.resources
+C:\Tesis\Tesis\TesisNueva\Menu\obj\Debug\Menu.Restricciones.resources
