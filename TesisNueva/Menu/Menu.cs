@@ -20,17 +20,11 @@ namespace Menu
             log.Show();
         }
 
-        private void BtnIniciarSesion_Click(object sender, EventArgs e)
+        //error al intentar mostrar el usuario 
+        public void Mostrar(string nom)
         {
-            Login log = new Login();
-            log.MdiParent = this;
-            log.Show();
-        }
-
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            BtnIniciarSesion.Top = this.Bottom - 810;
-            BtnIniciarSesion.Left = this.Width - 110;
+            labelUsuario.Text = nom;
+            MessageBox.Show(nom);
         }
 
         private void nuevoDerbyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -43,7 +37,7 @@ namespace Menu
             }
             else
             {
-                MessageBox.Show("Debe iniciar sesión");
+                MessageBox.Show("Para poder acceder debe iniciar\nsesión como un usuario Administrador");
             }
         }
 
@@ -57,7 +51,7 @@ namespace Menu
             }
             else
             {
-                MessageBox.Show("Debe iniciar sesión");
+                MessageBox.Show("Para poder acceder debe iniciar\nsesión como un usuario Administrador");
             }
         }
 
@@ -68,5 +62,15 @@ namespace Menu
             rest.Show();
         }
 
+        private void administradorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Login log = new Login();
+            log.MdiParent = this;
+            log.Show();
+        }
+
+        public class num
+        {
+        }
     }
 }
