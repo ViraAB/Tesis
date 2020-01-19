@@ -254,7 +254,7 @@ namespace Menu
             }
         }
 
-        //Autocompleta el campo de texto "Nombre Del Partido"
+        //Autocompleta el campo de texto "Nombre Del Partido" dentro de registro
         public void autoCompletar(TextBox cajaTexto)
         {
             conexion.Open();            
@@ -274,7 +274,7 @@ namespace Menu
             }
         }
 
-        //Autocompleta el campo de texto "txtMosNP2"
+        //Autocompleta el campo de texto "txtMosNP2" dentro de registro
         public void autoCompletar2(TextBox cajaTexto2)
         {
             try
@@ -284,6 +284,45 @@ namespace Menu
                 while (dr.Read())
                 {
                     cajaTexto2.AutoCompleteCustomSource.Add(dr["NomPartido"].ToString());
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se puede autocompletar el TextBox:" + ex.ToString());
+            }
+        }
+
+        //Autocompletar el campo de texto textPart1 dentro de restricciones
+        public void autoCompletar3(TextBox cajaTexto3)
+        {
+            try
+            {
+                conexion.Open();
+                cmd = new SQLiteCommand("SELECT NomPartido FROM Partido", conexion);
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    cajaTexto3.AutoCompleteCustomSource.Add(dr["NomPartido"].ToString());
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se puede autocompletar el TextBox:" + ex.ToString());
+            }
+        }
+
+        //Autocompletar el campo de texto textPart2 dentro de restricciones
+        public void autoCompletar4(TextBox cajaTexto4)
+        {            
+            try
+            {
+                cmd = new SQLiteCommand("SELECT NomPartido FROM Partido", conexion);
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    cajaTexto4.AutoCompleteCustomSource.Add(dr["NomPartido"].ToString());
                 }
                 dr.Close();
             }

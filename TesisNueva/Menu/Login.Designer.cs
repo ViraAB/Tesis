@@ -30,82 +30,24 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
-            this.salir1 = new System.Windows.Forms.Button();
-            this.btniniciarsesion = new System.Windows.Forms.Button();
-            this.tbcontraseña = new System.Windows.Forms.TextBox();
-            this.tbnombreusuario = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.tbnombreusuario = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.tbcontraseña = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.materialCheckBox1 = new MaterialSkin.Controls.MaterialCheckBox();
+            this.btniniciarsesion = new MaterialSkin.Controls.MaterialRaisedButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // salir1
-            // 
-            this.salir1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.salir1.Location = new System.Drawing.Point(207, 242);
-            this.salir1.Name = "salir1";
-            this.salir1.Size = new System.Drawing.Size(115, 27);
-            this.salir1.TabIndex = 12;
-            this.salir1.Text = "Salir";
-            this.salir1.UseVisualStyleBackColor = true;
-            this.salir1.Click += new System.EventHandler(this.salir1_Click);
-            // 
-            // btniniciarsesion
-            // 
-            this.btniniciarsesion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btniniciarsesion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btniniciarsesion.Location = new System.Drawing.Point(339, 242);
-            this.btniniciarsesion.Name = "btniniciarsesion";
-            this.btniniciarsesion.Size = new System.Drawing.Size(115, 27);
-            this.btniniciarsesion.TabIndex = 11;
-            this.btniniciarsesion.Text = "Iniciar Sesión";
-            this.btniniciarsesion.UseVisualStyleBackColor = true;
-            this.btniniciarsesion.Click += new System.EventHandler(this.btniniciarsesion_Click);
-            // 
-            // tbcontraseña
-            // 
-            this.tbcontraseña.Location = new System.Drawing.Point(214, 182);
-            this.tbcontraseña.Name = "tbcontraseña";
-            this.tbcontraseña.PasswordChar = '*';
-            this.tbcontraseña.Size = new System.Drawing.Size(213, 22);
-            this.tbcontraseña.TabIndex = 10;
-            // 
-            // tbnombreusuario
-            // 
-            this.tbnombreusuario.Location = new System.Drawing.Point(214, 105);
-            this.tbnombreusuario.Name = "tbnombreusuario";
-            this.tbnombreusuario.Size = new System.Drawing.Size(213, 22);
-            this.tbnombreusuario.TabIndex = 9;
-            this.tbnombreusuario.Tag = "";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(283, 151);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 17);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Contraseña";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(259, 69);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 17);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Nombre de usuario";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Georgia Pro Cond", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label3.Location = new System.Drawing.Point(95, 18);
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label3.Location = new System.Drawing.Point(98, 34);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(287, 20);
             this.label3.TabIndex = 13;
@@ -116,12 +58,74 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // tbnombreusuario
+            // 
+            this.tbnombreusuario.Depth = 0;
+            this.tbnombreusuario.Hint = "Usuario";
+            this.tbnombreusuario.Location = new System.Drawing.Point(220, 119);
+            this.tbnombreusuario.MouseState = MaterialSkin.MouseState.HOVER;
+            this.tbnombreusuario.Name = "tbnombreusuario";
+            this.tbnombreusuario.PasswordChar = '\0';
+            this.tbnombreusuario.SelectedText = "";
+            this.tbnombreusuario.SelectionLength = 0;
+            this.tbnombreusuario.SelectionStart = 0;
+            this.tbnombreusuario.Size = new System.Drawing.Size(213, 28);
+            this.tbnombreusuario.TabIndex = 15;
+            this.tbnombreusuario.UseSystemPasswordChar = false;
+            // 
+            // tbcontraseña
+            // 
+            this.tbcontraseña.Depth = 0;
+            this.tbcontraseña.Hint = "Contraseña";
+            this.tbcontraseña.Location = new System.Drawing.Point(220, 170);
+            this.tbcontraseña.MouseState = MaterialSkin.MouseState.HOVER;
+            this.tbcontraseña.Name = "tbcontraseña";
+            this.tbcontraseña.PasswordChar = '*';
+            this.tbcontraseña.SelectedText = "";
+            this.tbcontraseña.SelectionLength = 0;
+            this.tbcontraseña.SelectionStart = 0;
+            this.tbcontraseña.Size = new System.Drawing.Size(213, 28);
+            this.tbcontraseña.TabIndex = 16;
+            this.tbcontraseña.UseSystemPasswordChar = false;
+            // 
+            // materialCheckBox1
+            // 
+            this.materialCheckBox1.AutoSize = true;
+            this.materialCheckBox1.Depth = 0;
+            this.materialCheckBox1.Font = new System.Drawing.Font("Adobe Arabic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.materialCheckBox1.Location = new System.Drawing.Point(211, 213);
+            this.materialCheckBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.materialCheckBox1.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialCheckBox1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCheckBox1.Name = "materialCheckBox1";
+            this.materialCheckBox1.Ripple = true;
+            this.materialCheckBox1.Size = new System.Drawing.Size(185, 30);
+            this.materialCheckBox1.TabIndex = 19;
+            this.materialCheckBox1.Text = "Mostrar Contraseña";
+            this.materialCheckBox1.UseVisualStyleBackColor = true;
+            this.materialCheckBox1.CheckedChanged += new System.EventHandler(this.materialCheckBox1_CheckedChanged);
+            // 
+            // btniniciarsesion
+            // 
+            this.btniniciarsesion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btniniciarsesion.Depth = 0;
+            this.btniniciarsesion.Location = new System.Drawing.Point(331, 279);
+            this.btniniciarsesion.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btniniciarsesion.Name = "btniniciarsesion";
+            this.btniniciarsesion.Primary = true;
+            this.btniniciarsesion.Size = new System.Drawing.Size(141, 27);
+            this.btniniciarsesion.TabIndex = 18;
+            this.btniniciarsesion.Tag = "";
+            this.btniniciarsesion.Text = "Iniciar Sesión";
+            this.btniniciarsesion.UseVisualStyleBackColor = true;
+            this.btniniciarsesion.Click += new System.EventHandler(this.btniniciarsesion_Click_1);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Menu.Properties.Resources.usuario;
-            this.pictureBox1.Location = new System.Drawing.Point(29, 69);
+            this.pictureBox1.Location = new System.Drawing.Point(30, 107);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(157, 148);
+            this.pictureBox1.Size = new System.Drawing.Size(160, 156);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
@@ -133,22 +137,21 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(466, 281);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.salir1);
+            this.ClientSize = new System.Drawing.Size(484, 328);
+            this.Controls.Add(this.materialCheckBox1);
             this.Controls.Add(this.btniniciarsesion);
             this.Controls.Add(this.tbcontraseña);
             this.Controls.Add(this.tbnombreusuario);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.label3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(484, 328);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(484, 328);
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Tag = "";
-            this.Text = "Login";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -157,15 +160,12 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button salir1;
-        private System.Windows.Forms.Button btniniciarsesion;
-        private System.Windows.Forms.TextBox tbcontraseña;
-        private System.Windows.Forms.TextBox tbnombreusuario;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private MaterialSkin.Controls.MaterialSingleLineTextField tbnombreusuario;
+        private MaterialSkin.Controls.MaterialSingleLineTextField tbcontraseña;
+        private MaterialSkin.Controls.MaterialCheckBox materialCheckBox1;
+        private MaterialSkin.Controls.MaterialRaisedButton btniniciarsesion;
     }
 }

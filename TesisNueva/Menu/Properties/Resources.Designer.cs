@@ -63,6 +63,16 @@ namespace Menu.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _3floppy3_unmount {
+            get {
+                object obj = ResourceManager.GetObject("3floppy3_unmount", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap app_preferences {
             get {
                 object obj = ResourceManager.GetObject("app_preferences", resourceCulture);
@@ -166,26 +176,6 @@ namespace Menu.Properties {
         internal static System.Drawing.Bitmap plumas_fw {
             get {
                 object obj = ResourceManager.GetObject("plumas.fw", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap trofeo_fw {
-            get {
-                object obj = ResourceManager.GetObject("trofeo.fw", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap trofeo1 {
-            get {
-                object obj = ResourceManager.GetObject("trofeo1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

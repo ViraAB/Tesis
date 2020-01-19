@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Menu
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form 
     {
         public Form1()
         {
@@ -18,13 +18,6 @@ namespace Menu
             Login log = new Login();
             log.MdiParent = this;
             log.Show();
-        }
-
-        //error al intentar mostrar el usuario 
-        public void Mostrar(string nom)
-        {
-            labelUsuario.Text = nom;
-            MessageBox.Show(nom);
         }
 
         private void nuevoDerbyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -67,10 +60,6 @@ namespace Menu
             Login log = new Login();
             log.MdiParent = this;
             log.Show();
-        }
-
-        public class num
-        {
         }
     }
 }

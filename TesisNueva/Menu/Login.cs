@@ -7,18 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MaterialSkin;
+using MaterialSkin.Controls;
 
 namespace Menu
 {
-    public partial class Login : Form
+    public partial class Login : MaterialForm
     {
         public Login()
         {
             InitializeComponent();
-            MaximizeBox = false;
+
+            MaterialSkinManager m = MaterialSkinManager.Instance;
+            m.AddFormToManage(this);
+            m.Theme = MaterialSkinManager.Themes.LIGHT;
+            m.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey800, Primary.Blue500, Accent.LightBlue200, TextShade.WHITE);
         }
 
-        private void btniniciarsesion_Click(object sender, EventArgs e)
+        private void btniniciarsesion_Click_1(object sender, EventArgs e)
         {
             BorrrarMnsjErrorUsuario();
             if (ValidarCamposUsuario() == true)
@@ -26,7 +32,7 @@ namespace Menu
                 try
                 {
                     //NOS VAMOS A CLASE BASEDATOS DONDE GUARDAMOS LA CADENA DE DIRECCION DE LA MISMA
-                    BaseDatos bd = new BaseDatos();                    
+                    BaseDatos bd = new BaseDatos();
                     //POSTERIORMENTE ESTAMOS DICIENDO QUE EN LA MISMA CLASE BASEDATOS NOS IREMOS AL PUBLIC
                     //INICIARSESION DONDE SE REALIZA LA VALIDACION DE USUARIO Y CONTRASENA
                     Boolean res = bd.iniciarSesion(tbnombreusuario.Text, tbcontraseña.Text);
@@ -36,14 +42,10 @@ namespace Menu
                         x = ("Bienvenido(a)\n\n" + BaseDatos.Nombre);
                         MessageBox.Show(x);
                         this.Close();
-
-                        //error al intenter mostrar el usuario en el form MENU
-                        Form1 usu = new Form1();
-                        usu.Mostrar(x);
                     }
                     else
-                    {                        
-                       MessageBox.Show("Intenta de nuevo.", "Datos incorrectos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    {
+                        MessageBox.Show("Intenta de nuevo.", "Datos incorrectos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch
@@ -51,11 +53,6 @@ namespace Menu
                     MessageBox.Show("Error", "Error al comprar los datos\n\nproblema en la base de datos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-        }
-
-        private void salir1_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,6 +82,22 @@ namespace Menu
         {
             errorProvider1.SetError(tbnombreusuario, "");
             errorProvider1.SetError(tbcontraseña, "");
+        }
+
+        //Mostrar u ocultar la contraseña
+        private void materialCheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (materialCheckBox1.Checked == true)
+            {
+                if(tbcontraseña.PasswordChar == '*')
+                {
+                    tbcontraseña.PasswordChar = '\0';
+                }
+            }
+            else
+            {
+                tbcontraseña.PasswordChar = '*';
+            }
         }
     }
 }

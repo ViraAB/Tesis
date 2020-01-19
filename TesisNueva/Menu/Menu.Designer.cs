@@ -37,25 +37,20 @@
             this.iniciarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administradorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.labelUsuario = new System.Windows.Forms.Label();
+            this.skinEngine1 = new Sunisoft.IrisSkin.SkinEngine(((System.ComponentModel.Component)(this)));
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.AutoSize = false;
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.BackColor = System.Drawing.Color.PowderBlue;
-            this.menuStrip1.Font = new System.Drawing.Font("Maiandra GD", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.peleasToolStripMenuItem,
             this.derbysAterioresToolStripMenuItem,
             this.iniciarSesiónToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1348, 75);
-            this.menuStrip1.TabIndex = 2;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // peleasToolStripMenuItem
             // 
@@ -65,31 +60,27 @@
             this.peleasToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.peleasToolStripMenuItem.Image = global::Menu.Properties.Resources.gallo_fw;
             this.peleasToolStripMenuItem.Name = "peleasToolStripMenuItem";
-            this.peleasToolStripMenuItem.Size = new System.Drawing.Size(172, 71);
-            this.peleasToolStripMenuItem.Text = "Nuevo Derby";
+            resources.ApplyResources(this.peleasToolStripMenuItem, "peleasToolStripMenuItem");
             // 
             // nuevoDerbyToolStripMenuItem
             // 
             this.nuevoDerbyToolStripMenuItem.Image = global::Menu.Properties.Resources.file_new;
             this.nuevoDerbyToolStripMenuItem.Name = "nuevoDerbyToolStripMenuItem";
-            this.nuevoDerbyToolStripMenuItem.Size = new System.Drawing.Size(342, 28);
-            this.nuevoDerbyToolStripMenuItem.Text = "Nuevo Derby";
+            resources.ApplyResources(this.nuevoDerbyToolStripMenuItem, "nuevoDerbyToolStripMenuItem");
             this.nuevoDerbyToolStripMenuItem.Click += new System.EventHandler(this.nuevoDerbyToolStripMenuItem_Click);
             // 
             // registrarPartidosYGallosToolStripMenuItem
             // 
             this.registrarPartidosYGallosToolStripMenuItem.Image = global::Menu.Properties.Resources.app_preferences;
             this.registrarPartidosYGallosToolStripMenuItem.Name = "registrarPartidosYGallosToolStripMenuItem";
-            this.registrarPartidosYGallosToolStripMenuItem.Size = new System.Drawing.Size(342, 28);
-            this.registrarPartidosYGallosToolStripMenuItem.Text = "Registrar Partidos y Gallos";
+            resources.ApplyResources(this.registrarPartidosYGallosToolStripMenuItem, "registrarPartidosYGallosToolStripMenuItem");
             this.registrarPartidosYGallosToolStripMenuItem.Click += new System.EventHandler(this.registrarPartidosYGallosToolStripMenuItem_Click_1);
             // 
             // derbysAterioresToolStripMenuItem
             // 
             this.derbysAterioresToolStripMenuItem.Image = global::Menu.Properties.Resources.kappfinder;
             this.derbysAterioresToolStripMenuItem.Name = "derbysAterioresToolStripMenuItem";
-            this.derbysAterioresToolStripMenuItem.Size = new System.Drawing.Size(202, 71);
-            this.derbysAterioresToolStripMenuItem.Text = "Derbys Ateriores";
+            resources.ApplyResources(this.derbysAterioresToolStripMenuItem, "derbysAterioresToolStripMenuItem");
             // 
             // iniciarSesiónToolStripMenuItem
             // 
@@ -98,48 +89,42 @@
             this.consultorToolStripMenuItem});
             this.iniciarSesiónToolStripMenuItem.Image = global::Menu.Properties.Resources.kdmconfig;
             this.iniciarSesiónToolStripMenuItem.Name = "iniciarSesiónToolStripMenuItem";
-            this.iniciarSesiónToolStripMenuItem.Size = new System.Drawing.Size(168, 71);
-            this.iniciarSesiónToolStripMenuItem.Text = "Iniciar Sesión";
+            resources.ApplyResources(this.iniciarSesiónToolStripMenuItem, "iniciarSesiónToolStripMenuItem");
             // 
             // administradorToolStripMenuItem
             // 
             this.administradorToolStripMenuItem.Image = global::Menu.Properties.Resources.ball_green;
             this.administradorToolStripMenuItem.Name = "administradorToolStripMenuItem";
-            this.administradorToolStripMenuItem.Size = new System.Drawing.Size(305, 28);
-            this.administradorToolStripMenuItem.Text = "Administrador";
+            resources.ApplyResources(this.administradorToolStripMenuItem, "administradorToolStripMenuItem");
             this.administradorToolStripMenuItem.Click += new System.EventHandler(this.administradorToolStripMenuItem_Click);
             // 
             // consultorToolStripMenuItem
             // 
             this.consultorToolStripMenuItem.Image = global::Menu.Properties.Resources.ball_yellow;
             this.consultorToolStripMenuItem.Name = "consultorToolStripMenuItem";
-            this.consultorToolStripMenuItem.Size = new System.Drawing.Size(305, 28);
-            this.consultorToolStripMenuItem.Text = "Agregar Administrador";
+            resources.ApplyResources(this.consultorToolStripMenuItem, "consultorToolStripMenuItem");
             // 
-            // labelUsuario
+            // skinEngine1
             // 
-            this.labelUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelUsuario.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelUsuario.Location = new System.Drawing.Point(1158, 25);
-            this.labelUsuario.Name = "labelUsuario";
-            this.labelUsuario.Size = new System.Drawing.Size(178, 23);
-            this.labelUsuario.TabIndex = 7;
+            this.skinEngine1.ResSysMenuClose = "Cerrar";
+            this.skinEngine1.ResSysMenuMax = "Maximizar";
+            this.skinEngine1.ResSysMenuMin = "Minimizar";
+            this.skinEngine1.SerialNumber = "U4N2UjLguUZs33UR+Vy47JAZ81t2fjIFvut28vc5oHiVeivGb/NZMA==";
+            this.skinEngine1.SkinAllForm = false;
+            this.skinEngine1.SkinDialogs = false;
+            this.skinEngine1.SkinFile = "C:\\Tesis\\Tesis\\TesisNueva\\Menu\\bin\\Debug\\Componentes Graficos Vb2\\SKIN NET 2010 W" +
+    "IN 7\\SkinVS.NET\\Carlmness\\Calmness.ssk";
+            this.skinEngine1.SkinStreamMain = ((System.IO.Stream)(resources.GetObject("skinEngine1.SkinStreamMain")));
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(1348, 721);
-            this.Controls.Add(this.labelUsuario);
             this.Controls.Add(this.menuStrip1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -156,7 +141,7 @@
         private System.Windows.Forms.ToolStripMenuItem administradorToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem peleasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consultorToolStripMenuItem;
-        public System.Windows.Forms.Label labelUsuario;
+        private Sunisoft.IrisSkin.SkinEngine skinEngine1;
     }
 }
 

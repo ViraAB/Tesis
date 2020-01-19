@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IrisSkin2">
+      <HintPath>bin\Debug\Componentes Graficos Vb2\SKIN NET 2010 WIN 7\SkinVS.NET\IrisSkin2.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.84.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
@@ -93,6 +99,9 @@
     <EmbeddedResource Include="Derby.resx">
       <DependentUpon>Derby.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Menu.es-MX.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,6 +119,7 @@
     <EmbeddedResource Include="Restricciones.resx">
       <DependentUpon>Restricciones.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -125,9 +135,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\usuario.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\Debug\Imagenes\gallo.PNG" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\Imagenes\app_preferences.ico" />
@@ -164,6 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\Imagenes\plumas.fw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Imagenes\3floppy3_unmount.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

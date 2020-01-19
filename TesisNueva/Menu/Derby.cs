@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MaterialSkin;
+using MaterialSkin.Controls;
 
 namespace Menu
 {
@@ -18,6 +20,13 @@ namespace Menu
         public Derby()
         {
             InitializeComponent();
+            MaximizeBox = false;
+            MinimizeBox = false;
+
+            //MaterialSkinManager m = MaterialSkinManager.Instance;
+            //m.AddFormToManage(this);
+            //m.Theme = MaterialSkinManager.Themes.LIGHT;
+            //m.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey800, Primary.Blue500, Accent.LightBlue200, TextShade.WHITE);
         }
 
         private void NumGalloList_SelectedIndexChanged(object sender, EventArgs e)

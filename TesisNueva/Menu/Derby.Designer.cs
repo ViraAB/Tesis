@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Derby));
             this.dtpFechaDerby = new System.Windows.Forms.DateTimePicker();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.labelFechaDerby = new System.Windows.Forms.Label();
-            this.tbNomDerby = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.labelNomDerby = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tbNomOrganizador = new System.Windows.Forms.TextBox();
@@ -44,13 +43,15 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnGuardar = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.skinEngine1 = new Sunisoft.IrisSkin.SkinEngine(((System.ComponentModel.Component)(this)));
+            this.tbNomDerby = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // dtpFechaDerby
             // 
-            this.dtpFechaDerby.Location = new System.Drawing.Point(340, 150);
+            this.dtpFechaDerby.Location = new System.Drawing.Point(368, 136);
             this.dtpFechaDerby.Name = "dtpFechaDerby";
             this.dtpFechaDerby.Size = new System.Drawing.Size(242, 22);
             this.dtpFechaDerby.TabIndex = 16;
@@ -58,7 +59,7 @@
             // btnCancelar
             // 
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancelar.Location = new System.Drawing.Point(482, 357);
+            this.btnCancelar.Location = new System.Drawing.Point(520, 353);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(100, 27);
             this.btnCancelar.TabIndex = 15;
@@ -70,36 +71,17 @@
             // 
             this.labelFechaDerby.AutoSize = true;
             this.labelFechaDerby.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFechaDerby.Location = new System.Drawing.Point(29, 151);
+            this.labelFechaDerby.Location = new System.Drawing.Point(42, 137);
             this.labelFechaDerby.Name = "labelFechaDerby";
             this.labelFechaDerby.Size = new System.Drawing.Size(147, 20);
             this.labelFechaDerby.TabIndex = 13;
             this.labelFechaDerby.Text = "Fecha del Derby";
             // 
-            // tbNomDerby
-            // 
-            this.tbNomDerby.Location = new System.Drawing.Point(340, 105);
-            this.tbNomDerby.Name = "tbNomDerby";
-            this.tbNomDerby.Size = new System.Drawing.Size(242, 22);
-            this.tbNomDerby.TabIndex = 12;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label1.Location = new System.Drawing.Point(196, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(230, 24);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Nueva partida de Derby";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // labelNomDerby
             // 
             this.labelNomDerby.AutoSize = true;
             this.labelNomDerby.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNomDerby.Location = new System.Drawing.Point(29, 105);
+            this.labelNomDerby.Location = new System.Drawing.Point(42, 91);
             this.labelNomDerby.Name = "labelNomDerby";
             this.labelNomDerby.Size = new System.Drawing.Size(161, 20);
             this.labelNomDerby.TabIndex = 10;
@@ -109,7 +91,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(29, 289);
+            this.label2.Location = new System.Drawing.Point(42, 275);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(210, 20);
             this.label2.TabIndex = 17;
@@ -117,14 +99,14 @@
             // 
             // tbNomOrganizador
             // 
-            this.tbNomOrganizador.Location = new System.Drawing.Point(340, 289);
+            this.tbNomOrganizador.Location = new System.Drawing.Point(368, 275);
             this.tbNomOrganizador.Name = "tbNomOrganizador";
             this.tbNomOrganizador.Size = new System.Drawing.Size(242, 22);
             this.tbNomOrganizador.TabIndex = 18;
             // 
             // tbToleranciaPeso
             // 
-            this.tbToleranciaPeso.Location = new System.Drawing.Point(340, 242);
+            this.tbToleranciaPeso.Location = new System.Drawing.Point(368, 228);
             this.tbToleranciaPeso.Multiline = true;
             this.tbToleranciaPeso.Name = "tbToleranciaPeso";
             this.tbToleranciaPeso.Size = new System.Drawing.Size(242, 24);
@@ -135,7 +117,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(29, 243);
+            this.label3.Location = new System.Drawing.Point(42, 229);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(216, 20);
             this.label3.TabIndex = 20;
@@ -145,7 +127,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(29, 197);
+            this.label4.Location = new System.Drawing.Point(42, 183);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(268, 20);
             this.label4.TabIndex = 19;
@@ -163,7 +145,7 @@
             "4",
             "5",
             "6"});
-            this.NumGalloList.Location = new System.Drawing.Point(340, 195);
+            this.NumGalloList.Location = new System.Drawing.Point(368, 181);
             this.NumGalloList.Name = "NumGalloList";
             this.NumGalloList.Size = new System.Drawing.Size(242, 24);
             this.NumGalloList.TabIndex = 22;
@@ -176,7 +158,7 @@
             // btnGuardar
             // 
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGuardar.Location = new System.Drawing.Point(340, 357);
+            this.btnGuardar.Location = new System.Drawing.Point(378, 353);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(124, 27);
             this.btnGuardar.TabIndex = 14;
@@ -187,19 +169,34 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Menu.Properties.Resources.gallo2_fw;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 53);
+            this.pictureBox1.Location = new System.Drawing.Point(25, 39);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(321, 341);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 23;
             this.pictureBox1.TabStop = false;
             // 
+            // skinEngine1
+            // 
+            this.skinEngine1.SerialNumber = "U4N2UjLguUZs33UR+Vy47JAZ81t2fjIFvut28vc5oHiVeivGb/NZMA==";
+            this.skinEngine1.SkinAllForm = false;
+            this.skinEngine1.SkinFile = "C:\\Tesis\\Tesis\\TesisNueva\\Menu\\bin\\Debug\\Componentes Graficos Vb2\\SKIN NET 2010 W" +
+    "IN 7\\SkinVS.NET\\Diamond\\DiamondBlue.ssk";
+            this.skinEngine1.SkinStreamMain = ((System.IO.Stream)(resources.GetObject("skinEngine1.SkinStreamMain")));
+            // 
+            // tbNomDerby
+            // 
+            this.tbNomDerby.Location = new System.Drawing.Point(368, 91);
+            this.tbNomDerby.Name = "tbNomDerby";
+            this.tbNomDerby.Size = new System.Drawing.Size(242, 22);
+            this.tbNomDerby.TabIndex = 12;
+            // 
             // Derby
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(622, 402);
+            this.ClientSize = new System.Drawing.Size(622, 401);
             this.Controls.Add(this.NumGalloList);
             this.Controls.Add(this.tbToleranciaPeso);
             this.Controls.Add(this.label3);
@@ -211,12 +208,14 @@
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.labelFechaDerby);
             this.Controls.Add(this.tbNomDerby);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.labelNomDerby);
             this.Controls.Add(this.pictureBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(640, 448);
+            this.MinimumSize = new System.Drawing.Size(640, 448);
             this.Name = "Derby";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Derby";
+            this.Text = "Nueva partida de Derby";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -229,8 +228,6 @@
         public System.Windows.Forms.DateTimePicker dtpFechaDerby;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Label labelFechaDerby;
-        public System.Windows.Forms.TextBox tbNomDerby;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelNomDerby;
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.TextBox tbNomOrganizador;
@@ -241,5 +238,7 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private Sunisoft.IrisSkin.SkinEngine skinEngine1;
+        public System.Windows.Forms.TextBox tbNomDerby;
     }
 }
