@@ -29,12 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Restricciones));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.TotalRestricciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrimerPartido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SegundoPartido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.salir = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSigRest = new System.Windows.Forms.Button();
@@ -47,6 +44,9 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.TotalRestricciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrimerPartido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SegundoPartido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -70,34 +70,11 @@
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
-            // TotalRestricciones
-            // 
-            dataGridViewCellStyle2.NullValue = null;
-            this.TotalRestricciones.DefaultCellStyle = dataGridViewCellStyle2;
-            this.TotalRestricciones.HeaderText = "Restricciones";
-            this.TotalRestricciones.Name = "TotalRestricciones";
-            this.TotalRestricciones.ReadOnly = true;
-            this.TotalRestricciones.Width = 110;
-            // 
-            // PrimerPartido
-            // 
-            this.PrimerPartido.HeaderText = "Primer_Partido";
-            this.PrimerPartido.Name = "PrimerPartido";
-            this.PrimerPartido.ReadOnly = true;
-            this.PrimerPartido.Width = 120;
-            // 
-            // SegundoPartido
-            // 
-            this.SegundoPartido.HeaderText = "Segundo_Partido";
-            this.SegundoPartido.Name = "SegundoPartido";
-            this.SegundoPartido.ReadOnly = true;
-            this.SegundoPartido.Width = 130;
-            // 
             // salir
             // 
-            this.salir.Location = new System.Drawing.Point(929, 443);
+            this.salir.Location = new System.Drawing.Point(929, 437);
             this.salir.Name = "salir";
-            this.salir.Size = new System.Drawing.Size(75, 23);
+            this.salir.Size = new System.Drawing.Size(75, 26);
             this.salir.TabIndex = 1;
             this.salir.Text = "Salir";
             this.salir.UseVisualStyleBackColor = true;
@@ -194,12 +171,12 @@
             // 
             this.btnEliminar.BackColor = System.Drawing.Color.White;
             this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEliminar.Location = new System.Drawing.Point(301, 262);
+            this.btnEliminar.Location = new System.Drawing.Point(762, 437);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(146, 51);
+            this.btnEliminar.Size = new System.Drawing.Size(146, 26);
             this.btnEliminar.TabIndex = 25;
             this.btnEliminar.Text = "Eliminar Restricción";
-            this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // errorProvider1
@@ -209,6 +186,29 @@
             // errorProvider2
             // 
             this.errorProvider2.ContainerControl = this;
+            // 
+            // TotalRestricciones
+            // 
+            this.TotalRestricciones.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle1.NullValue = null;
+            this.TotalRestricciones.DefaultCellStyle = dataGridViewCellStyle1;
+            this.TotalRestricciones.HeaderText = "Restricciones";
+            this.TotalRestricciones.Name = "TotalRestricciones";
+            this.TotalRestricciones.ReadOnly = true;
+            // 
+            // PrimerPartido
+            // 
+            this.PrimerPartido.HeaderText = "Primer_Partido";
+            this.PrimerPartido.Name = "PrimerPartido";
+            this.PrimerPartido.ReadOnly = true;
+            this.PrimerPartido.Width = 120;
+            // 
+            // SegundoPartido
+            // 
+            this.SegundoPartido.HeaderText = "Segundo_Partido";
+            this.SegundoPartido.Name = "SegundoPartido";
+            this.SegundoPartido.ReadOnly = true;
+            this.SegundoPartido.Width = 130;
             // 
             // Restricciones
             // 
@@ -244,11 +244,11 @@
         private Sunisoft.IrisSkin.SkinEngine skinEngine1;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnSigRest;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TotalRestricciones;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrimerPartido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SegundoPartido;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.ErrorProvider errorProvider2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TotalRestricciones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrimerPartido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SegundoPartido;
     }
 }

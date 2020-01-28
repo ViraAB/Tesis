@@ -27,6 +27,8 @@ namespace Menu
         public Restricciones()
         {
             InitializeComponent();
+            //Ocultamos la columna de id gallo, pero se agrega para poder eliminar los registros con el id del mismo
+            this.dataGridView1.Columns["TotalRestricciones"].Visible = false;
         }
 
         //Autocompleta los campos de texto "Nombre Del Partido"

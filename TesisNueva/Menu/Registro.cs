@@ -228,7 +228,7 @@ namespace Menu
             if (txtGallo1.Text == "")
             {
                 ok = false;
-                errorProvider2.SetError(txtGallo1, "Ingresar Nombre del Gallo");
+                errorProvider2.SetError(txtGallo1, "Ingresar Peso del Gallo");
             }
             if(txtNumAnillo1.Text == "")
             {
@@ -259,7 +259,7 @@ namespace Menu
             if (txtMosPG.Text == "")
             {
                 ok = false;
-                errorProvider3.SetError(txtMosPG, "Ingresar Nombre del Gallo");
+                errorProvider3.SetError(txtMosPG, "Ingresar Peso del Gallo");
             }
             if (txtMosNA.Text == "")
             {

@@ -339,9 +339,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(40, 89);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(119, 18);
+            this.label10.Size = new System.Drawing.Size(155, 18);
             this.label10.TabIndex = 27;
-            this.label10.Text = "Peso del Gallo";
+            this.label10.Text = "Peso del Gallo (Gr)";
             // 
             // label
             // 
