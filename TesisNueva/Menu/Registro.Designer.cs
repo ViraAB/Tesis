@@ -117,7 +117,7 @@
             // 
             this.textNomPartido.Location = new System.Drawing.Point(183, 51);
             this.textNomPartido.Name = "textNomPartido";
-            this.textNomPartido.Size = new System.Drawing.Size(234, 24);
+            this.textNomPartido.Size = new System.Drawing.Size(216, 24);
             this.textNomPartido.TabIndex = 14;
             this.textNomPartido.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -153,7 +153,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(113, 96);
+            this.label7.Location = new System.Drawing.Point(118, 96);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(83, 18);
             this.label7.TabIndex = 22;
@@ -186,7 +186,7 @@
             this.textNomPartido2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.textNomPartido2.Location = new System.Drawing.Point(183, 44);
             this.textNomPartido2.Name = "textNomPartido2";
-            this.textNomPartido2.Size = new System.Drawing.Size(234, 24);
+            this.textNomPartido2.Size = new System.Drawing.Size(217, 24);
             this.textNomPartido2.TabIndex = 15;
             // 
             // btnGuardarGallos
@@ -209,23 +209,23 @@
             this.txtNumAnillo1.Location = new System.Drawing.Point(266, 133);
             this.txtNumAnillo1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumAnillo1.Name = "txtNumAnillo1";
-            this.txtNumAnillo1.Size = new System.Drawing.Size(151, 24);
+            this.txtNumAnillo1.Size = new System.Drawing.Size(133, 24);
             this.txtNumAnillo1.TabIndex = 11;
             this.txtNumAnillo1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumAnillo1_KeyPress);
             // 
             // txtGallo1
             // 
-            this.txtGallo1.Location = new System.Drawing.Point(84, 133);
+            this.txtGallo1.Location = new System.Drawing.Point(93, 130);
             this.txtGallo1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtGallo1.Name = "txtGallo1";
-            this.txtGallo1.Size = new System.Drawing.Size(151, 24);
+            this.txtGallo1.Size = new System.Drawing.Size(133, 24);
             this.txtGallo1.TabIndex = 10;
             this.txtGallo1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtGallo1_KeyPress);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(266, 96);
+            this.label5.Location = new System.Drawing.Point(264, 96);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(136, 18);
             this.label5.TabIndex = 9;
