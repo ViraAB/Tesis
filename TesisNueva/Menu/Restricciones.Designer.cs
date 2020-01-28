@@ -28,20 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Restricciones));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.TotalRestricciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Primer_Partido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrimerPartido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SegundoPartido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.salir = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSigRest = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.textPart2 = new System.Windows.Forms.TextBox();
             this.textPart1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.skinEngine1 = new Sunisoft.IrisSkin.SkinEngine(((System.ComponentModel.Component)(this)));
-            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +55,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.TotalRestricciones,
-            this.Primer_Partido,
+            this.PrimerPartido,
             this.SegundoPartido});
             this.dataGridView1.Location = new System.Drawing.Point(486, 28);
             this.dataGridView1.Name = "dataGridView1";
@@ -61,22 +63,23 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(518, 397);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // TotalRestricciones
             // 
-            dataGridViewCellStyle2.NullValue = null;
-            this.TotalRestricciones.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.NullValue = null;
+            this.TotalRestricciones.DefaultCellStyle = dataGridViewCellStyle1;
             this.TotalRestricciones.HeaderText = "Restricciones";
             this.TotalRestricciones.Name = "TotalRestricciones";
             this.TotalRestricciones.ReadOnly = true;
             this.TotalRestricciones.Width = 110;
             // 
-            // Primer_Partido
+            // PrimerPartido
             // 
-            this.Primer_Partido.HeaderText = "Primer_Partido";
-            this.Primer_Partido.Name = "Primer_Partido";
-            this.Primer_Partido.ReadOnly = true;
-            this.Primer_Partido.Width = 120;
+            this.PrimerPartido.HeaderText = "Primer_Partido";
+            this.PrimerPartido.Name = "PrimerPartido";
+            this.PrimerPartido.ReadOnly = true;
+            this.PrimerPartido.Width = 120;
             // 
             // SegundoPartido
             // 
@@ -97,6 +100,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSigRest);
             this.groupBox1.Controls.Add(this.btnGuardar);
             this.groupBox1.Controls.Add(this.textPart2);
             this.groupBox1.Controls.Add(this.textPart1);
@@ -108,6 +112,33 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Restricciones";
+            // 
+            // btnSigRest
+            // 
+            this.btnSigRest.BackColor = System.Drawing.Color.White;
+            this.btnSigRest.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSigRest.Location = new System.Drawing.Point(110, 116);
+            this.btnSigRest.Name = "btnSigRest";
+            this.btnSigRest.Size = new System.Drawing.Size(146, 51);
+            this.btnSigRest.TabIndex = 24;
+            this.btnSigRest.Text = "Nueva Restricción";
+            this.btnSigRest.UseVisualStyleBackColor = false;
+            this.btnSigRest.Click += new System.EventHandler(this.btnSigRest_Click);
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.BackColor = System.Drawing.Color.White;
+            this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGuardar.Image = global::Menu.Properties.Resources._3floppy3_unmount;
+            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnGuardar.Location = new System.Drawing.Point(273, 116);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(130, 51);
+            this.btnGuardar.TabIndex = 15;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click_1);
             // 
             // textPart2
             // 
@@ -154,20 +185,17 @@
     "IN 7\\SkinVS.NET\\Diamond\\DiamondBlue.ssk";
             this.skinEngine1.SkinStreamMain = ((System.IO.Stream)(resources.GetObject("skinEngine1.SkinStreamMain")));
             // 
-            // btnGuardar
+            // btnEliminar
             // 
-            this.btnGuardar.BackColor = System.Drawing.Color.White;
-            this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGuardar.Image = global::Menu.Properties.Resources._3floppy3_unmount;
-            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGuardar.Location = new System.Drawing.Point(273, 116);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(130, 51);
-            this.btnGuardar.TabIndex = 15;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.UseVisualStyleBackColor = false;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click_1);
+            this.btnEliminar.BackColor = System.Drawing.Color.White;
+            this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEliminar.Location = new System.Drawing.Point(301, 262);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(146, 51);
+            this.btnEliminar.TabIndex = 25;
+            this.btnEliminar.Text = "Eliminar Restricción";
+            this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // Restricciones
             // 
@@ -175,6 +203,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1029, 478);
+            this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.salir);
             this.Controls.Add(this.dataGridView1);
@@ -197,10 +226,12 @@
         private System.Windows.Forms.TextBox textPart1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TotalRestricciones;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Primer_Partido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SegundoPartido;
         private Sunisoft.IrisSkin.SkinEngine skinEngine1;
         private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.Button btnSigRest;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TotalRestricciones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrimerPartido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SegundoPartido;
+        private System.Windows.Forms.Button btnEliminar;
     }
 }

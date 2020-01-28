@@ -128,6 +128,18 @@
   <data name="menuStrip1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Maiandra GD, 12pt, style=Bold</value>
   </data>
+  <data name="nuevoDerbyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>342, 28</value>
+  </data>
+  <data name="nuevoDerbyToolStripMenuItem.Text" xml:space="preserve">
+    <value>Nuevo Derby</value>
+  </data>
+  <data name="registrarPartidosYGallosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>342, 28</value>
+  </data>
+  <data name="registrarPartidosYGallosToolStripMenuItem.Text" xml:space="preserve">
+    <value>Registrar Partidos y Gallos</value>
+  </data>
   <data name="peleasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 71</value>
   </data>
@@ -139,6 +151,18 @@
   </data>
   <data name="derbysAterioresToolStripMenuItem.Text" xml:space="preserve">
     <value>Derbys Ateriores</value>
+  </data>
+  <data name="administradorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>305, 28</value>
+  </data>
+  <data name="administradorToolStripMenuItem.Text" xml:space="preserve">
+    <value>Administrador</value>
+  </data>
+  <data name="consultorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>305, 28</value>
+  </data>
+  <data name="consultorToolStripMenuItem.Text" xml:space="preserve">
+    <value>Agregar Administrador</value>
   </data>
   <data name="iniciarSesiónToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>168, 71</value>
@@ -170,30 +194,6 @@
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="nuevoDerbyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>342, 28</value>
-  </data>
-  <data name="nuevoDerbyToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nuevo Derby</value>
-  </data>
-  <data name="registrarPartidosYGallosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>342, 28</value>
-  </data>
-  <data name="registrarPartidosYGallosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Registrar Partidos y Gallos</value>
-  </data>
-  <data name="administradorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 28</value>
-  </data>
-  <data name="administradorToolStripMenuItem.Text" xml:space="preserve">
-    <value>Administrador</value>
-  </data>
-  <data name="consultorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 28</value>
-  </data>
-  <data name="consultorToolStripMenuItem.Text" xml:space="preserve">
-    <value>Agregar Administrador</value>
-  </data>
   <metadata name="skinEngine1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>163, 24</value>
   </metadata>
@@ -202,7 +202,7 @@
         AAEAAAD/////AQAAAAAAAAAEAQAAABZTeXN0ZW0uSU8uTWVtb3J5U3RyZWFtCgAAAAdfYnVmZmVyB19v
         cmlnaW4JX3Bvc2l0aW9uB19sZW5ndGgJX2NhcGFjaXR5C19leHBhbmRhYmxlCV93cml0YWJsZQpfZXhw
         b3NhYmxlB19pc09wZW4dTWFyc2hhbEJ5UmVmT2JqZWN0K19faWRlbnRpdHkHAAAAAAAAAAACAggICAgB
-        AQEBCQIAAAAAAAAAAAAAAKtOAACrTgAAAAEAAQoPAgAAAKtOAAACU0sDBBQAAAAIABFSdjTYA+POMU4A
+        AQEBCQIAAAAAAAAAq04AAKtOAACrTgAAAAEAAQoPAgAAAKtOAAACU0sDBBQAAAAIABFSdjTYA+POMU4A
         ALNvAgAMAAAAU0tJTkRBVEEuU0sy7J0JdFxHme8rsSXZ1i7f1tLaLKm174u1y9a+2VqszS15be92bGdx
         nOBA4uDgkH3FWSYr2XDyAgHegCEkEAwOJJMTGF7CADOBNyQnzHlwBnic8M6BmdH79F3X1VddVbevnMFR
         rPs7pVitVOl+9//966vqdm5ldHywb3Soe2zL6JqqZMbYxfA18+fomr7Bqi1jfWNru9rbRirZnNkJX8+s

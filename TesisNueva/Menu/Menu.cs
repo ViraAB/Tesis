@@ -61,5 +61,10 @@ namespace Menu
             log.MdiParent = this;
             log.Show();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Matrices.Consultar("Gallos", "Rondas");
+        }
     }
 }
