@@ -22,12 +22,7 @@ namespace Menu
         public string dataSegunPartido = " ";
         public string IdPartido1 = " ", IdPartido2 = " ";
         public string EliminarPartido1 = " ", EliminarPartido2 = " ";
-        public int NR = Variables.IntValNR;  //HACERLO DINAMICO NUMERO DE RONDAS
-
-        public int TOL = Variables.IntValNT;
-        public int NumeroPartidosDerby = Variables.IntValNP;
-        public int NumeroGallosDerby = Variables.IntValNG;
-
+        public int NR = Variables.IntValNR;
 
         public Restricciones()
         {
@@ -50,51 +45,56 @@ namespace Menu
 
         private void btnGuardar_Click_1(object sender, EventArgs e)
         {
-            Partido1 = textPart1.Text;
-            Partido2 = textPart2.Text;
-
-            dataGridView1.Rows.Add(numero, textPart1.Text, textPart2.Text);
-            numero = numero + 1;
-
-            //Comparamos el nombre del partido que se selecciono en la lista desplegable, para poder cambiarlo por el 
-            //IdPartido
-            SQLiteParameter parNomPartido1 = new SQLiteParameter("@nompartido", Partido1);
-            SQLiteCommand com = new SQLiteCommand("SELECT Id_Partido FROM Partido WHERE NomPartido = @nompartido", conexion);
-            com.Parameters.Add(parNomPartido1);
-            SQLiteDataReader lector1 = com.ExecuteReader();
-
-            while (lector1.Read())
+            BorrrarMnsjErrorRestricciones();
+            if (ValidarCamposRestricciones() == true)
             {
-                IdPartido1 = lector1.GetInt16(0) + " ";
-            }
-            lector1.Close();
-            int IntIdPartido1 = Int16.Parse(IdPartido1);//Convertimos el IdPartido1 a entero (int)
+                Partido1 = textPart1.Text;
+                Partido2 = textPart2.Text;
 
-            SQLiteParameter parNomPartido2 = new SQLiteParameter("@nompartido", Partido2);
-            SQLiteCommand com1 = new SQLiteCommand("SELECT Id_Partido FROM Partido WHERE NomPartido = @nompartido", conexion);
-            com1.Parameters.Add(parNomPartido2);
-            SQLiteDataReader lector2 = com1.ExecuteReader();
+                dataGridView1.Rows.Add(numero, textPart1.Text, textPart2.Text);
+                numero = numero + 1;
 
-            while (lector2.Read())
-            {
-                IdPartido2 = lector2.GetInt16(0) + " ";
-            }
-            lector2.Close();
-            int IntIdPartido2 = Int16.Parse(IdPartido2);//Convertimos el IdPartido2 a entero (int)
+                //Comparamos el nombre del partido que se selecciono en la lista desplegable, para poder cambiarlo por el 
+                //IdPartido
+                SQLiteParameter parNomPartido1 = new SQLiteParameter("@nompartido", Partido1);
+                SQLiteCommand com = new SQLiteCommand("SELECT Id_Partido FROM Partido WHERE NomPartido = @nompartido", conexion);
+                com.Parameters.Add(parNomPartido1);
+                SQLiteDataReader lector1 = com.ExecuteReader();
 
-            int x = 0, y = 0;
-            int inicio1 = 0, inicio2 = 0;
-
-            inicio1 = ((IntIdPartido1 - 1) * NR); //32
-            inicio2 = ((IntIdPartido2 - 1) * NR); //40
-
-            for (x = inicio1; x <= (inicio1 + NR); x++)
-            {
-                for (y = inicio2; y <= (inicio2 + NR); y++)
+                while (lector1.Read())
                 {
-                    Matrices.peleaPartido[x, y] = false; //32
-                    Matrices.peleaPartido[y, x] = false; //40
+                    IdPartido1 = lector1.GetInt16(0) + " ";
                 }
+                lector1.Close();
+                int IntIdPartido1 = Int16.Parse(IdPartido1);//Convertimos el IdPartido1 a entero (int)
+
+                SQLiteParameter parNomPartido2 = new SQLiteParameter("@nompartido", Partido2);
+                SQLiteCommand com1 = new SQLiteCommand("SELECT Id_Partido FROM Partido WHERE NomPartido = @nompartido", conexion);
+                com1.Parameters.Add(parNomPartido2);
+                SQLiteDataReader lector2 = com1.ExecuteReader();
+
+                while (lector2.Read())
+                {
+                    IdPartido2 = lector2.GetInt16(0) + " ";
+                }
+                lector2.Close();
+                int IntIdPartido2 = Int16.Parse(IdPartido2);//Convertimos el IdPartido2 a entero (int)
+
+                int x = 0, y = 0;
+                int inicio1 = 0, inicio2 = 0;
+
+                inicio1 = ((IntIdPartido1 - 1) * NR); //32
+                inicio2 = ((IntIdPartido2 - 1) * NR); //40
+
+                for (x = inicio1; x < (inicio1 + NR); x++)
+                {
+                    for (y = inicio2; y < (inicio2 + NR); y++)
+                    {
+                        Matrices.peleaPartido[x, y] = false; //32
+                        Matrices.peleaPartido[y, x] = false; //40
+                    }
+                }
+
             }
         }
 
@@ -124,7 +124,7 @@ namespace Menu
             }
             else
             {
-                if (MessageBox.Show("Estas seguro de que quieres eliminar el gallo?",
+                if (MessageBox.Show("Estas seguro de que quieres eliminar la restricción?",
                 "Eliminar", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     int ElimInicio1 = 0, ElimInicio2 = 0;
@@ -159,16 +159,45 @@ namespace Menu
                     ElimInicio1 = ((IntEliminarPartido1 - 1) * NR); //32
                     ElimInicio2 = ((IntEliminarPartido2 - 1) * NR); //40
 
-                    for (ex = ElimInicio1; ex <= (ElimInicio1 + NR); ex++)
+                    for (ex = ElimInicio1; ex < (ElimInicio1 + NR); ex++)
                     {
-                        for (ey = ElimInicio2; ey <= (ElimInicio2 + NR); ey++)
+                        for (ey = ElimInicio2; ey < (ElimInicio2 + NR); ey++)
                         {
                             Matrices.peleaPartido[ex, ey] = true; //32
                             Matrices.peleaPartido[ey, ex] = true; //40
                         }
                     }
+                    dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
                 }
             }
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////V A L I D A C I O N E S///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        //Validar Campos vacíos del Partido
+        private bool ValidarCamposRestricciones()
+        {
+            bool ok = true;
+            if (textPart1.Text == "")
+            {
+                ok = false;
+                errorProvider1.SetError(textPart1, "Ingresar Nombre del Partido");
+            }
+            if (textPart2.Text == "")
+            {
+                ok = false;
+                errorProvider2.SetError(textPart2, "Ingresar Nombre del Partido");
+            }
+            return ok;
+        }
+
+        //Borrar los mensajes de errores cuando ya se ingresaron los datos correctos de la parte de Editar registros
+        private void BorrrarMnsjErrorRestricciones()
+        {
+            errorProvider1.SetError(textPart1, "");
+            errorProvider2.SetError(textPart2, "");
         }
     }
 }
