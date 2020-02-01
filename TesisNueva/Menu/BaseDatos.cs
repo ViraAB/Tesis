@@ -254,6 +254,52 @@ namespace Menu
             }
         }
 
+        public Boolean registroRestriccion(string NomPartido1, string NomPartido2)
+        {
+            conexion.Open();
+            //Registrar los datos del partido
+            SQLiteParameter nompartido1 = new SQLiteParameter("@nomPart1", NomPartido1);
+            SQLiteParameter nompartido2 = new SQLiteParameter("@nomPart2", NomPartido2);
+
+            SQLiteCommand comando = new SQLiteCommand("INSERT INTO Restricciones(Partido1,Partido2) VALUES(@nomPart1, @nomPart2);", conexion);
+            comando.Parameters.Add(nompartido1);
+            comando.Parameters.Add(nompartido2);
+
+            SQLiteDataReader lector = comando.ExecuteReader();
+
+            lector.Close();
+
+            if (string.IsNullOrEmpty(NumGallos))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        //Borrar datos en la base de datos de la tabla restricciones
+        public bool BorrarRestricciones(int valorElim)
+        {
+            conexion.Open();
+            SQLiteParameter parIdPartido = new SQLiteParameter("@Valor", valorElim);
+            SQLiteCommand adaptador = new SQLiteCommand("DELETE FROM Restricciones WHERE Id_Restricciones = @Valor", conexion);
+            adaptador.Parameters.Add(parIdPartido);
+            SQLiteDataReader lector = adaptador.ExecuteReader();
+            lector.Close();
+            MessageBox.Show("Registro Eliminado");
+
+            if (string.IsNullOrEmpty(NumGallos))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         //Autocompleta el campo de texto "Nombre Del Partido" dentro de registro
         public void autoCompletar(TextBox cajaTexto)
         {

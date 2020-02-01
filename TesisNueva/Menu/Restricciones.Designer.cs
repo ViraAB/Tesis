@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Restricciones));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.salir = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -190,8 +190,8 @@
             // TotalRestricciones
             // 
             this.TotalRestricciones.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle5.NullValue = null;
-            this.TotalRestricciones.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.NullValue = null;
+            this.TotalRestricciones.DefaultCellStyle = dataGridViewCellStyle1;
             this.TotalRestricciones.HeaderText = "Restricciones";
             this.TotalRestricciones.Name = "TotalRestricciones";
             this.TotalRestricciones.ReadOnly = true;
@@ -202,6 +202,7 @@
             this.PrimerPartido.HeaderText = "Primer_Partido";
             this.PrimerPartido.Name = "PrimerPartido";
             this.PrimerPartido.ReadOnly = true;
+            this.PrimerPartido.Visible = false;
             this.PrimerPartido.Width = 120;
             // 
             // SegundoPartido
@@ -209,6 +210,7 @@
             this.SegundoPartido.HeaderText = "Segundo_Partido";
             this.SegundoPartido.Name = "SegundoPartido";
             this.SegundoPartido.ReadOnly = true;
+            this.SegundoPartido.Visible = false;
             this.SegundoPartido.Width = 130;
             // 
             // Restricciones

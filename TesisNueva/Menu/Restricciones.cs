@@ -17,7 +17,7 @@ namespace Menu
         public string Partido1 = " ";
         public string Partido2 = " ";
         public int numero = 1;
-        public string totalRestr = " ";
+        public string idRestricciones = " ";
         public string dataPrimPartido = " ";
         public string dataSegunPartido = " ";
         public string IdPartido1 = " ", IdPartido2 = " ";
@@ -27,8 +27,19 @@ namespace Menu
         public Restricciones()
         {
             InitializeComponent();
+            CargarDatosRestricciones();
+
             //Ocultamos la columna de id gallo, pero se agrega para poder eliminar los registros con el id del mismo
-            this.dataGridView1.Columns["TotalRestricciones"].Visible = false;
+            this.dataGridView1.Columns["Id_Restricciones"].Visible = false;
+        }
+
+        //Mostrar datos en el DataGrid
+        public void CargarDatosRestricciones()
+        {
+            SQLiteDataAdapter adaptador = new SQLiteDataAdapter("SELECT Id_Restricciones, Partido1 AS 'Primer Partido', Partido2 AS 'Segundo Partido' FROM Restricciones;", conexion);
+            DataTable tabla = new DataTable("Datos");
+            adaptador.Fill(tabla);
+            dataGridView1.DataSource = tabla;
         }
 
         //Autocompleta los campos de texto "Nombre Del Partido"
@@ -53,11 +64,12 @@ namespace Menu
                 Partido1 = textPart1.Text;
                 Partido2 = textPart2.Text;
 
-                dataGridView1.Rows.Add(numero, textPart1.Text, textPart2.Text);
-                numero = numero + 1;
+                //Borrar los registros de la base de datos
+                BaseDatos bd = new BaseDatos();
+                Boolean res = bd.registroRestriccion(Partido1,Partido2);
 
                 //Comparamos el nombre del partido que se selecciono en la lista desplegable, para poder cambiarlo por el 
-                //IdPartido
+                //IdPartido y actualizar la matriz PeleaPartido
                 SQLiteParameter parNomPartido1 = new SQLiteParameter("@nompartido", Partido1);
                 SQLiteCommand com = new SQLiteCommand("SELECT Id_Partido FROM Partido WHERE NomPartido = @nompartido", conexion);
                 com.Parameters.Add(parNomPartido1);
@@ -88,6 +100,7 @@ namespace Menu
                 inicio1 = ((IntIdPartido1 - 1) * NR); //32
                 inicio2 = ((IntIdPartido2 - 1) * NR); //40
 
+                //Actualizar matriz
                 for (x = inicio1; x < (inicio1 + NR); x++)
                 {
                     for (y = inicio2; y < (inicio2 + NR); y++)
@@ -96,8 +109,8 @@ namespace Menu
                         Matrices.peleaPartido[y, x] = false; //40
                     }
                 }
-
             }
+            CargarDatosRestricciones();
         }
 
         private void btnSigRest_Click(object sender, EventArgs e)
@@ -113,14 +126,14 @@ namespace Menu
                 return;
             }
             dataGridView1.CurrentCell.Selected = true;
-            totalRestr = dataGridView1.Rows[e.RowIndex].Cells["TotalRestricciones"].FormattedValue.ToString();
-            dataPrimPartido = dataGridView1.Rows[e.RowIndex].Cells["PrimerPartido"].FormattedValue.ToString();
-            dataSegunPartido = dataGridView1.Rows[e.RowIndex].Cells["SegundoPartido"].FormattedValue.ToString();
+            idRestricciones = dataGridView1.Rows[e.RowIndex].Cells["Id_Restricciones"].FormattedValue.ToString();
+            dataPrimPartido = dataGridView1.Rows[e.RowIndex].Cells["Primer Partido"].FormattedValue.ToString();
+            dataSegunPartido = dataGridView1.Rows[e.RowIndex].Cells["Segundo Partido"].FormattedValue.ToString();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (totalRestr == " ")
+            if (idRestricciones == " ")
             {
                 MessageBox.Show("Debe seleccionar un registro");
             }
@@ -132,8 +145,14 @@ namespace Menu
                     int ElimInicio1 = 0, ElimInicio2 = 0;
                     int ex = 0, ey = 0;
 
+                    //Borrar los registros de la base de datos
+                    int ValElim = int.Parse(idRestricciones.ToString());
+                    BaseDatos bd = new BaseDatos();
+                    Boolean res = bd.BorrarRestricciones(ValElim);
+                    CargarDatosRestricciones();
+
                     //Comparamos el nombre del partido que se selecciono en la lista desplegable, para poder cambiarlo por el 
-                    //IdPartido
+                    //IdPartido y actualizar la matriz PeleaPartido
                     SQLiteParameter NomPartido1 = new SQLiteParameter("@nompartido", dataPrimPartido);
                     SQLiteCommand com = new SQLiteCommand("SELECT Id_Partido FROM Partido WHERE NomPartido = @nompartido", conexion);
                     com.Parameters.Add(NomPartido1);
@@ -172,6 +191,7 @@ namespace Menu
                     dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
                 }
             }
+            CargarDatosRestricciones();
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
