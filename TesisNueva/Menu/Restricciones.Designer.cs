@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Restricciones));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.salir = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -66,13 +66,13 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(518, 397);
+            this.dataGridView1.Size = new System.Drawing.Size(390, 397);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // salir
             // 
-            this.salir.Location = new System.Drawing.Point(929, 437);
+            this.salir.Location = new System.Drawing.Point(801, 440);
             this.salir.Name = "salir";
             this.salir.Size = new System.Drawing.Size(75, 26);
             this.salir.TabIndex = 1;
@@ -171,7 +171,7 @@
             // 
             this.btnEliminar.BackColor = System.Drawing.Color.White;
             this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEliminar.Location = new System.Drawing.Point(762, 437);
+            this.btnEliminar.Location = new System.Drawing.Point(634, 440);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(146, 26);
             this.btnEliminar.TabIndex = 25;
@@ -190,11 +190,12 @@
             // TotalRestricciones
             // 
             this.TotalRestricciones.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.NullValue = null;
-            this.TotalRestricciones.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.NullValue = null;
+            this.TotalRestricciones.DefaultCellStyle = dataGridViewCellStyle5;
             this.TotalRestricciones.HeaderText = "Restricciones";
             this.TotalRestricciones.Name = "TotalRestricciones";
             this.TotalRestricciones.ReadOnly = true;
+            this.TotalRestricciones.Visible = false;
             // 
             // PrimerPartido
             // 
@@ -215,11 +216,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1029, 478);
+            this.ClientSize = new System.Drawing.Size(902, 478);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.salir);
             this.Controls.Add(this.dataGridView1);
+            this.MaximumSize = new System.Drawing.Size(920, 525);
+            this.MinimumSize = new System.Drawing.Size(920, 525);
             this.Name = "Restricciones";
             this.Text = "Restricciones";
             this.Load += new System.EventHandler(this.Restricciones_Load);

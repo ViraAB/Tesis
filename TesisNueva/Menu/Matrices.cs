@@ -117,7 +117,7 @@ namespace Menu
                     for (ry = 0; ry < Variables.IntValNP; ry++) 
                     {
                         for (rz = 0; rz < 3; rz++)
-                        {
+                        { 
                             rondas[rx, ry, rz] = int.Parse(dsron.Tables["Rondas"].Rows[incre][rz].ToString());
                         }
                         incre = incre + Variables.IntValNG; 

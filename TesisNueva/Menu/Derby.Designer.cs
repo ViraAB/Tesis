@@ -59,7 +59,7 @@
             // btnCancelar
             // 
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancelar.Location = new System.Drawing.Point(520, 353);
+            this.btnCancelar.Location = new System.Drawing.Point(510, 353);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(100, 27);
             this.btnCancelar.TabIndex = 15;
@@ -158,7 +158,7 @@
             // btnGuardar
             // 
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGuardar.Location = new System.Drawing.Point(378, 353);
+            this.btnGuardar.Location = new System.Drawing.Point(368, 353);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(124, 27);
             this.btnGuardar.TabIndex = 14;
@@ -196,7 +196,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(622, 401);
+            this.ClientSize = new System.Drawing.Size(637, 401);
             this.Controls.Add(this.NumGalloList);
             this.Controls.Add(this.tbToleranciaPeso);
             this.Controls.Add(this.label3);
@@ -211,8 +211,8 @@
             this.Controls.Add(this.labelNomDerby);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(640, 448);
-            this.MinimumSize = new System.Drawing.Size(640, 448);
+            this.MaximumSize = new System.Drawing.Size(655, 448);
+            this.MinimumSize = new System.Drawing.Size(655, 448);
             this.Name = "Derby";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nueva partida de Derby";
