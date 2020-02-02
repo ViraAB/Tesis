@@ -39,7 +39,8 @@ namespace Menu
         public static bool[,] peleaPartido = { };
         public static bool[,] yaPelearon = { };
         public static bool[,] puedenPelear = { };
-        public static int[,,] rondas = { };
+        //public static int[,,] rondas = { }; 
+        public static int[,] rondas2 = { };
 
         public static void Consultar(string tabla, string tablaRon)
         {
@@ -48,9 +49,9 @@ namespace Menu
             string ValNTD = ""; //numero de la tolerancia entre gallos del derby
             string ValNR = ""; //numero de rondas del derby
 
-        //obtenemos el total de partidos, el número de gallos, la tolerancia y el numero de rondas 
-        //con que se realizara el derby
-        conexion.Open();
+            //obtenemos el total de partidos, el número de gallos, la tolerancia y el numero de rondas 
+            //con que se realizara el derby
+            conexion.Open();
             cmb = new SQLiteCommand("SELECT Id_Partido FROM Partido ORDER BY Id_Partido DESC  LIMIT 1;", conexion);
             dr = cmb.ExecuteReader();
             cmb = new SQLiteCommand("SELECT NumGallos FROM Derby ORDER BY NumGallos DESC LIMIT 1;", conexion);
@@ -104,26 +105,58 @@ namespace Menu
             int x = 0, y = 0;
             int tolerancia = Variables.IntValNT;
             int NR = Variables.IntValNR;
-            int rx = 0, ry = 0, rz = 0;
 
+            //Matriz de rondas bidimencional
             if (dsron.Tables["Rondas"].Rows.Count > 0)
             {
-                //Llenar las rondas
-                rondas = new int[Variables.IntValNG, Variables.IntValNP, 3];
-                int incre = 0;
-                for (rx = 0; rx < Variables.IntValNG; rx++)
+                rondas2 = new int[NG, 4]; //[48,(0,1,2,3)]
+                int rx = 0, ry = 0;
+                int incre = 0, numeroRonda = 0, continuar = 0;
+                int continuar2 = Variables.IntValNP;
+
+                for (numeroRonda = 0; numeroRonda < Variables.IntValNR; numeroRonda++)
                 {
-                    incre = rx;
-                    for (ry = 0; ry < Variables.IntValNP; ry++) 
+                    incre = numeroRonda;
+                    for (rx = continuar; rx < continuar2; rx++)
                     {
-                        for (rz = 0; rz < 3; rz++)
-                        { 
-                            rondas[rx, ry, rz] = int.Parse(dsron.Tables["Rondas"].Rows[incre][rz].ToString());
+                        for (ry = 0; ry < 4; ry++)
+                        {
+                            if (ry == 0)
+                            {
+                                rondas2[rx, ry] = numeroRonda;
+                            }
+                            else
+                            {
+                                rondas2[rx, ry] = int.Parse(dsron.Tables["Rondas"].Rows[incre][ry-1].ToString());
+                            }
                         }
-                        incre = incre + Variables.IntValNG; 
-                    }                    
+                        incre = incre + Variables.IntValNG;
+                    }
+                    continuar = rx;
+                    continuar2 = rx + 12;
                 }
             }
+
+            //Matriz en tridimencional
+            //if (dsron.Tables["Rondas"].Rows.Count > 0)
+            //{
+            //    int rx = 0, ry = 0, rz = 0;
+            //    //Llenar las rondas
+            //    rondas = new int[Variables.IntValNG, Variables.IntValNP, 3]; //[4,12,3]
+            //    int incre = 0;
+            //    for (rx = 0; rx < Variables.IntValNG; rx++) //0
+            //    {
+            //        incre = rx; //0
+            //        for (ry = 0; ry < Variables.IntValNP; ry++) //0
+            //        {
+            //            for (rz = 0; rz < 3; rz++) //0
+            //            { 
+            //                rondas[rx, ry, rz] = int.Parse(dsron.Tables["Rondas"].Rows[incre][rz].ToString());
+            //            }
+            //            incre = incre + Variables.IntValNG; 
+            //        }                    
+            //    }
+            //}
 
             //aqui cuenta las columnas que hay en la tabla Gallos y se compara para que entre a manipular el arreglo
             if (ds.Tables["Gallos"].Rows.Count > 0)

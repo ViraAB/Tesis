@@ -40,6 +40,8 @@ namespace Menu
             DataTable tabla = new DataTable("Datos");
             adaptador.Fill(tabla);
             dataGridView1.DataSource = tabla;
+            dataGridView1.Columns[1].Width = 125; //tamaño
+            dataGridView1.Columns[2].Width = 124;
         }
 
         //Autocompleta los campos de texto "Nombre Del Partido"

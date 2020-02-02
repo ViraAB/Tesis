@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Restricciones));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.salir = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -44,9 +43,6 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.TotalRestricciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrimerPartido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SegundoPartido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -57,11 +53,9 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.TotalRestricciones,
-            this.PrimerPartido,
-            this.SegundoPartido});
             this.dataGridView1.Location = new System.Drawing.Point(486, 28);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -187,32 +181,6 @@
             // 
             this.errorProvider2.ContainerControl = this;
             // 
-            // TotalRestricciones
-            // 
-            this.TotalRestricciones.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.NullValue = null;
-            this.TotalRestricciones.DefaultCellStyle = dataGridViewCellStyle1;
-            this.TotalRestricciones.HeaderText = "Restricciones";
-            this.TotalRestricciones.Name = "TotalRestricciones";
-            this.TotalRestricciones.ReadOnly = true;
-            this.TotalRestricciones.Visible = false;
-            // 
-            // PrimerPartido
-            // 
-            this.PrimerPartido.HeaderText = "Primer_Partido";
-            this.PrimerPartido.Name = "PrimerPartido";
-            this.PrimerPartido.ReadOnly = true;
-            this.PrimerPartido.Visible = false;
-            this.PrimerPartido.Width = 120;
-            // 
-            // SegundoPartido
-            // 
-            this.SegundoPartido.HeaderText = "Segundo_Partido";
-            this.SegundoPartido.Name = "SegundoPartido";
-            this.SegundoPartido.ReadOnly = true;
-            this.SegundoPartido.Visible = false;
-            this.SegundoPartido.Width = 130;
-            // 
             // Restricciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -252,8 +220,5 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.ErrorProvider errorProvider2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TotalRestricciones;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrimerPartido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SegundoPartido;
     }
 }
