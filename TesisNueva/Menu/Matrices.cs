@@ -105,6 +105,7 @@ namespace Menu
             int x = 0, y = 0;
             int tolerancia = Variables.IntValNT;
             int NR = Variables.IntValNR;
+            int NP = Variables.IntValNP;
 
             //Matriz de rondas bidimencional
             if (dsron.Tables["Rondas"].Rows.Count > 0)
@@ -136,6 +137,84 @@ namespace Menu
                     continuar2 = rx + 12;
                 }
             }
+
+            ////Ordenar matriz Rondas2 por pesos
+            ////una matriz es [RENGLON][COLUMNA]
+            //int ronda = 0;
+            //int orx = (NP*ronda), ory = (NP * ronda)+1; //orx, ory - renglones 
+            //int count = 0, count1 = 0;
+            
+            //for (count = 0; count < (NP - 1); count++)
+            //{
+            //    for (i = 0; i < (NP - 1); i++)
+            //    {
+            //        int[,] cambio = { };
+            //        cambio = new int[1, 4];
+            //        int a = 0, b = 0, c = 0;
+
+            //        if (rondas2[orx, 1] > rondas2[ory, 1])
+            //        {
+            //            for (a = 0; a < 4; a++)
+            //            {
+            //                cambio[0, a] = rondas2[orx, a];
+            //            }
+            //            for (b = 0; b < 4; b++)
+            //            {
+            //                rondas2[orx, b] = rondas2[ory, b];
+            //            }
+            //            for (c = 0; c < 4; c++)
+            //            {
+            //                rondas2[ory, c] = cambio[0, c];
+            //            }
+            //            orx = orx + 1;
+            //            ory = ory + 1;
+            //        }
+            //        else
+            //        {
+            //            orx = orx + 1;
+            //            ory = ory + 1;
+            //        }
+            //    }
+            //    orx = 0;
+            //    ory = 1;
+            //}
+
+            //ronda = ronda + 1;
+            //int orx1 = (NP * ronda), ory1 = (NP * ronda)+1; //12,13
+            //for (count1 = 0; count1 < (NP - 1); count1++)
+            //{
+            //    for (i = 0; i < (NP - 1); i++)
+            //    {
+            //        int[,] cambio = { };
+            //        cambio = new int[1, 4];
+            //        int a = 0, b = 0, c = 0;
+
+            //        if (rondas2[orx1, 1] > rondas2[ory1, 1])
+            //        {
+            //            for (a = 0; a < 4; a++)
+            //            {
+            //                cambio[0, a] = rondas2[orx1, a];
+            //            }
+            //            for (b = 0; b < 4; b++)
+            //            {
+            //                rondas2[orx1, b] = rondas2[ory1, b];
+            //            }
+            //            for (c = 0; c < 4; c++)
+            //            {
+            //                rondas2[ory1, c] = cambio[0, c];
+            //            }
+            //            orx1 = orx1 + 1;
+            //            ory1 = ory1 + 1;
+            //        }
+            //        else
+            //        {
+            //            orx = orx + 1;
+            //            ory = ory + 1;
+            //        }
+            //    }
+            //    orx = 0;
+            //    ory = 1;
+            //}
 
             //Matriz en tridimencional
             //if (dsron.Tables["Rondas"].Rows.Count > 0)
@@ -196,6 +275,18 @@ namespace Menu
                             peleaPartido[x, y] = false;
                         }
                         else peleaPartido[x, y] = true;
+                    }
+                }
+
+                //Matriz pueden pelear
+                for (i=0;i <NG; i++)
+                {
+                    for (j = 0; j < NG; j++)
+                    {
+                        if((peleaPeso[i,j] && peleaPartido[i,j] && (!(yaPelearon[i,j]))) == true)
+                        {
+                            puedenPelear[i, j] = true;
+                        }
                     }
                 }
 
