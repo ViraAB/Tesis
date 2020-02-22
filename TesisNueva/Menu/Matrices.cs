@@ -138,83 +138,37 @@ namespace Menu
                 }
             }
 
-            ////Ordenar matriz Rondas2 por pesos
-            ////una matriz es [RENGLON][COLUMNA]
-            //int ronda = 0;
-            //int orx = (NP*ronda), ory = (NP * ronda)+1; //orx, ory - renglones 
-            //int count = 0, count1 = 0;
-            
-            //for (count = 0; count < (NP - 1); count++)
-            //{
-            //    for (i = 0; i < (NP - 1); i++)
-            //    {
-            //        int[,] cambio = { };
-            //        cambio = new int[1, 4];
-            //        int a = 0, b = 0, c = 0;
+            //Ordenar matriz Rondas2 por pesos
+            //una matriz es [RENGLON][COLUMNA]
+            int ronda = 0, orx = 0, ory = 0;
+            int[,] cambio = { };
+            cambio = new int[1, 4];
+            int a = 0, b = 0, c = 0;
 
-            //        if (rondas2[orx, 1] > rondas2[ory, 1])
-            //        {
-            //            for (a = 0; a < 4; a++)
-            //            {
-            //                cambio[0, a] = rondas2[orx, a];
-            //            }
-            //            for (b = 0; b < 4; b++)
-            //            {
-            //                rondas2[orx, b] = rondas2[ory, b];
-            //            }
-            //            for (c = 0; c < 4; c++)
-            //            {
-            //                rondas2[ory, c] = cambio[0, c];
-            //            }
-            //            orx = orx + 1;
-            //            ory = ory + 1;
-            //        }
-            //        else
-            //        {
-            //            orx = orx + 1;
-            //            ory = ory + 1;
-            //        }
-            //    }
-            //    orx = 0;
-            //    ory = 1;
-            //}
-
-            //ronda = ronda + 1;
-            //int orx1 = (NP * ronda), ory1 = (NP * ronda)+1; //12,13
-            //for (count1 = 0; count1 < (NP - 1); count1++)
-            //{
-            //    for (i = 0; i < (NP - 1); i++)
-            //    {
-            //        int[,] cambio = { };
-            //        cambio = new int[1, 4];
-            //        int a = 0, b = 0, c = 0;
-
-            //        if (rondas2[orx1, 1] > rondas2[ory1, 1])
-            //        {
-            //            for (a = 0; a < 4; a++)
-            //            {
-            //                cambio[0, a] = rondas2[orx1, a];
-            //            }
-            //            for (b = 0; b < 4; b++)
-            //            {
-            //                rondas2[orx1, b] = rondas2[ory1, b];
-            //            }
-            //            for (c = 0; c < 4; c++)
-            //            {
-            //                rondas2[ory1, c] = cambio[0, c];
-            //            }
-            //            orx1 = orx1 + 1;
-            //            ory1 = ory1 + 1;
-            //        }
-            //        else
-            //        {
-            //            orx = orx + 1;
-            //            ory = ory + 1;
-            //        }
-            //    }
-            //    orx = 0;
-            //    ory = 1;
-            //}
+            for (ronda = 0; ronda <= (NR-1); ronda++)
+            {
+                for (orx = ((NP*ronda)+NP-1); orx >= (NP*ronda); orx--)
+                {
+                    for (ory = (NP * ronda)+1; ory <= orx ; ory++)
+                    {
+                        if (rondas2[ory-1, 1] > rondas2[ory, 1])
+                        {
+                            for (a = 0; a < 4; a++)
+                            {
+                                cambio[0, a] = rondas2[ory, a];
+                            }
+                            for (b = 0; b < 4; b++)
+                            {
+                                rondas2[ory, b] = rondas2[ory-1, b];
+                            }
+                            for (c = 0; c < 4; c++)
+                            {
+                                rondas2[ory-1, c] = cambio[0, c];
+                            }
+                        }
+                    }
+                }
+            }
 
             //Matriz en tridimencional
             //if (dsron.Tables["Rondas"].Rows.Count > 0)
