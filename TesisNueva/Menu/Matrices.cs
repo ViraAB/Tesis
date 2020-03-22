@@ -85,15 +85,15 @@ namespace Menu
             }
             Variables.IntValNR = Int16.Parse(ValNR);//Convertimos el ValNR a entero (int) 
 
-            //obtenemos los datos de la base de datos para armar las matrices matrizGallos
-            string sql = "select Id_Partido, Peso from Gallos order by Id_Partido, Peso"; //Se ordenade menor a mayor los gallos de cada partido
+            //obtenemos los datos de la base de datos para armar la matrizGallos
+            string sql = "select Id_Partido, Peso from GallosPrueba order by Id_Partido, Peso"; //Se ordenade menor a mayor los gallos de cada partido
             da = new SQLiteDataAdapter(sql, conexion);
             cmb = new SQLiteCommand();
             cmb.CommandText = sql;
             da.Fill(ds, tabla);
 
-            //obtenemos los datos de la base de datos para armar la matriz Rondas
-            string sqlron = "SELECT Peso AS 'Peso del Gallo (Gr)', g.Id_Gallo AS 'ID Gallo', g.Id_Partido AS 'ID Partido' FROM Gallos as g JOIN Partido as p on g.Id_Partido = p.Id_Partido ORDER by g.Id_Partido, g.Peso;";
+            //obtenemos los datos de la base de datos para armar la matrizRondas
+            string sqlron = "SELECT Peso AS 'Peso del Gallo (Gr)', g.Id_Gallo AS 'ID Gallo', g.Id_Partido AS 'ID Partido' FROM GallosPrueba as g JOIN Partido as p on g.Id_Partido = p.Id_Partido ORDER by g.Id_Partido, g.Peso;";
             da2 = new SQLiteDataAdapter(sqlron, conexion);
             cmb2 = new SQLiteCommand();
             cmb2.CommandText = sqlron;
@@ -107,94 +107,10 @@ namespace Menu
             int NR = Variables.IntValNR;
             int NP = Variables.IntValNP;
 
-            //Matriz de rondas bidimencional
-            if (dsron.Tables["Rondas"].Rows.Count > 0)
-            {
-                rondas2 = new int[NG, 4]; //[48,(0,1,2,3)]
-                int rx = 0, ry = 0;
-                int incre = 0, numeroRonda = 0, continuar = 0;
-                int continuar2 = Variables.IntValNP;
-
-                for (numeroRonda = 0; numeroRonda < Variables.IntValNR; numeroRonda++)
-                {
-                    incre = numeroRonda;
-                    for (rx = continuar; rx < continuar2; rx++)
-                    {
-                        for (ry = 0; ry < 4; ry++)
-                        {
-                            if (ry == 0)
-                            {
-                                rondas2[rx, ry] = numeroRonda;
-                            }
-                            else
-                            {
-                                rondas2[rx, ry] = int.Parse(dsron.Tables["Rondas"].Rows[incre][ry-1].ToString());
-                            }
-                        }
-                        incre = incre + Variables.IntValNG;
-                    }
-                    continuar = rx;
-                    continuar2 = rx + 12;
-                }
-            }
-
-            //Ordenar matriz Rondas2 por pesos
-            //una matriz es [RENGLON][COLUMNA]
-            int ronda = 0, orx = 0, ory = 0;
-            int[,] cambio = { };
-            cambio = new int[1, 4];
-            int a = 0, b = 0, c = 0;
-
-            for (ronda = 0; ronda <= (NR-1); ronda++)
-            {
-                for (orx = ((NP*ronda)+NP-1); orx >= (NP*ronda); orx--)
-                {
-                    for (ory = (NP * ronda)+1; ory <= orx ; ory++)
-                    {
-                        if (rondas2[ory-1, 1] > rondas2[ory, 1])
-                        {
-                            for (a = 0; a < 4; a++)
-                            {
-                                cambio[0, a] = rondas2[ory, a];
-                            }
-                            for (b = 0; b < 4; b++)
-                            {
-                                rondas2[ory, b] = rondas2[ory-1, b];
-                            }
-                            for (c = 0; c < 4; c++)
-                            {
-                                rondas2[ory-1, c] = cambio[0, c];
-                            }
-                        }
-                    }
-                }
-            }
-
-            //Matriz en tridimencional
-            //if (dsron.Tables["Rondas"].Rows.Count > 0)
-            //{
-            //    int rx = 0, ry = 0, rz = 0;
-            //    //Llenar las rondas
-            //    rondas = new int[Variables.IntValNG, Variables.IntValNP, 3]; //[4,12,3]
-            //    int incre = 0;
-            //    for (rx = 0; rx < Variables.IntValNG; rx++) //0
-            //    {
-            //        incre = rx; //0
-            //        for (ry = 0; ry < Variables.IntValNP; ry++) //0
-            //        {
-            //            for (rz = 0; rz < 3; rz++) //0
-            //            { 
-            //                rondas[rx, ry, rz] = int.Parse(dsron.Tables["Rondas"].Rows[incre][rz].ToString());
-            //            }
-            //            incre = incre + Variables.IntValNG; 
-            //        }                    
-            //    }
-            //}
-
             //aqui cuenta las columnas que hay en la tabla Gallos y se compara para que entre a manipular el arreglo
             if (ds.Tables["Gallos"].Rows.Count > 0)
             {
-                arryRows = ds.Tables["Gallos"].Rows.Count;
+                arryRows = ds.Tables[tabla].Rows.Count;
                 //se asigna a las matrices el numero de filas x numero de columnas de la Tabla Gallos [NG,NG]
                 //Al crear una matriz booleana, esta se inicializa en falso automanticamente.
                 matrizGallos = new int[arryRows, 2];
@@ -212,7 +128,7 @@ namespace Menu
                         matrizGallos[i, j] = int.Parse(ds.Tables["Gallos"].Rows[i][j].ToString());
                     }
                 }
-
+ 
                 //Aqui llenamos las matrices matrizPesos, PeleaPeso y PeleaPartido
                 for (x = 0; x <= NG - 1; x++)
                 {
@@ -232,17 +148,202 @@ namespace Menu
                     }
                 }
 
+                //Matriz de rondas bidimencional
+                if (dsron.Tables["Rondas"].Rows.Count > 0)
+                {
+                    rondas2 = new int[NG, 4]; //[48,(0,1,2,3)]
+                    int rx = 0, ry = 0;
+                    int incre = 0, numeroRonda = 0, continuar = 0;
+                    int continuar2 = Variables.IntValNP;
+
+                    for (numeroRonda = 0; numeroRonda < Variables.IntValNR; numeroRonda++)
+                    {
+                        incre = numeroRonda;
+                        for (rx = continuar; rx < continuar2; rx++)
+                        {
+                            for (ry = 0; ry < 4; ry++)
+                            {
+                                if (ry == 0)
+                                {
+                                    rondas2[rx, ry] = numeroRonda;
+                                }
+                                else if (ry == 1 || ry == 3)
+                                {
+                                    rondas2[rx, ry] = int.Parse(dsron.Tables["Rondas"].Rows[incre][ry - 1].ToString());
+                                }
+                                else if (ry == 2)
+                                {
+                                    //no.gallo en rondas estaba comenzando en 1 debido a la tabla de se obtienen 
+                                    //por ello fue necesario agregarlo a una variable temporal y restarle 1
+                                    int temp = 0;
+                                    temp = int.Parse(dsron.Tables["Rondas"].Rows[incre][ry - 1].ToString());
+                                    rondas2[rx, ry] = temp -1;
+                                }
+                            }
+                            incre = incre + Variables.IntValNG;
+                        }
+                        continuar = rx;
+                        continuar2 = rx + NP;
+                    }
+                }
+
+                //Ordenar matriz Rondas2 por pesos
+                //Metodo de la burbuja
+                //una matriz [RENGLON][COLUMNA]
+                int ordenarRonda = 0, orx = 0, ory = 0;
+                int[,] cambio = { };
+                cambio = new int[1, 4];
+                int a = 0, b = 0, c = 0;
+
+                for (ordenarRonda = 0; ordenarRonda <= (NR - 1); ordenarRonda++)
+                {
+                    for (orx = ((NP * ordenarRonda) + NP - 1); orx >= (NP * ordenarRonda); orx--)
+                    {
+                        for (ory = (NP * ordenarRonda) + 1; ory <= orx; ory++)
+                        {
+                            if (rondas2[ory - 1, 1] > rondas2[ory, 1])
+                            {
+                                for (a = 0; a < 4; a++)
+                                {
+                                    cambio[0, a] = rondas2[ory, a];
+                                }
+                                for (b = 0; b < 4; b++)
+                                {
+                                    rondas2[ory, b] = rondas2[ory - 1, b];
+                                }
+                                for (c = 0; c < 4; c++)
+                                {
+                                    rondas2[ory - 1, c] = cambio[0, c];
+                                }
+                            }
+                        }
+                    }
+                }
+
                 //Matriz pueden pelear
-                for (i=0;i <NG; i++)
+                for (i = 0; i < NG; i++)
                 {
                     for (j = 0; j < NG; j++)
                     {
-                        if((peleaPeso[i,j] && peleaPartido[i,j] && (!(yaPelearon[i,j]))) == true)
+                        if ((peleaPeso[i, j] && peleaPartido[i, j] && (!(yaPelearon[i, j]))) == true)
                         {
                             puedenPelear[i, j] = true;
                         }
                     }
                 }
+
+                int ronda = 0, gallo1 = 0, gallo2 = 0;
+                i = 0;
+                while ((ronda < NR) && (ronda >= 0))
+                {
+                    if (i<NP-1)
+                    {
+                        gallo1 = rondas2[NP * ronda + i, 2];
+                        gallo2 = rondas2[NP * ronda + i + 1, 2];
+
+                        if (puedenPelear[gallo1,gallo2] == true)
+                        {
+                            //Actualizar matriz yaPelearon y PuedenPelear
+                            int equipo1 = 0, equipo2 = 0;
+                            int inicio1 = 0, inicio2 = 0;
+                            int actA = 0, actB = 0;
+
+                            equipo1 = rondas2[NP * ronda + i, 3];
+                            equipo2 = rondas2[NP * ronda + i + 1, 3];
+                            inicio1 = (equipo1 - 1) * (NR);
+                            inicio2 = (equipo2 - 1) * (NR);
+
+                            for (actA = inicio1; actA < (inicio1 + NR); actA++)
+                            {
+                                for (actB = inicio2; actB < (inicio2 + NR); actB++)
+                                {
+                                    yaPelearon[actA, actB] = true;
+                                    yaPelearon[actB, actA] = true;
+                                    puedenPelear[actA, actB] = false;
+                                    puedenPelear[actB, actA] = false;
+                                }
+                            }
+                            i = i + 2;
+                        }
+                        else if(peleaPeso[gallo1,gallo2] == false) //No pueden pelaer por diferencia de pesos
+                        {
+                            if (ronda==0 && i==0)
+                            {
+                                if (peleaPartido[gallo1,gallo2] == false) //los partidos no pueden pelear
+                                {
+                                    MessageBox.Show("si es SI,\nEtiqueta |H|");
+                                }
+                                else //NO
+                                {
+                                    MessageBox.Show("si es NO,\nEtiqueta |G|");
+                                }
+                            }
+                            else //NO
+                            {
+                                int noPartido = 0;
+                                int k = 0;
+                                int gallo3 = 0;
+                                noPartido = rondas2[NP * ronda + i, 3]; //equipo del gallo3
+
+                                //buscar en la sig. ronda al gallo del mismo partido q' el gallo1
+                                while (noPartido != rondas2[NP*(ronda+1)+k, 3])
+                                {
+                                    k = k + 1;
+                                    if (noPartido == rondas2[NP * (ronda + 1) + k, 3])
+                                    {
+                                        gallo3 = rondas2[NP * (ronda + 1) + k, 2];
+                                    }
+                                }
+
+                                if (peleaPeso[gallo3, gallo2] == true)
+                                {
+                                    MessageBox.Show("etiqueta |I|");
+                                }
+                                else //no
+                                {
+                                    MessageBox.Show("Etiqueta |E|");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("conflicto con los equpos\nEtiqueta |H|");
+                        }
+                        //else
+                        //{
+                        //    MessageBox.Show("no se pueden pelear\nEtiqueta |C| ");
+                        //    i = i + 2;
+                        //}
+                    }
+                    else
+                    {
+                        MessageBox.Show("Termina ronda");
+                        ronda++;
+                        i = 0;
+                    }
+                    i = i + 2;
+                } //fin while
+
+                //Matriz en tridimencional
+                //if (dsron.Tables["Rondas"].Rows.Count > 0)
+                //{
+                //    int rx = 0, ry = 0, rz = 0;
+                //    //Llenar las rondas
+                //    rondas = new int[Variables.IntValNG, Variables.IntValNP, 3]; //[4,12,3]
+                //    int incre = 0;
+                //    for (rx = 0; rx < Variables.IntValNG; rx++) //0
+                //    {
+                //        incre = rx; //0
+                //        for (ry = 0; ry < Variables.IntValNP; ry++) //0
+                //        {
+                //            for (rz = 0; rz < 3; rz++) //0
+                //            { 
+                //                rondas[rx, ry, rz] = int.Parse(dsron.Tables["Rondas"].Rows[incre][rz].ToString());
+                //            }
+                //            incre = incre + Variables.IntValNG; 
+                //        }                    
+                //    }
+                //}
 
                 ////Actualizar matriz yaPelearon y PuedenPelear
                 //int equipo1 = 0, equipo2 = 0;
