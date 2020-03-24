@@ -57,26 +57,22 @@ namespace Menu
             cmb = new SQLiteCommand("SELECT NumGallos FROM Derby ORDER BY NumGallos DESC LIMIT 1;", conexion);
             dr3 = cmb.ExecuteReader();
 
-            while (dr.Read())
-            {
+            while (dr.Read()){
                 ValNPD = dr.GetInt16(0) + " ";
             }
             Variables.IntValNP = Int16.Parse(ValNPD);//Convertimos el ValNP a entero (int)
         
-            while (dr1.Read())
-            {
+            while (dr1.Read()){
                 ValNGD = dr1.GetInt16(0) + " ";
             }
             Variables.IntValNG = Int16.Parse(ValNGD);//Convertimos el ValNG a entero (int)
 
-            while (dr2.Read())
-            {
+            while (dr2.Read()){
                 ValNTD = dr2.GetInt16(0) + " ";
             }
             Variables.IntValNT = Int16.Parse(ValNTD);//Convertimos el ValNTD a entero (int)
 
-            while (dr3.Read())
-            {
+            while (dr3.Read()){
                 ValNR = dr3.GetInt16(0) + " ";
             }
             Variables.IntValNR = Int16.Parse(ValNR);//Convertimos el ValNR a entero (int) 
@@ -88,20 +84,20 @@ namespace Menu
             cmb.CommandText = sql;
             da.Fill(ds, tabla);
 
+            //DECLARACION DE VARIABLES
             int NG = (Variables.IntValNG * Variables.IntValNP); //Multiplicamos NGD*NPD para saber el total de gallos
+            int tolerancia = Variables.IntValNT, NR = Variables.IntValNR, NP = Variables.IntValNP, continuar2 = Variables.IntValNP;
             int arryRows = 0;
-            int i = 0, j = 0, id = 0;
-            int x = 0, y = 0;
-            int tolerancia = Variables.IntValNT;
-            int NR = Variables.IntValNR;
-            int NP = Variables.IntValNP;
+            int i = 0, j = 0, id = 0, x = 0, y = 0, rx = 0, ry = 0, incre = 0, numeroRonda = 0, continuar = 0;
+            int ordenarRonda = 0, orx = 0, ory = 0, a = 0, b = 0, c = 0, d = 0, e = 0, f = 0, k = 0;
+            int ronda = 0, gallo1 = 0, gallo2 = 0, noPartido = 0, gallo3 = 0;
 
             //aqui cuenta las columnas que hay en la tabla Gallos y se compara para que entre a manipular el arreglo
             if (ds.Tables["Gallos"].Rows.Count > 0)
             {
                 arryRows = ds.Tables["Gallos"].Rows.Count;
                 //se asigna a las matrices el numero de filas x numero de columnas de la Tabla Gallos [NG,NG]
-                //Al crear una matriz booleana, esta se inicializa en falso automanticamente.
+                //Al crear una matriz booleana, esta se inicializa en FALSO automanticamente.
                 matrizGallos = new int[arryRows, 3];
                 matrizPesos = new int[arryRows, arryRows];
                 peleaPeso = new bool[NG, NG];
@@ -143,11 +139,7 @@ namespace Menu
                 //Matriz de rondas bidimencional
                 if (ds.Tables["Gallos"].Rows.Count > 0)
                 {
-                    rondas2 = new int[NG, 4]; //[48,(0,1,2,3)]
-                    int rx = 0, ry = 0;
-                    int incre = 0, numeroRonda = 0, continuar = 0;
-                    int continuar2 = Variables.IntValNP;
-
+                    rondas2 = new int[NG, 4];
                     for (numeroRonda = 0; numeroRonda < Variables.IntValNR; numeroRonda++)
                     {
                         incre = numeroRonda;
@@ -170,12 +162,9 @@ namespace Menu
                 }
 
                 //Ordenar matriz Rondas2 por pesos
-                //Metodo de la burbuja
-                //una matriz [RENGLON][COLUMNA]
-                int ordenarRonda = 0, orx = 0, ory = 0;
+                //Metodo de la burbuja (matriz [RENGLON][COLUMNA])
                 int[,] cambio = { };
                 cambio = new int[1, 4];
-                int a = 0, b = 0, c = 0;
 
                 for (ordenarRonda = 0; ordenarRonda <= (NR - 1); ordenarRonda++)
                 {
@@ -197,33 +186,29 @@ namespace Menu
                 }
 
                 //Matriz pueden pelear
-                for (i = 0; i < NG; i++)
+                for (d = 0; d < NG; d++)
                 {
-                    for (j = 0; j < NG; j++)
+                    for (e = 0; e < NG; e++)
                     {
-                        if ((peleaPeso[i, j] && peleaPartido[i, j] && (!(yaPelearon[i, j]))) == true)
-                            puedenPelear[i, j] = true;
+                        if ((peleaPeso[d, e] && peleaPartido[d, e] && (!(yaPelearon[d, e]))) == true)
+                            puedenPelear[d, e] = true;
                     }
                 }
 
-                int ronda = 0, gallo1 = 0, gallo2 = 0;
-                i = 0;
                 while ((ronda < NR) && (ronda >= 0))
                 {
-                    if (i < NP - 1)
+                    if (f < NP - 1)
                     {
-                        gallo1 = rondas2[NP * ronda + i, 2];
-                        gallo2 = rondas2[NP * ronda + i + 1, 2];
+                        gallo1 = rondas2[NP * ronda + f, 2];
+                        gallo2 = rondas2[NP * ronda + f + 1, 2];
 
                         if (puedenPelear[gallo1, gallo2] == true)
                         {
                             //Actualizar matriz yaPelearon y PuedenPelear
-                            int equipo1 = 0, equipo2 = 0;
-                            int inicio1 = 0, inicio2 = 0;
-                            int actA = 0, actB = 0;
+                            int equipo1 = 0, equipo2 = 0, inicio1 = 0, inicio2 = 0, actA = 0, actB = 0;
 
-                            equipo1 = rondas2[NP * ronda + i, 3];
-                            equipo2 = rondas2[NP * ronda + i + 1, 3];
+                            equipo1 = rondas2[NP * ronda + f, 3];
+                            equipo2 = rondas2[NP * ronda + f + 1, 3];
                             inicio1 = (equipo1 - 1) * (NR);
                             inicio2 = (equipo2 - 1) * (NR);
 
@@ -237,12 +222,12 @@ namespace Menu
                                     puedenPelear[actB, actA] = false;
                                 }
                             }
-                            i = i + 2;
+                            f = f + 2;
                         }
                         //comienza etiqueta |C|
                         else if (peleaPeso[gallo1, gallo2] == false) //No pueden pelaer por diferencia de pesos
                         {
-                            if (ronda == 0 && i == 0)
+                            if (ronda == 0 && f == 0)
                             {
                                 if (peleaPartido[gallo1, gallo2] == false) //los partidos no pueden pelear
                                 {
@@ -255,10 +240,7 @@ namespace Menu
                             }
                             else //NO
                             {
-                                int noPartido = 0;
-                                int k = 0;
-                                int gallo3 = 0;
-                                noPartido = rondas2[NP * ronda + i, 3]; //equipo del gallo3
+                                noPartido = rondas2[NP * ronda + f, 3]; //equipo del gallo3
 
                                 //buscar en la sig. ronda al gallo del mismo partido q' el gallo1
                                 while (noPartido != rondas2[NP * (ronda + 1) + k, 3])
@@ -289,9 +271,9 @@ namespace Menu
                     {
                         MessageBox.Show("Termina ronda");
                         ronda++;
-                        i = 0;
+                        f = 0;
                     }
-                    i = i + 2;
+                    f = f + 2;
                 } //fin while
             }
         }

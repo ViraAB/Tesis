@@ -65,6 +65,7 @@ namespace Menu
         private void Form1_Load(object sender, EventArgs e)
         {
             //Matrices.Consultar("Gallos", "Rondas");
+
             Matrices.Consultar("Gallos");
         }
     }
