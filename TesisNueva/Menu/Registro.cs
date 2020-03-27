@@ -33,7 +33,7 @@ namespace Menu
         {
             conexion2 = new SQLiteConnection(cadenaConexion);
             conexion2.Open();
-            SQLiteDataAdapter adaptador = new SQLiteDataAdapter("SELECT g.Id_Partido AS 'ID Partido', g.Id_Gallo AS 'ID Gallo', NomPartido AS 'Nombre del Partido', Peso AS 'Peso del Gallo (Gr)', Anillo AS 'Número de Anillo' FROM Gallos as g JOIN Partido as p on g.Id_Partido = p.Id_Partido ORDER by g.Id_Partido, g.Peso", conexion2);
+            SQLiteDataAdapter adaptador = new SQLiteDataAdapter("SELECT g.Id_Partido AS 'ID Partido', g.Id_Gallo AS 'ID Gallo', NomPartido AS 'Nombre del Partido', Peso AS 'Peso del Gallo (Gr)', Anillo AS 'Número de Anillo' FROM GallosPrueba as g JOIN Partido as p on g.Id_Partido = p.Id_Partido ORDER by g.Id_Partido, g.Peso", conexion2);
             DataTable tabla = new DataTable("Datos");            
             adaptador.Fill(tabla);
             dgvGallos.DataSource = tabla;
