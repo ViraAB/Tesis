@@ -62,11 +62,11 @@ namespace Menu
             log.Show();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //Matrices.Consultar("Gallos", "Rondas");
+        //private void Form1_Load(object sender, EventArgs e)
+        //{
+        //    //Matrices.Consultar("Gallos", "Rondas");
 
-            Matrices.Consultar("Gallos");
-        }
+        //    Matrices.Consultar("Gallos");
+        //}
     }
 }

@@ -62,6 +62,8 @@
             this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
             this.AgreRest = new System.Windows.Forms.Button();
             this.skinEngine1 = new Sunisoft.IrisSkin.SkinEngine(((System.ComponentModel.Component)(this)));
+            this.cotejar = new System.Windows.Forms.Button();
+            this.btnCotejar = new System.Windows.Forms.Button();
             this.grBoxPartidos.SuspendLayout();
             this.grBoxGallos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -243,7 +245,7 @@
             // btnEliminar
             // 
             this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEliminar.Location = new System.Drawing.Point(718, 774);
+            this.btnEliminar.Location = new System.Drawing.Point(716, 770);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(162, 27);
             this.btnEliminar.TabIndex = 28;
@@ -383,7 +385,7 @@
             // Actualizar
             // 
             this.Actualizar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Actualizar.Location = new System.Drawing.Point(505, 774);
+            this.Actualizar.Location = new System.Drawing.Point(505, 770);
             this.Actualizar.Name = "Actualizar";
             this.Actualizar.Size = new System.Drawing.Size(162, 27);
             this.Actualizar.TabIndex = 29;
@@ -397,7 +399,7 @@
             // 
             // AgreRest
             // 
-            this.AgreRest.Location = new System.Drawing.Point(930, 774);
+            this.AgreRest.Location = new System.Drawing.Point(934, 770);
             this.AgreRest.Name = "AgreRest";
             this.AgreRest.Size = new System.Drawing.Size(162, 27);
             this.AgreRest.TabIndex = 30;
@@ -414,13 +416,26 @@
     "IN 7\\SkinVS.NET\\Diamond\\DiamondBlue.ssk";
             this.skinEngine1.SkinStreamMain = ((System.IO.Stream)(resources.GetObject("skinEngine1.SkinStreamMain")));
             // 
+            // btnCotejar
+            // 
+            this.btnCotejar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCotejar.Location = new System.Drawing.Point(744, 814);
+            this.btnCotejar.Name = "btnCotejar";
+            this.btnCotejar.Size = new System.Drawing.Size(106, 27);
+            this.btnCotejar.TabIndex = 32;
+            this.btnCotejar.Text = "Cotejar";
+            this.btnCotejar.UseVisualStyleBackColor = true;
+            this.btnCotejar.Click += new System.EventHandler(this.btnCotejar_Click);
+            // 
             // Registro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1111, 811);
+            this.ClientSize = new System.Drawing.Size(1111, 853);
+            this.Controls.Add(this.btnCotejar);
+            this.Controls.Add(this.cotejar);
             this.Controls.Add(this.AgreRest);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.grBoxEditRegis);
@@ -430,9 +445,9 @@
             this.Controls.Add(this.grBoxPartidos);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1129, 858);
+            this.MaximumSize = new System.Drawing.Size(1129, 900);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1129, 858);
+            this.MinimumSize = new System.Drawing.Size(1129, 900);
             this.Name = "Registro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro de Partidos y Gallos";
@@ -485,5 +500,7 @@
         private Sunisoft.IrisSkin.SkinEngine skinEngine1;
         private System.Windows.Forms.Button btnSigPartido;
         private System.Windows.Forms.Button btnGuardarNomPartido;
+        private System.Windows.Forms.Button cotejar;
+        private System.Windows.Forms.Button btnCotejar;
     }
 }

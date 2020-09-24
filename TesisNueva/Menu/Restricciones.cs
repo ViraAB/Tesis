@@ -66,51 +66,51 @@ namespace Menu
                 Partido1 = textPart1.Text;
                 Partido2 = textPart2.Text;
 
-                //Borrar los registros de la base de datos
+                //Agregar los registros a la base de datos
                 BaseDatos bd = new BaseDatos();
                 Boolean res = bd.registroRestriccion(Partido1,Partido2);
 
-                //Comparamos el nombre del partido que se selecciono en la lista desplegable, para poder cambiarlo por el 
-                //IdPartido y actualizar la matriz PeleaPartido
-                SQLiteParameter parNomPartido1 = new SQLiteParameter("@nompartido", Partido1);
-                SQLiteCommand com = new SQLiteCommand("SELECT Id_Partido FROM Partido WHERE NomPartido = @nompartido", conexion);
-                com.Parameters.Add(parNomPartido1);
-                SQLiteDataReader lector1 = com.ExecuteReader();
+                //    //Comparamos el nombre del partido que se selecciono en la lista desplegable, para poder cambiarlo por el 
+                //    //IdPartido y actualizar la matriz PeleaPartido
+                //    SQLiteParameter parNomPartido1 = new SQLiteParameter("@nompartido", Partido1);
+                //    SQLiteCommand com = new SQLiteCommand("SELECT Id_Partido FROM Partido WHERE NomPartido = @nompartido", conexion);
+                //    com.Parameters.Add(parNomPartido1);
+                //    SQLiteDataReader lector1 = com.ExecuteReader();
 
-                while (lector1.Read())
-                {
-                    IdPartido1 = lector1.GetInt16(0) + " ";
-                }
-                lector1.Close();
-                int IntIdPartido1 = Int16.Parse(IdPartido1);//Convertimos el IdPartido1 a entero (int)
+                //    while (lector1.Read())
+                //    {
+                //        IdPartido1 = lector1.GetInt16(0) + " ";
+                //    }
+                //    lector1.Close();
+                //    int IntIdPartido1 = Int16.Parse(IdPartido1);//Convertimos el IdPartido1 a entero (int)
 
-                SQLiteParameter parNomPartido2 = new SQLiteParameter("@nompartido", Partido2);
-                SQLiteCommand com1 = new SQLiteCommand("SELECT Id_Partido FROM Partido WHERE NomPartido = @nompartido", conexion);
-                com1.Parameters.Add(parNomPartido2);
-                SQLiteDataReader lector2 = com1.ExecuteReader();
+                //    SQLiteParameter parNomPartido2 = new SQLiteParameter("@nompartido", Partido2);
+                //    SQLiteCommand com1 = new SQLiteCommand("SELECT Id_Partido FROM Partido WHERE NomPartido = @nompartido", conexion);
+                //    com1.Parameters.Add(parNomPartido2);
+                //    SQLiteDataReader lector2 = com1.ExecuteReader();
 
-                while (lector2.Read())
-                {
-                    IdPartido2 = lector2.GetInt16(0) + " ";
-                }
-                lector2.Close();
-                int IntIdPartido2 = Int16.Parse(IdPartido2);//Convertimos el IdPartido2 a entero (int)
+                //    while (lector2.Read())
+                //    {
+                //        IdPartido2 = lector2.GetInt16(0) + " ";
+                //    }
+                //    lector2.Close();
+                //    int IntIdPartido2 = Int16.Parse(IdPartido2);//Convertimos el IdPartido2 a entero (int)
 
-                int x = 0, y = 0;
-                int inicio1 = 0, inicio2 = 0;
+                //    int x = 0, y = 0;
+                //    int inicio1 = 0, inicio2 = 0;
 
-                inicio1 = ((IntIdPartido1 - 1) * NR); //32
-                inicio2 = ((IntIdPartido2 - 1) * NR); //40
+                //    inicio1 = ((IntIdPartido1 - 1) * NR); //32
+                //    inicio2 = ((IntIdPartido2 - 1) * NR); //40
 
-                //Actualizar matriz
-                for (x = inicio1; x < (inicio1 + NR); x++)
-                {
-                    for (y = inicio2; y < (inicio2 + NR); y++)
-                    {
-                        Matrices.peleaPartido[x, y] = false; //32
-                        Matrices.peleaPartido[y, x] = false; //40
-                    }
-                }
+                //    //Actualizar matriz
+                //    for (x = inicio1; x < (inicio1 + NR); x++)
+                //    {
+                //        for (y = inicio2; y < (inicio2 + NR); y++)
+                //        {
+                //            Matrices.peleaPartido[x, y] = false; //32
+                //            Matrices.peleaPartido[y, x] = false; //40
+                //        }
+                //    }
             }
             CargarDatosRestricciones();
         }
@@ -144,8 +144,8 @@ namespace Menu
                 if (MessageBox.Show("Estas seguro de que quieres eliminar la restricción?",
                 "Eliminar", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    int ElimInicio1 = 0, ElimInicio2 = 0;
-                    int ex = 0, ey = 0;
+                    //int ElimInicio1 = 0, ElimInicio2 = 0;
+                    //int ex = 0, ey = 0;
 
                     //Borrar los registros de la base de datos
                     int ValElim = int.Parse(idRestricciones.ToString());
@@ -153,43 +153,43 @@ namespace Menu
                     Boolean res = bd.BorrarRestricciones(ValElim);
                     CargarDatosRestricciones();
 
-                    //Comparamos el nombre del partido que se selecciono en la lista desplegable, para poder cambiarlo por el 
-                    //IdPartido y actualizar la matriz PeleaPartido
-                    SQLiteParameter NomPartido1 = new SQLiteParameter("@nompartido", dataPrimPartido);
-                    SQLiteCommand com = new SQLiteCommand("SELECT Id_Partido FROM Partido WHERE NomPartido = @nompartido", conexion);
-                    com.Parameters.Add(NomPartido1);
-                    SQLiteDataReader lector3 = com.ExecuteReader();
+                    ////Comparamos el nombre del partido que se selecciono en la lista desplegable, para poder cambiarlo por el 
+                    ////IdPartido y actualizar la matriz PeleaPartido
+                    //SQLiteParameter NomPartido1 = new SQLiteParameter("@nompartido", dataPrimPartido);
+                    //SQLiteCommand com = new SQLiteCommand("SELECT Id_Partido FROM Partido WHERE NomPartido = @nompartido", conexion);
+                    //com.Parameters.Add(NomPartido1);
+                    //SQLiteDataReader lector3 = com.ExecuteReader();
 
-                    while (lector3.Read())
-                    {
-                        EliminarPartido1 = lector3.GetInt16(0) + " ";
-                    }
-                    lector3.Close();
-                    int IntEliminarPartido1 = Int16.Parse(EliminarPartido1);//Convertimos el IdPartido1 a entero (int)
+                    //while (lector3.Read())
+                    //{
+                    //    EliminarPartido1 = lector3.GetInt16(0) + " ";
+                    //}
+                    //lector3.Close();
+                    //int IntEliminarPartido1 = Int16.Parse(EliminarPartido1);//Convertimos el IdPartido1 a entero (int)
 
-                    SQLiteParameter NomPartido2 = new SQLiteParameter("@nompartido", dataSegunPartido);
-                    SQLiteCommand com1 = new SQLiteCommand("SELECT Id_Partido FROM Partido WHERE NomPartido = @nompartido", conexion);
-                    com1.Parameters.Add(NomPartido2);
-                    SQLiteDataReader lector4 = com1.ExecuteReader();
+                    //SQLiteParameter NomPartido2 = new SQLiteParameter("@nompartido", dataSegunPartido);
+                    //SQLiteCommand com1 = new SQLiteCommand("SELECT Id_Partido FROM Partido WHERE NomPartido = @nompartido", conexion);
+                    //com1.Parameters.Add(NomPartido2);
+                    //SQLiteDataReader lector4 = com1.ExecuteReader();
 
-                    while (lector4.Read())
-                    {
-                        EliminarPartido2 = lector4.GetInt16(0) + " ";
-                    }
-                    lector4.Close();
-                    int IntEliminarPartido2 = Int16.Parse(EliminarPartido2);//Convertimos el IdPartido2 a entero (int)
+                    //while (lector4.Read())
+                    //{
+                    //    EliminarPartido2 = lector4.GetInt16(0) + " ";
+                    //}
+                    //lector4.Close();
+                    //int IntEliminarPartido2 = Int16.Parse(EliminarPartido2);//Convertimos el IdPartido2 a entero (int)
 
-                    ElimInicio1 = ((IntEliminarPartido1 - 1) * NR); //32
-                    ElimInicio2 = ((IntEliminarPartido2 - 1) * NR); //40
+                    //ElimInicio1 = ((IntEliminarPartido1 - 1) * NR); //32
+                    //ElimInicio2 = ((IntEliminarPartido2 - 1) * NR); //40
 
-                    for (ex = ElimInicio1; ex < (ElimInicio1 + NR); ex++)
-                    {
-                        for (ey = ElimInicio2; ey < (ElimInicio2 + NR); ey++)
-                        {
-                            Matrices.peleaPartido[ex, ey] = true; //32
-                            Matrices.peleaPartido[ey, ex] = true; //40
-                        }
-                    }
+                    //for (ex = ElimInicio1; ex < (ElimInicio1 + NR); ex++)
+                    //{
+                    //    for (ey = ElimInicio2; ey < (ElimInicio2 + NR); ey++)
+                    //    {
+                    //        Matrices.peleaPartido[ex, ey] = true; //32
+                    //        Matrices.peleaPartido[ey, ex] = true; //40
+                    //    }
+                    //}
                     dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
                 }
             }

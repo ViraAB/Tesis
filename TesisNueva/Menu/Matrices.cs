@@ -16,6 +16,7 @@ namespace Menu
         public static int IntValNG = 0; //Numero de Gallos entero
         public static int IntValNT = 0; //Numero de Tolerancia entero
         public static int IntValNR = 0; //Numero de Rondas entero
+        public static int IntTtotalRestricciones = 0; //Numero de restricciones
     }
 
     static class Matrices
@@ -25,6 +26,12 @@ namespace Menu
         public static SQLiteDataReader dr1;
         public static SQLiteDataReader dr2;
         public static SQLiteDataReader dr3;
+        public static SQLiteDataReader restricciones;
+        public static SQLiteDataReader rest1;
+        public static SQLiteDataReader rest2;
+        public static SQLiteDataReader rest3;
+        public static SQLiteDataReader lector2;
+
         public static SQLiteCommand cmb;
         public static DataSet ds = new DataSet();
         public static SQLiteDataAdapter da;
@@ -40,14 +47,20 @@ namespace Menu
 
         public static void Consultar(string tabla)
         {
-            string ValNPD = ""; //numero de partidos que tiene el derby
-            string ValNGD = ""; //numero de gallos con los que se llebara acabo el derby
-            string ValNTD = ""; //numero de la tolerancia entre gallos del derby
-            string ValNR = ""; //numero de rondas del derby
+            string ValNPD = " "; //numero de partidos que tiene el derby
+            string ValNGD = " "; //numero de gallos con los que se llebara acabo el derby
+            string ValNTD = " "; //numero de la tolerancia entre gallos del derby
+            string ValNR = " "; //numero de rondas del derby
 
-            //obtenemos el total de partidos, el número de gallos, la tolerancia y el numero de rondas 
-            //con que se realizara el derby
-            conexion.Open();
+            //Restricciones
+            string totalRestricciones = " "; //Numero de restricciones
+            string partido1 = " ";
+            string partido2 = " ";
+            string IdPartido1 = " ", IdPartido2 = " ";
+
+        //obtenemos el total de partidos, el número de gallos, la tolerancia y el numero de rondas 
+        //con que se realizara el derby
+        conexion.Open();
             cmb = new SQLiteCommand("SELECT Id_Partido FROM Partido ORDER BY Id_Partido DESC  LIMIT 1;", conexion);
             dr = cmb.ExecuteReader();
             cmb = new SQLiteCommand("SELECT NumGallos FROM Derby ORDER BY NumGallos DESC LIMIT 1;", conexion);
@@ -92,7 +105,8 @@ namespace Menu
             int ordenarRonda = 0, orx = 0, ory = 0, a = 0, b = 0, c = 0, d = 0, e = 0, f = 0, k = 0;
             int ronda = 0, gallo1 = 0, gallo2 = 0, noPartido = 0, gallo3 = 0;
             int g = 0, h = 0, actX = 0, actY = 0, iniA = 0, iniB = 0, equipoA = 0, equipoB = 0;
-
+            int xRestri = 0;
+            
             //aqui cuenta las columnas que hay en la tabla Gallos y se compara para que entre a manipular el arreglo
             if (ds.Tables["Gallos"].Rows.Count > 0)
             {
@@ -132,9 +146,102 @@ namespace Menu
                         else peleaPeso[x, y] = false;
                         if (matrizGallos[x, 0] == matrizGallos[y, 0])
                         {
-                            peleaPartido[x, y] = false;
+                            //Se llena la diagonal en falso, donde no se pueden enfrentar entre ellos mismos
+                            peleaPartido[x, y] = false; 
                         }
                         else peleaPartido[x, y] = true;
+                    }
+                }
+
+                //Se agregan a la matriz PeleaPartido las restricciones
+                //Obtenermos el numero maximo de restricciones para comenzar a recorrer la tabla
+                cmb = new SQLiteCommand("SELECT Id_Restricciones FROM Restricciones ORDER BY Id_Restricciones DESC LIMIT 1;", conexion);
+                restricciones = cmb.ExecuteReader();
+
+                while (restricciones.Read())
+                {
+                    totalRestricciones = restricciones.GetInt16(0) + " ";
+                }
+                Variables.IntTtotalRestricciones = Int16.Parse(totalRestricciones);//Convertimos el totalRestricciones a entero (int)
+
+                //Recorremos la tabla RESTRICCIONES de la BD
+                while (xRestri <= Variables.IntTtotalRestricciones)
+                {
+                    //Obtenemos el nombre del partido 1 y del 2
+                    SQLiteParameter p1 = new SQLiteParameter("@xRestri1", xRestri);
+                    cmb = new SQLiteCommand("SELECT Partido1 FROM Restricciones WHERE Id_Restricciones = @xRestri1;", conexion);
+                    cmb.Parameters.Add(p1);
+                    rest1 = cmb.ExecuteReader();
+
+                    while (rest1.Read())
+                    {
+                        partido1 = rest1.GetString(0);
+                    }
+
+                    //Validamos si el partido1 contiene algun dato
+                    //sino contiene revisamos el siguiente renglon, 
+                    //caso contrario obtenemos el segundo partido
+                    if (partido1 != " ")
+                    {
+                        SQLiteParameter p2 = new SQLiteParameter("@xRestri2", xRestri);
+                        cmb = new SQLiteCommand("SELECT Partido2 FROM Restricciones WHERE Id_Restricciones = @xRestri2; ", conexion);
+                        cmb.Parameters.Add(p2);
+                        rest2 = cmb.ExecuteReader();
+
+                        while (rest2.Read())
+                        {
+                            partido2 = rest2.GetString(0);
+                        }
+
+                        ////Comparamos el nombre del partido que se selecciono en la lista desplegable, para poder cambiarlo por el 
+                        ////IdPartido y actualizar la matriz PeleaPartido
+                        SQLiteParameter parNomPartido1 = new SQLiteParameter("@partido1", partido1);
+                        SQLiteCommand com = new SQLiteCommand("SELECT Id_Partido FROM Partido WHERE NomPartido = @partido1", conexion);
+                        com.Parameters.Add(parNomPartido1);
+                        rest3 = com.ExecuteReader();
+
+                        while (rest3.Read())
+                        {
+                            IdPartido1 = rest3.GetInt16(0) + " ";
+                        }
+                        rest3.Close();
+                        int IntIdPartido1 = Int16.Parse(IdPartido1);//Convertimos el IdPartido1 a entero (int)
+
+                        SQLiteParameter parNomPartido2 = new SQLiteParameter("@partido2", partido2);
+                        SQLiteCommand com1 = new SQLiteCommand("SELECT Id_Partido FROM Partido WHERE NomPartido = @partido2", conexion);
+                        com1.Parameters.Add(parNomPartido2);
+                        lector2 = com1.ExecuteReader();
+
+                        while (lector2.Read())
+                        {
+                            IdPartido2 = lector2.GetInt16(0) + " ";
+                        }
+                        lector2.Close();
+                        int IntIdPartido2 = Int16.Parse(IdPartido2);//Convertimos el IdPartido2 a entero (int)
+
+                        //int x = 0, y = 0;
+                        int inicioRest1 = 0, inicioRest2 = 0;
+
+                        inicioRest1 = ((IntIdPartido1 - 1) * NR); //32
+                        inicioRest2 = ((IntIdPartido2 - 1) * NR); //40
+
+                        //Actualizar matriz
+                        for (x = inicioRest1; x < (inicioRest1 + NR); x++)
+                        {
+                            for (y = inicioRest2; y < (inicioRest2 + NR); y++)
+                            {
+                                Matrices.peleaPartido[x, y] = false; //32
+                                Matrices.peleaPartido[y, x] = false; //40
+                            }
+                        }
+
+                        xRestri++;
+                        partido1 = " ";
+                        partido2 = " ";
+                    }
+                    else
+                    {
+                        xRestri++;
                     }
                 }
 
@@ -186,7 +293,8 @@ namespace Menu
                     }
                 }
 
-                //Matriz pueden pelear
+                //Matriz pueden pelear 
+                //NOTA: necesita que la matriz PELEAPARTIDO ya tenga las restricciones agregadas.
                 for (d = 0; d < NG; d++)
                 {
                     for (e = 0; e < NG; e++)
