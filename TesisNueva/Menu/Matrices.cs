@@ -103,10 +103,11 @@ namespace Menu
             int arryRows = 0;
             int i = 0, j = 0, id = 0, x = 0, y = 0, rx = 0, ry = 0, incre = 0, numeroRonda = 0, continuar = 0;
             int ordenarRonda = 0, orx = 0, ory = 0, a = 0, b = 0, c = 0, d = 0, e = 0, f = 0, k = 0;
-            int ronda = 0, gallo1 = 0, gallo2 = 0, noPartido = 0, gallo3 = 0;
+            int ronda = 0, gallo1 = 0, gallo2 = 0, noPartidoGallo1 = 0, noPartidoGallo2 = 0, noPartidoGallo3 = 0, gallo3 = 0;
             int g = 0, h = 0, actX = 0, actY = 0, iniA = 0, iniB = 0, equipoA = 0, equipoB = 0;
-            int xRestri = 0;
-            
+            int xRestri = 0, l = 0;
+            bool exit = false;
+
             //aqui cuenta las columnas que hay en la tabla Gallos y se compara para que entre a manipular el arreglo
             if (ds.Tables["Gallos"].Rows.Count > 0)
             {
@@ -347,20 +348,23 @@ namespace Menu
                                     MessageBox.Show("si es NO,\nEtiqueta |G|");
                                 }
                             }
+                            //Verifica el gallo del mismo partido que se encuentre en la sig ronda
+                            //para ver si da el peso con el gallo2, si es true, los intercambia
                             else //NO
                             {
-                                noPartido = rondas2[NP * ronda + f, 3]; //equipo del gallo3
+                                noPartidoGallo1 = rondas2[NP * ronda + f, 3]; //equipo del gallo1
+                                noPartidoGallo2 = rondas2[NP * ronda + f + 1, 3]; //equipo del gallo2
 
                                 //buscar en la sig. ronda al gallo del mismo partido q' el gallo1
-                                while (noPartido != rondas2[NP * (ronda + 1) + k, 3])
+                                while (noPartidoGallo1 != rondas2[NP * (ronda + 1) + k, 3])
                                 {
                                     k = k + 1;
-                                    if (noPartido == rondas2[NP * (ronda + 1) + k, 3])
+                                    if (noPartidoGallo1 == rondas2[NP * (ronda + 1) + k, 3])
                                     {
                                         gallo3 = rondas2[NP * (ronda + 1) + k, 2]; //id_gallo
                                     }
                                 }
-                                
+
                                 if (peleaPeso[gallo3, gallo2] == true) //aqui es TRUE
                                 {
                                     //MessageBox.Show("etiqueta |I|");
@@ -376,6 +380,7 @@ namespace Menu
                                     for (c = 0; c < 2; c++)
                                         rondas2[NP * ronda + f, c + 1] = cambio2[0, c];
 
+                                    //Actualizar yaPelearon y PuedenPelear 
                                     for (h = f - 2; h >= 0; h = h - 2)
                                     {
                                         equipoA = rondas2[NP * ronda + h, 3]; equipoB = rondas2[NP * ronda + h + 1, 3];
@@ -395,8 +400,6 @@ namespace Menu
 
                                     //Reordenar las rondas modificadas por el peso 
                                     //Metodo de la burbuja (matriz [RENGLON][COLUMNA])
-                                    //int[,] cambio = { };
-                                    //cambio = new int[1, 4];
                                     int numRonda1 = 0;
                                     int count = 0;
                                     //numRonda1 = rondas2[NP * ronda + h, 0]; //1
@@ -424,7 +427,79 @@ namespace Menu
                                 }
                                 else //no
                                 {
-                                    MessageBox.Show("Etiqueta |E|");
+                                    //MessageBox.Show("Etiqueta |E|");
+                                    while (k > 0 && exit == false)
+                                    {
+                                        k--;
+                                        noPartidoGallo3 = rondas2[NP * (ronda + 1) + k, 3];
+                                        if ((noPartidoGallo2 != noPartidoGallo3) )
+                                        {
+                                            gallo3 = rondas2[NP * (ronda + 1) + k, 2]; //id_gallo
+                                            if (peleaPeso[gallo3, gallo2] == true)
+                                            {
+                                                exit = true;
+                                            }
+                                        }
+                                    }
+                                    while (noPartidoGallo1 != noPartidoGallo3)
+                                    {
+                                        noPartidoGallo1 = rondas2[(NP * ronda) + l, 3];
+                                        l++;
+                                    }
+
+                                    int[,] cambio2 = { };
+                                    cambio2 = new int[1, 2];
+                                    l--;
+                                    for (a = 0; a < 2; a++)
+                                        cambio2[0, a] = rondas2[NP * (ronda + 1) + k, a + 1];
+                                    for (b = 0; b < 2; b++)
+                                        rondas2[NP * (ronda + 1) + k, b + 1] = rondas2[NP * ronda + l, b + 1];
+                                    for (c = 0; c < 2; c++)
+                                        rondas2[NP * ronda + l, c + 1] = cambio2[0, c];
+
+                                    //Actualizar yaPelearon y PuedenPelear 
+                                    for (h = f - 2; h >= 0; h = h - 2)
+                                    {
+                                        equipoA = rondas2[NP * ronda + h, 3]; equipoB = rondas2[NP * ronda + h + 1, 3];
+                                        iniA = (equipoA - 1) * (NR); iniB = (equipoB - 1) * (NR);
+
+                                        for (actX = iniA; actX < (iniA + NR); actX++)
+                                        {
+                                            for (actY = iniB; actY < (iniB + NR); actY++)
+                                            {
+                                                yaPelearon[actX, actY] = false;
+                                                yaPelearon[actY, actX] = false;
+                                                puedenPelear[actX, actY] = true;
+                                                puedenPelear[actY, actX] = true;
+                                            }
+                                        }
+                                    }
+
+                                    //Reordenar las rondas modificadas por el peso 
+                                    //Metodo de la burbuja (matriz [RENGLON][COLUMNA])
+                                    int numRonda1 = 0;
+                                    int count = 0;
+                                    //numRonda1 = rondas2[NP * ronda + h, 0]; //1
+
+                                    for (numRonda1 = ronda; count < 2; numRonda1++)
+                                    {
+                                        for (orx = ((NP * numRonda1) + NP - 1); orx >= (NP * numRonda1); orx--)
+                                        {
+                                            for (ory = (NP * numRonda1) + 1; ory <= orx; ory++)
+                                            {
+                                                if (rondas2[ory - 1, 1] > rondas2[ory, 1])
+                                                {
+                                                    for (a = 0; a < 4; a++)
+                                                        cambio[0, a] = rondas2[ory, a];
+                                                    for (b = 0; b < 4; b++)
+                                                        rondas2[ory, b] = rondas2[ory - 1, b];
+                                                    for (c = 0; c < 4; c++)
+                                                        rondas2[ory - 1, c] = cambio[0, c];
+                                                }
+                                            }
+                                        }
+                                        count++;
+                                    }
                                 }
                             }
                         }
@@ -435,6 +510,7 @@ namespace Menu
                     }
                     else
                     {
+                        
                         MessageBox.Show("Termina ronda");
                         ronda++;
                         f = 0;
@@ -444,4 +520,13 @@ namespace Menu
             }
         }
     }
+
+    ////Crear metodos para no repetir tanto codigo 
+    //class reordenar
+    //{
+    //    public void Reordenar(int x)
+    //    {
+    //        MessageBox.Show("En construccion");
+    //    }
+    //}
 }
