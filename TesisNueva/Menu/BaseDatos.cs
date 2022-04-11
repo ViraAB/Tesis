@@ -150,7 +150,7 @@ namespace Menu
 
             //Validar si son 4 gallos para que ya no los guarde y muestre mensaje
             SQLiteParameter valNomPartido = new SQLiteParameter("@idpartido", IdPartido);
-            SQLiteCommand val = new SQLiteCommand("SELECT count (Id_Partido) FROM Gallos WHERE Id_Partido = @idpartido;", conexion);
+            SQLiteCommand val = new SQLiteCommand("SELECT count (Id_Partido) FROM GallosPrueba WHERE Id_Partido = @idpartido;", conexion);
             val.Parameters.Add(valNomPartido);
             SQLiteDataReader lector = val.ExecuteReader();
 
@@ -167,7 +167,7 @@ namespace Menu
                 SQLiteParameter parIdPartido = new SQLiteParameter("@idpartido", IdPartido);
                 SQLiteParameter parPesoGallo = new SQLiteParameter("@pesogallo", PesoGallo);
                 SQLiteParameter parNumAnillo = new SQLiteParameter("@numanillo", NumAnillo);
-                SQLiteCommand comando = new SQLiteCommand("INSERT INTO Gallos(Id_Partido, Peso, Anillo) VALUES(@idpartido, @pesogallo, @numanillo);", conexion);
+                SQLiteCommand comando = new SQLiteCommand("INSERT INTO GallosPrueba(Id_Partido, Peso, Anillo) VALUES(@idpartido, @pesogallo, @numanillo);", conexion);
                 comando.Parameters.Add(parIdPartido);
                 comando.Parameters.Add(parPesoGallo);
                 comando.Parameters.Add(parNumAnillo);
@@ -196,7 +196,7 @@ namespace Menu
         {
             conexion.Open();
             SQLiteParameter parIdPartido = new SQLiteParameter("@Valor", valorElim);
-            SQLiteCommand adaptador = new SQLiteCommand("DELETE FROM Gallos WHERE Id_Gallo = @Valor", conexion);
+            SQLiteCommand adaptador = new SQLiteCommand("DELETE FROM GallosPrueba WHERE Id_Gallo = @Valor", conexion);
             adaptador.Parameters.Add(parIdPartido);
             SQLiteDataReader lector = adaptador.ExecuteReader();
             lector.Close();
@@ -235,7 +235,7 @@ namespace Menu
             SQLiteParameter pesoValor = new SQLiteParameter("@ValorPeso", valorPeso); //Peso
             SQLiteParameter anilloValor = new SQLiteParameter("@ValorAnillo", valorAnillo); //Anillo
 
-            SQLiteCommand adaptador = new SQLiteCommand("UPDATE Gallos SET Id_Partido=@ValorPartido, Peso=@ValorPeso, Anillo=@ValorAnillo WHERE Id_Gallo = @ValorActu", conexion);
+            SQLiteCommand adaptador = new SQLiteCommand("UPDATE GallosPrueba SET Id_Partido=@ValorPartido, Peso=@ValorPeso, Anillo=@ValorAnillo WHERE Id_Gallo = @ValorActu", conexion);
             adaptador.Parameters.Add(idValor);
             adaptador.Parameters.Add(partidoValor);
             adaptador.Parameters.Add(pesoValor);

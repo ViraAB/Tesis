@@ -62,7 +62,6 @@
             this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
             this.AgreRest = new System.Windows.Forms.Button();
             this.skinEngine1 = new Sunisoft.IrisSkin.SkinEngine(((System.ComponentModel.Component)(this)));
-            this.cotejar = new System.Windows.Forms.Button();
             this.btnCotejar = new System.Windows.Forms.Button();
             this.grBoxPartidos.SuspendLayout();
             this.grBoxGallos.SuspendLayout();
@@ -265,6 +264,7 @@
             this.dgvGallos.Location = new System.Drawing.Point(505, 43);
             this.dgvGallos.Name = "dgvGallos";
             this.dgvGallos.ReadOnly = true;
+            this.dgvGallos.RowHeadersWidth = 51;
             this.dgvGallos.RowTemplate.Height = 24;
             this.dgvGallos.Size = new System.Drawing.Size(591, 711);
             this.dgvGallos.TabIndex = 2;
@@ -412,8 +412,7 @@
             this.skinEngine1.SerialNumber = "U4N2UjLguUZs33UR+Vy47JAZ81t2fjIFvut28vc5oHiVeivGb/NZMA==";
             this.skinEngine1.SkinAllForm = false;
             this.skinEngine1.SkinDialogs = false;
-            this.skinEngine1.SkinFile = "C:\\Tesis\\Tesis\\TesisNueva\\Menu\\bin\\Debug\\Componentes Graficos Vb2\\SKIN NET 2010 W" +
-    "IN 7\\SkinVS.NET\\Diamond\\DiamondBlue.ssk";
+            this.skinEngine1.SkinFile = null;
             this.skinEngine1.SkinStreamMain = ((System.IO.Stream)(resources.GetObject("skinEngine1.SkinStreamMain")));
             // 
             // btnCotejar
@@ -435,7 +434,6 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1111, 853);
             this.Controls.Add(this.btnCotejar);
-            this.Controls.Add(this.cotejar);
             this.Controls.Add(this.AgreRest);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.grBoxEditRegis);
@@ -500,7 +498,6 @@
         private Sunisoft.IrisSkin.SkinEngine skinEngine1;
         private System.Windows.Forms.Button btnSigPartido;
         private System.Windows.Forms.Button btnGuardarNomPartido;
-        private System.Windows.Forms.Button cotejar;
         private System.Windows.Forms.Button btnCotejar;
     }
 }

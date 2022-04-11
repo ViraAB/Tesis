@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Data;
 using System.Windows.Forms;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
+using System.IO;
 
 namespace Menu
 {
@@ -22,6 +26,10 @@ namespace Menu
     static class Matrices
     {
         static SQLiteConnection conexion = new SQLiteConnection("Data Source=BD_Tesis.db");
+        public static SQLiteDataReader drIdPartido;
+        public static SQLiteDataReader drName;
+        public static SQLiteDataReader drTablaPartido;
+        public static SQLiteDataReader drDiccionarioAnillos;
         public static SQLiteDataReader dr;
         public static SQLiteDataReader dr1;
         public static SQLiteDataReader dr2;
@@ -36,7 +44,9 @@ namespace Menu
         public static DataSet ds = new DataSet();
         public static SQLiteDataAdapter da;
 
-        //Declaracion de matrices
+        //Declaracion de matrices y diccionarios
+        public static Dictionary<int, string> diccionarioPartidos = new Dictionary<int, string>();
+        public static Dictionary<int, int> diccionarioAnillos = new Dictionary<int, int>();
         public static int[,] matrizGallos = { };
         public static int[,] matrizPesos = { };
         public static bool[,] peleaPeso = { };
@@ -47,6 +57,8 @@ namespace Menu
 
         public static void Consultar(string tabla)
         {
+            string IdPartidoDerby = " "; //id del derby
+            string NomDerby = " "; //Nombre del derby
             string ValNPD = " "; //numero de partidos que tiene el derby
             string ValNGD = " "; //numero de gallos con los que se llebara acabo el derby
             string ValNTD = " "; //numero de la tolerancia entre gallos del derby
@@ -58,9 +70,49 @@ namespace Menu
             string partido2 = " ";
             string IdPartido1 = " ", IdPartido2 = " ";
 
-        //obtenemos el total de partidos, el número de gallos, la tolerancia y el numero de rondas 
-        //con que se realizara el derby
-        conexion.Open();
+            //Obtenemos el nombre del Derby
+            conexion.Open();
+            cmb = new SQLiteCommand("SELECT ID_Partido_Derby FROM Partido LIMIT 1;", conexion);
+            drIdPartido = cmb.ExecuteReader();
+            while (drIdPartido.Read())
+            {
+                IdPartidoDerby = drIdPartido.GetInt16(0) + " ";
+            }
+
+            SQLiteParameter p0 = new SQLiteParameter("@IdPartidoDerby", IdPartidoDerby);
+            SQLiteCommand SQLcom = new SQLiteCommand("SELECT NomDerby FROM Derby WHERE ID_Derby = @IdPartidoDerby", conexion);
+            SQLcom.Parameters.Add(p0);
+            drName = SQLcom.ExecuteReader();
+            while (drName.Read())
+            {
+                NomDerby = drName.GetString(0);
+            }
+
+            //Creamos el diccionario diccionarioPartidos para obtener el nombre de los partidos
+            cmb = new SQLiteCommand("SELECT NomPartido FROM Partido ORDER BY Id_Partido;", conexion);
+            drTablaPartido = cmb.ExecuteReader();
+            int keyDiccionarioPartidos = 1;
+            while (drTablaPartido.Read())
+            {
+                string partido = drTablaPartido.GetString(0);
+                diccionarioPartidos.Add(keyDiccionarioPartidos, partido);
+                keyDiccionarioPartidos++;
+            }
+
+            //Creamos el diccionario diccionarioAnillo para obtener el anillo de cada gallo
+            cmb = new SQLiteCommand("SELECT Anillo FROM Gallos ORDER BY Id_Gallo;", conexion);
+            drDiccionarioAnillos = cmb.ExecuteReader();
+            int keyDiccionarioAnillos = 0;
+            while (drDiccionarioAnillos.Read())
+            {
+                int anillo = drDiccionarioAnillos.GetInt16(0);
+                diccionarioAnillos.Add(keyDiccionarioAnillos, anillo);
+                keyDiccionarioAnillos++;
+            }
+
+
+            //obtenemos el total de partidos, el número de gallos, la tolerancia y el numero de rondas 
+            //con que se realizara el derby
             cmb = new SQLiteCommand("SELECT Id_Partido FROM Partido ORDER BY Id_Partido DESC  LIMIT 1;", conexion);
             dr = cmb.ExecuteReader();
             cmb = new SQLiteCommand("SELECT NumGallos FROM Derby ORDER BY NumGallos DESC LIMIT 1;", conexion);
@@ -104,7 +156,7 @@ namespace Menu
             int i = 0, j = 0, id = 0, x = 0, y = 0, rx = 0, ry = 0, incre = 0, numeroRonda = 0, continuar = 0;
             int ordenarRonda = 0, orx = 0, ory = 0, a = 0, b = 0, c = 0, d = 0, e = 0, f = 0, k = 0;
             int ronda = 0, gallo1 = 0, gallo2 = 0, noPartidoGallo1 = 0, noPartidoGallo2 = 0, noPartidoGallo3 = 0, gallo3 = 0, gallo4 = 0;
-            
+
             int xRestri = 0, l = 0, m = 0;
             bool exit = false;
 
@@ -148,7 +200,7 @@ namespace Menu
                         if (matrizGallos[x, 0] == matrizGallos[y, 0])
                         {
                             //Se llena la diagonal en falso, donde no se pueden enfrentar entre ellos mismos
-                            peleaPartido[x, y] = false; 
+                            peleaPartido[x, y] = false;
                         }
                         else peleaPartido[x, y] = true;
                     }
@@ -245,6 +297,7 @@ namespace Menu
                         xRestri++;
                     }
                 }
+                conexion.Close();
 
                 //Matriz de rondas bidimencional
                 if (ds.Tables["Gallos"].Rows.Count > 0)
@@ -263,7 +316,7 @@ namespace Menu
                                 else if (ry == 3)
                                     rondas2[rx, ry] = matrizGallos[incre, ry - 3]; //id_partido
                             }
-                            incre = incre + Variables.IntValNG;
+                            incre += Variables.IntValNG;
                         }
                         continuar = rx;
                         continuar2 = rx + NP;
@@ -316,7 +369,7 @@ namespace Menu
                         if (puedenPelear[gallo1, gallo2] == true)
                         {
                             ActualizarYapeleraonPuedenpelear(NP, ronda, NR, f);
-                            f = f + 2;
+                            f += 2;
                         }
                         //comienza etiqueta |C|
                         else if (peleaPeso[gallo1, gallo2] == false) //No pueden pelaer por diferencia de pesos
@@ -338,11 +391,12 @@ namespace Menu
                             {
                                 noPartidoGallo1 = rondas2[NP * ronda + f, 3]; //equipo del gallo1
                                 noPartidoGallo2 = rondas2[NP * ronda + f + 1, 3]; //equipo del gallo2
+                                k = 0;
 
                                 //buscar en la sig. ronda al gallo del mismo partido q' el gallo1
                                 while (noPartidoGallo1 != rondas2[NP * (ronda + 1) + k, 3])
                                 {
-                                    k = k + 1;
+                                    k += 1;
                                     if (noPartidoGallo1 == rondas2[NP * (ronda + 1) + k, 3])
                                     {
                                         gallo3 = rondas2[NP * (ronda + 1) + k, 2]; //id_gallo
@@ -355,7 +409,7 @@ namespace Menu
                                     //g = rondas2[NP * (ronda + 1) + k, 1];
 
                                     IntercambiarGallos(ronda, NP, k, a, b, c, f, l);
-                                    ActualizarYapeleraonPuedenpelear2(NP, ronda, NR, f);
+                                    ActualizarYapeleraonPuedenpelear2(NP, ronda, NR);
                                     ReordenarMetBurbuja(ronda, NP, cambio, ory, orx, a, b, c);
                                     f = 0;
                                 }
@@ -385,17 +439,17 @@ namespace Menu
                                         l++;
                                     }
 
-                                    IntercambiarGallos(ronda,  NP, k, a, b, c, f, l);
+                                    IntercambiarGallos(ronda, NP, k, a, b, c, f, l);
 
                                     //MessageBox.Show("Etiqueta |F|");
                                     //Actualizar yaPelearon y PuedenPelear
-                                    ActualizarYapeleraonPuedenpelear2(NP, ronda, NR, f);
+                                    ActualizarYapeleraonPuedenpelear2(NP, ronda, NR);
                                     ReordenarMetBurbuja(ronda, NP, cambio, ory, orx, a, b, c);
                                     f = 0;
                                 }
                             }
                         }
-                        else
+                        else // NO
                         {
                             gallo1 = rondas2[NP * ronda + f, 2];
                             gallo2 = rondas2[NP * ronda + f + 1, 2];
@@ -406,7 +460,7 @@ namespace Menu
 
                             // Conflicto entre los equipos (peleaPeso=No y YaPelearon=Si)
                             // MessageBox.Show("conflicto con los equpos\nEtiqueta |H|");
-                            if (f >= 0) //m >= 0
+                            if (m >= 0) //m >= 0   //f >= 0
                             {
                                 gallo3 = rondas2[NP * ronda + m, 2];
                                 gallo4 = rondas2[NP * ronda + m + 1, 2];
@@ -416,7 +470,10 @@ namespace Menu
                                     {
                                         if (m < f)
                                         {
-                                            // intercambiar gallo2 y gallo3
+                                            // Actualizar ya pelearon y pueden pelear antes de hacer un cambio
+                                            ActualizarYapeleraonPuedenpelear2(NP, ronda, NR);
+
+                                            // intercambiar gallo1 y gallo4
                                             for (a = 0; a < 3; a++)
                                                 cambio3[0, a] = rondas2[(NP * ronda) + f - 1, a + 1];
                                             for (b = 0; b < 3; b++)
@@ -426,7 +483,10 @@ namespace Menu
                                         }
                                         else
                                         {
-                                            //intercambiar gallo1 y gallo4
+                                            // Actualizar ya pelearon y pueden pelear antes de hacer un cambio
+                                            ActualizarYapeleraonPuedenpelear2(NP, ronda, NR);
+
+                                            //intercambiar gallo2 y gallo3
                                             for (a = 0; a < 3; a++)
                                                 cambio3[0, a] = rondas2[(NP * ronda) + f - 2, a + 1];
                                             for (b = 0; b < 3; b++)
@@ -441,7 +501,7 @@ namespace Menu
                                     {
                                         if (m < f)
                                         {
-                                            f = f - 2;
+                                            f -= 2;
                                         }
                                         else
                                         // Buscamos adelante
@@ -471,19 +531,177 @@ namespace Menu
                                     }
                                 }
                             }
+                            // Conflicto entre los equipos(peleaPeso= No y YaPelearon = Si)
+                            // No me puedo ir para atras, ya que son los primeros de la ronda
                             else //NO
                             {
-                                MessageBox.Show("No hay posible cambio en la ronda\nEtiqueta |K|");
+                                m = f + 2;
+                                //MessageBox.Show("No hay posible cambio en la ronda\nEtiqueta |K|");
+                                if (m < NP - 1)
+                                {
+                                    gallo3 = rondas2[NP * ronda + m, 2];
+                                    gallo4 = rondas2[NP * ronda + m + 1, 2];
+
+                                    if ((peleaPeso[gallo1, gallo3] == true) && (peleaPeso[gallo2, gallo4] == true))
+                                    {
+                                        if ((puedenPelear[gallo1, gallo3] == true) && (puedenPelear[gallo2, gallo4] == true))
+                                        {
+                                            if (m > f)
+                                            {
+                                                // Actualizar ya pelearon y pueden pelear antes de hacer un cambio
+                                                ActualizarYapeleraonPuedenpelear2(NP, ronda, NR);
+
+                                                f += 2;
+                                                // intercambiar gallo2 y gallo3
+                                                for (a = 0; a < 3; a++)
+                                                    cambio3[0, a] = rondas2[(NP * ronda) + f - 1, a + 1];
+                                                for (b = 0; b < 3; b++)
+                                                    rondas2[(NP * ronda) + k - 1, b + 1] = rondas2[(NP * ronda) + f, b + 1];
+                                                for (c = 0; c < 3; c++)
+                                                    rondas2[NP * ronda + f, c + 1] = cambio3[0, c];
+
+                                                gallo2 = gallo3;
+                                            }
+                                            else
+                                            {
+                                                // Actualizar ya pelearon y pueden pelear antes de hacer un cambio
+                                                ActualizarYapeleraonPuedenpelear2(NP, ronda, NR);
+
+                                                //intercambiar gallo1 y gallo4
+                                                for (a = 0; a < 3; a++)
+                                                    cambio3[0, a] = rondas2[(NP * ronda) + f - 2, a + 1];
+                                                for (b = 0; b < 3; b++)
+                                                    rondas2[(NP * ronda) + k - 2, b + 1] = rondas2[(NP * ronda) + f + 1, b + 1];
+                                                for (c = 0; c < 3; c++)
+                                                    rondas2[NP * ronda + f + 1, c + 1] = cambio3[0, c];
+
+                                                gallo1 = gallo4;
+                                            }
+
+                                        }
+                                        else // No
+                                             // Buscamos atras
+                                        {
+                                            if (m < f)
+                                            {
+                                                f -= 2;
+                                            }
+                                            else
+                                            // Buscamos adelante
+                                            {
+                                                MessageBox.Show("Buscamos adelante\nEtiqueta |K|");
+                                            }
+                                        }
+                                    }
+
+                                }
+                                else
+                                {
+                                    MessageBox.Show("No hay posible cambio, ultimos 4 gallos ");
+                                }
+
                             }
                         }
                     }
                     else
                     {
                         ronda++;
-                        MessageBox.Show("Termina ronda: " + ronda);
+                        //MessageBox.Show("Termina ronda: " + ronda);
                         f = 0;
                     }
                 } //fin while 
+
+            }
+
+            String message = "Cotejo finalizado de manera exitosa\n¿Quieres descargar el archivo PDF?";
+            String title = "Cotejo finalizado";
+            String plantillaHTML = Properties.Resources.plantilla.ToString();
+            plantillaHTML = plantillaHTML.Replace("@nomDerby", NomDerby);
+
+            String fila = String.Empty;
+            for (int cont = 0; cont < 4; cont++)
+            {
+                fila += "<td>";
+                fila += "<table border='1' style='border-collapse: collapse; width: 100%; text-align:center;'>";
+                fila += "<tr style='background-color: lightgrey;'>";
+
+                fila += "<td style='width: 17%; height: 50px;'><strong> Color </strong></td>";
+                fila += "<td style='width: 49%; height: 50px;'><strong> Partido </strong></td>";
+                fila += "<td style='width: 17%; height: 50px;'><strong> Peso </strong></td>";
+                fila += "<td style='width: 17%; height: 50px;'><strong> Anillo </strong></td>";
+
+                fila += "</tr>";
+                fila += "</table>";
+                fila += "</td>";
+            }
+            plantillaHTML = plantillaHTML.Replace("@FILA", fila);
+            
+            String fila2 = String.Empty;
+            int showInfo = 0;
+            int color = 0;
+
+            for (int contador = 1; contador < NP + 1; contador++)
+            {
+                if (color == 0)
+                    color++;
+                else
+                    color = 0;
+                
+                fila2 += "<tr>";
+                for (showInfo = showInfo; showInfo < (NR * NP); showInfo += NP)
+                {
+                    int numPartido = rondas2[showInfo, 3];
+                    string nomPartido = diccionarioPartidos[numPartido].ToString();
+
+                    int numGallo = rondas2[showInfo, 2];
+                    int numAnillo = diccionarioAnillos[numGallo];
+
+                    fila2 += "<td>";
+                    fila2 += "<table border='1' style='border-collapse: collapse; width: 100%; text-align:center'>";
+                    fila2 += "<tr>";
+
+                    fila2 += "<td style='font-size: 14px; width: 17%; height: 50px;'>"
+                        + (color == 0 ? "Rojo" : "Verde") + "</td>";
+                    fila2 += "<td style='font-size: 14px; width: 49%; height: 50px;'>"
+                        + nomPartido + "</td>";
+                    fila2 += "<td style='font-size: 14px; width: 17%; height: 50px;'>"
+                        + rondas2[showInfo, 1] + "</td>";
+                    fila2 += "<td style='font-size: 14px; width: 17%; height: 50px;'>"
+                        + (numAnillo) + " </td>";
+
+                    fila2 += "</tr>";
+                    fila2 += "</table>";
+                    fila2 += "</td>";
+                }
+                showInfo = contador;
+                fila2 += "</tr>";
+            }
+            plantillaHTML = plantillaHTML.Replace("@CONTENIDO", fila2);
+
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show(message, title, buttons);
+            if (result == DialogResult.Yes)
+            {
+                SaveFileDialog guardarCotejo = new SaveFileDialog();
+                guardarCotejo.FileName = NomDerby + DateTime.Now.ToString("dd-MM-yyy") + ".pdf";
+                guardarCotejo.ShowDialog();
+
+                using(FileStream stream = new FileStream(guardarCotejo.FileName, FileMode.Create))
+                {
+                    
+                    Document pdfCotejo = new Document(PageSize.A4.Rotate(), 25, 25, 25, 25);
+                    PdfWriter writer = PdfWriter.GetInstance(pdfCotejo, stream);
+
+                    pdfCotejo.Open();
+                    using (StringReader sr = new StringReader(plantillaHTML))
+                    {
+                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfCotejo, sr);
+                    }
+                    pdfCotejo.Close();
+                    stream.Close();
+                }
+                
+
             }
         }
 
@@ -492,7 +710,7 @@ namespace Menu
         {
             //Reordenar las rondas modificadas por el peso 
             //Metodo de la burbuja (matriz [RENGLON][COLUMNA])
-            int numRonda1 = 0, count = 0;
+            int numRonda1, count = 0;
 
             for (numRonda1 = ronda; count < 2; numRonda1++)
             {
@@ -519,7 +737,7 @@ namespace Menu
         {
             //Actualizar matriz yaPelearon y PuedenPelear
             // yaPelearon = true | puedenPelear = false
-            int equipo1 = 0, equipo2 = 0, inicio1 = 0, inicio2 = 0, actA = 0, actB = 0;
+            int equipo1, equipo2, inicio1, inicio2, actA, actB;
 
             equipo1 = rondas2[NP * ronda + f, 3];
             equipo2 = rondas2[NP * ronda + f + 1, 3];
@@ -538,13 +756,13 @@ namespace Menu
             }
         }
 
-        public static void ActualizarYapeleraonPuedenpelear2(int NP, int ronda, int NR, int f)
+        public static void ActualizarYapeleraonPuedenpelear2(int NP, int ronda, int NR)
         {
             //Actualizar matriz yaPelearon y PuedenPelear
-            // yaPelearon = false | puedenPelea r= true
-            int h = 0, actX = 0, actY = 0, iniA = 0, iniB = 0, equipoA = 0, equipoB = 0;
+            // yaPelearon = false | puedenPelear = true
+            int h, actX, actY, iniA, iniB, equipoA, equipoB;
 
-            for (h = f - 2; h >= 0; h = h - 2)
+            for (h = 10; h >= 0; h -= 2)
             {
                 equipoA = rondas2[NP * ronda + h, 3];
                 equipoB = rondas2[NP * ronda + h + 1, 3];
