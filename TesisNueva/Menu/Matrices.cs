@@ -623,12 +623,13 @@ namespace Menu
             {
                 fila += "<td>";
                 fila += "<table border='1' style='border-collapse: collapse; width: 100%; text-align:center;'>";
-                fila += "<tr style='background-color: lightgrey;'>";
+                fila += "<tr style='background-color: lightblue;'>";
 
-                fila += "<td style='width: 17%; height: 50px;'><strong> Color </strong></td>";
+                fila += "<td style='width: 12%; height: 50px; padding-top: 10px;'><p>Gana</p><hr></hr><p>Pierde</p></td>";
+                fila += "<td style='width: 13%; height: 50px;'><strong> Color </strong></td>";
                 fila += "<td style='width: 49%; height: 50px;'><strong> Partido </strong></td>";
-                fila += "<td style='width: 17%; height: 50px;'><strong> Peso </strong></td>";
-                fila += "<td style='width: 17%; height: 50px;'><strong> Anillo </strong></td>";
+                fila += "<td style='width: 13%; height: 50px;'><strong> Peso </strong></td>";
+                fila += "<td style='width: 13%; height: 50px;'><strong> Anillo </strong></td>";
 
                 fila += "</tr>";
                 fila += "</table>";
@@ -638,43 +639,55 @@ namespace Menu
             
             String fila2 = String.Empty;
             int showInfo = 0;
-            int color = 0;
+            int contador2 = 1;
 
-            for (int contador = 1; contador < NP + 1; contador++)
+            for (int contador = 2; contador < NP + 1; contador += 2)
             {
-                if (color == 0)
-                    color++;
-                else
-                    color = 0;
-                
+                int numPelea = contador2;
                 fila2 += "<tr>";
                 for (showInfo = showInfo; showInfo < (NR * NP); showInfo += NP)
                 {
-                    int numPartido = rondas2[showInfo, 3];
-                    string nomPartido = diccionarioPartidos[numPartido].ToString();
+                    String nomPartidoGallo1 = diccionarioPartidos[rondas2[showInfo, 3]].ToString();
+                    String nomPartidoGallo2 = diccionarioPartidos[rondas2[showInfo + 1, 3]].ToString();
 
-                    int numGallo = rondas2[showInfo, 2];
-                    int numAnillo = diccionarioAnillos[numGallo];
+                    int pesoGallo1 = rondas2[showInfo, 1];
+                    int pesoGallo2 = rondas2[showInfo + 1, 1];
+
+                    int numAnilloGallo1 = diccionarioAnillos[rondas2[showInfo, 2]];
+                    int numAnilloGallo2 = diccionarioAnillos[rondas2[showInfo + 1, 2]];
 
                     fila2 += "<td>";
-                    fila2 += "<table border='1' style='border-collapse: collapse; width: 100%; text-align:center'>";
+                    fila2 += "<table border='1' style='border-collapse: collapse; width: 100%; text-align:center;'>";
+
+                    fila2 += "<tr style='background-color: lightgrey; height: 25px;'>";
+                    fila2 += "<td colspan='5'>" + numPelea + "</td>";
+                    fila2 += "</tr>";
+
                     fila2 += "<tr>";
 
-                    fila2 += "<td style='font-size: 14px; width: 17%; height: 50px;'>"
-                        + (color == 0 ? "Rojo" : "Verde") + "</td>";
-                    fila2 += "<td style='font-size: 14px; width: 49%; height: 50px;'>"
-                        + nomPartido + "</td>";
-                    fila2 += "<td style='font-size: 14px; width: 17%; height: 50px;'>"
-                        + rondas2[showInfo, 1] + "</td>";
-                    fila2 += "<td style='font-size: 14px; width: 17%; height: 50px;'>"
-                        + (numAnillo) + " </td>";
+                    fila2 += "<td style='width: 12%; height: 50px;'> <hr></hr> </td>";
+                    fila2 += "<td style='font-size: 14px; width: 13%; height: 50px; padding-top: 20px;'>";
+                    fila2 += "<p>Rojo</p>" + "<p>Verde</p>";
+                    fila2 += "</td>";
+                    fila2 += "<td style='font-size: 14px; width: 49%; height: 50px; padding-top: 20px;'>";
+                    fila2 += "<p>" + nomPartidoGallo1 + "</p>" + "<p>" + nomPartidoGallo2 + "</p>";
+                    fila2 += "</td>";
+                    fila2 += "<td style='font-size: 14px; width: 13%; height: 50px; padding-top: 20px;'>";
+                    fila2 += "<p>" + pesoGallo1 + "</p>" + "<p>" + pesoGallo2 + "</p>";
+                    fila2 += "</td>";
+                    fila2 += "<td style='font-size: 14px; width: 13%; height: 50px; padding-top: 20px;'>";
+                    fila2 += "<p>" + numAnilloGallo1 + "</p>" + "<p>" + numAnilloGallo2 + "</p>";
+                    fila2 += "</td>";
 
                     fila2 += "</tr>";
                     fila2 += "</table>";
                     fila2 += "</td>";
+
+                    numPelea += NP / 2;
                 }
                 showInfo = contador;
                 fila2 += "</tr>";
+                contador2++;
             }
             plantillaHTML = plantillaHTML.Replace("@CONTENIDO", fila2);
 
@@ -682,14 +695,19 @@ namespace Menu
             DialogResult result = MessageBox.Show(message, title, buttons);
             if (result == DialogResult.Yes)
             {
-                SaveFileDialog guardarCotejo = new SaveFileDialog();
-                guardarCotejo.FileName = NomDerby + DateTime.Now.ToString("dd-MM-yyy") + ".pdf";
+                String fecha = DateTime.Now.ToString("D");
+                plantillaHTML = plantillaHTML.Replace("@FECHA", fecha);
+
+                SaveFileDialog guardarCotejo = new SaveFileDialog
+                {
+                    FileName = "Derby " + NomDerby + DateTime.Now.ToString("dd-MM-yyy") + ".pdf"
+                };
                 guardarCotejo.ShowDialog();
 
                 using(FileStream stream = new FileStream(guardarCotejo.FileName, FileMode.Create))
                 {
                     
-                    Document pdfCotejo = new Document(PageSize.A4.Rotate(), 25, 25, 25, 25);
+                    Document pdfCotejo = new Document(PageSize.A2.Rotate(), 25, 25, 25, 25);
                     PdfWriter writer = PdfWriter.GetInstance(pdfCotejo, stream);
 
                     pdfCotejo.Open();
