@@ -129,43 +129,43 @@
     <value>Maiandra GD, 12pt, style=Bold</value>
   </data>
   <data name="nuevoDerbyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>342, 28</value>
+    <value>291, 26</value>
   </data>
   <data name="nuevoDerbyToolStripMenuItem.Text" xml:space="preserve">
     <value>Nuevo Derby</value>
   </data>
   <data name="registrarPartidosYGallosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>342, 28</value>
+    <value>291, 26</value>
   </data>
   <data name="registrarPartidosYGallosToolStripMenuItem.Text" xml:space="preserve">
     <value>Registrar Partidos y Gallos</value>
   </data>
   <data name="peleasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 71</value>
+    <value>149, 57</value>
   </data>
   <data name="peleasToolStripMenuItem.Text" xml:space="preserve">
     <value>Nuevo Derby</value>
   </data>
   <data name="derbysAterioresToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 71</value>
+    <value>183, 57</value>
   </data>
   <data name="derbysAterioresToolStripMenuItem.Text" xml:space="preserve">
-    <value>Derbys Ateriores</value>
+    <value>Derbys Anteriores</value>
   </data>
   <data name="administradorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 28</value>
+    <value>263, 26</value>
   </data>
   <data name="administradorToolStripMenuItem.Text" xml:space="preserve">
     <value>Administrador</value>
   </data>
   <data name="consultorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 28</value>
+    <value>263, 26</value>
   </data>
   <data name="consultorToolStripMenuItem.Text" xml:space="preserve">
     <value>Agregar Administrador</value>
   </data>
   <data name="iniciarSesiónToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 71</value>
+    <value>146, 57</value>
   </data>
   <data name="iniciarSesiónToolStripMenuItem.Text" xml:space="preserve">
     <value>Iniciar Sesión</value>
@@ -173,8 +173,12 @@
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="menuStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 2, 0, 2</value>
+  </data>
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1348, 75</value>
+    <value>1011, 61</value>
   </data>
   <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -548,9 +552,8 @@
     <value>76</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 16</value>
+    <value>6, 13</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
@@ -1367,7 +1370,7 @@
 </value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1348, 721</value>
+    <value>1011, 586</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4846,6 +4849,9 @@
         /////8AA///////////////////////////////////AAP//////////////////////////////////
         wAA=
 </value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

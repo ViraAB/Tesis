@@ -25,7 +25,7 @@ namespace Menu
 
     static class Matrices
     {
-        static SQLiteConnection conexion = new SQLiteConnection("Data Source=BD_Tesis.db");
+        static readonly SQLiteConnection conexion = new SQLiteConnection("Data Source=BD_Tesis.db");
         public static SQLiteDataReader drIdPartido;
         public static SQLiteDataReader drName;
         public static SQLiteDataReader drTablaPartido;
@@ -57,6 +57,9 @@ namespace Menu
 
         public static void Consultar(string tabla)
         {
+            diccionarioPartidos.Clear();
+            diccionarioAnillos.Clear();
+
             string IdPartidoDerby = " "; //id del derby
             string NomDerby = " "; //Nombre del derby
             string ValNPD = " "; //numero de partidos que tiene el derby
@@ -273,7 +276,7 @@ namespace Menu
                         int IntIdPartido2 = Int16.Parse(IdPartido2);//Convertimos el IdPartido2 a entero (int)
 
                         //int x = 0, y = 0;
-                        int inicioRest1 = 0, inicioRest2 = 0;
+                        int inicioRest1, inicioRest2;
 
                         inicioRest1 = ((IntIdPartido1 - 1) * NR); //32
                         inicioRest2 = ((IntIdPartido2 - 1) * NR); //40
@@ -325,7 +328,7 @@ namespace Menu
 
                 //Ordenar matriz Rondas2 por pesos
                 //Metodo de la burbuja (matriz [RENGLON][COLUMNA])
-                int[,] cambio = { };
+                int[,] cambio;
                 cambio = new int[1, 4];
 
                 for (ordenarRonda = 0; ordenarRonda <= (NR - 1); ordenarRonda++)
@@ -455,7 +458,7 @@ namespace Menu
                             gallo2 = rondas2[NP * ronda + f + 1, 2];
                             m = f - 2;
 
-                            int[,] cambio3 = { };
+                            int[,] cambio3;
                             cambio3 = new int[1, 3];
 
                             // Conflicto entre los equipos (peleaPeso=No y YaPelearon=Si)
@@ -618,6 +621,9 @@ namespace Menu
             String plantillaHTML = Properties.Resources.plantilla.ToString();
             plantillaHTML = plantillaHTML.Replace("@nomDerby", NomDerby);
 
+            String fecha = DateTime.Now.ToString("D");
+            plantillaHTML = plantillaHTML.Replace("@FECHA", fecha);
+
             String fila = String.Empty;
             for (int cont = 0; cont < 4; cont++)
             {
@@ -636,7 +642,7 @@ namespace Menu
                 fila += "</td>";
             }
             plantillaHTML = plantillaHTML.Replace("@FILA", fila);
-            
+
             String fila2 = String.Empty;
             int showInfo = 0;
             int contador2 = 1;
@@ -693,37 +699,42 @@ namespace Menu
 
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult result = MessageBox.Show(message, title, buttons);
+
+            Registro registro = new Registro();
             if (result == DialogResult.Yes)
             {
-                String fecha = DateTime.Now.ToString("D");
-                plantillaHTML = plantillaHTML.Replace("@FECHA", fecha);
-
-                SaveFileDialog guardarCotejo = new SaveFileDialog
-                {
-                    FileName = "Derby " + NomDerby + DateTime.Now.ToString("dd-MM-yyy") + ".pdf"
-                };
-                guardarCotejo.ShowDialog();
-
-                using(FileStream stream = new FileStream(guardarCotejo.FileName, FileMode.Create))
-                {
-                    
-                    Document pdfCotejo = new Document(PageSize.A2.Rotate(), 25, 25, 25, 25);
-                    PdfWriter writer = PdfWriter.GetInstance(pdfCotejo, stream);
-
-                    pdfCotejo.Open();
-                    using (StringReader sr = new StringReader(plantillaHTML))
-                    {
-                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfCotejo, sr);
-                    }
-                    pdfCotejo.Close();
-                    stream.Close();
-                }
-                
-
+                ImprimirPdf(plantillaHTML, NomDerby);
+                registro.GenerarPDF(plantillaHTML, NomDerby);
+            }
+            else
+            {
+                registro.GenerarPDF(plantillaHTML, NomDerby);
             }
         }
 
         // FUNCIONES
+        public static void ImprimirPdf(String plantillaHTML, String NomDerby)
+        {
+            SaveFileDialog guardarCotejo = new SaveFileDialog
+            {
+                FileName = "Derby " + NomDerby + DateTime.Now.ToString("dd-MM-yyy") + ".pdf"
+            };
+            guardarCotejo.ShowDialog();
+
+            using (FileStream stream = new FileStream(guardarCotejo.FileName, FileMode.Create))
+            {
+                Document pdfCotejo = new Document(PageSize.A2.Rotate(), 25, 25, 25, 25);
+                PdfWriter writer = PdfWriter.GetInstance(pdfCotejo, stream);
+
+                pdfCotejo.Open();
+                using (StringReader sr = new StringReader(plantillaHTML))
+                {
+                    XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfCotejo, sr);
+                }
+                pdfCotejo.Close();
+                stream.Close();
+            }
+        }
         public static void ReordenarMetBurbuja(int ronda, int NP, int[,] cambio, int ory, int orx, int a, int b, int c)
         {
             //Reordenar las rondas modificadas por el peso 
@@ -802,7 +813,7 @@ namespace Menu
 
         public static void IntercambiarGallos(int ronda, int NP, int k, int a, int b, int c, int f, int l)
         {
-            int[,] cambio2 = { };
+            int[,] cambio2;
             cambio2 = new int[1, 2];
 
             if (l == 0)

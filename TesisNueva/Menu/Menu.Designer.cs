@@ -76,12 +76,6 @@
             resources.ApplyResources(this.registrarPartidosYGallosToolStripMenuItem, "registrarPartidosYGallosToolStripMenuItem");
             this.registrarPartidosYGallosToolStripMenuItem.Click += new System.EventHandler(this.registrarPartidosYGallosToolStripMenuItem_Click_1);
             // 
-            // derbysAterioresToolStripMenuItem
-            // 
-            this.derbysAterioresToolStripMenuItem.Image = global::Menu.Properties.Resources.kappfinder;
-            this.derbysAterioresToolStripMenuItem.Name = "derbysAterioresToolStripMenuItem";
-            resources.ApplyResources(this.derbysAterioresToolStripMenuItem, "derbysAterioresToolStripMenuItem");
-            // 
             // iniciarSesiónToolStripMenuItem
             // 
             this.iniciarSesiónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -112,8 +106,7 @@
             this.skinEngine1.SerialNumber = "U4N2UjLguUZs33UR+Vy47JAZ81t2fjIFvut28vc5oHiVeivGb/NZMA==";
             this.skinEngine1.SkinAllForm = false;
             this.skinEngine1.SkinDialogs = false;
-            this.skinEngine1.SkinFile = "C:\\Tesis\\Tesis\\TesisNueva\\Menu\\bin\\Debug\\Componentes Graficos Vb2\\SKIN NET 2010 W" +
-    "IN 7\\SkinVS.NET\\Carlmness\\Calmness.ssk";
+            this.skinEngine1.SkinFile = null;
             this.skinEngine1.SkinStreamMain = ((System.IO.Stream)(resources.GetObject("skinEngine1.SkinStreamMain")));
             // 
             // Form1

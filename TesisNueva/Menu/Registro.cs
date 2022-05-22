@@ -17,6 +17,8 @@ namespace Menu
         public string ActuPeso = " ";
         public string ActuAnillo = " ";
         public string ActuPartido = " ";
+        public static string PlantillaHtmlRegistro = " ";
+        public static string NomDerbyRegistro = " ";
 
         private string cadenaConexion = "Data Source=BD_Tesis.db; Version=3;Initial Catalog=Usuario;Intefrated Security=true;";
         SQLiteConnection conexion2;
@@ -40,7 +42,15 @@ namespace Menu
 
             //Ocultamos la columna de id gallo, pero se agrega para poder eliminar los registros con el id del mismo
             this.dgvGallos.Columns["ID Gallo"].Visible = false;
-        }      
+        }
+
+        //Guardar PDF
+        public void GenerarPDF(String plantillaHTML, String NomDerby)
+        {
+            PlantillaHtmlRegistro = plantillaHTML;
+            NomDerbyRegistro = NomDerby;
+            this.Refresh();
+        }
 
         //Guardamos los partidos nuevos
         private void btnGuardarNomPartido_Click(object sender, EventArgs e)
