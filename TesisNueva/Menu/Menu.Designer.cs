@@ -38,6 +38,7 @@
             this.administradorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.skinEngine1 = new Sunisoft.IrisSkin.SkinEngine(((System.ComponentModel.Component)(this)));
+            this.derbysAnterioresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,6 +49,7 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.peleasToolStripMenuItem,
+            this.derbysAnterioresToolStripMenuItem,
             this.derbysAterioresToolStripMenuItem,
             this.iniciarSesiónToolStripMenuItem});
             this.menuStrip1.Name = "menuStrip1";
@@ -75,6 +77,11 @@
             this.registrarPartidosYGallosToolStripMenuItem.Name = "registrarPartidosYGallosToolStripMenuItem";
             resources.ApplyResources(this.registrarPartidosYGallosToolStripMenuItem, "registrarPartidosYGallosToolStripMenuItem");
             this.registrarPartidosYGallosToolStripMenuItem.Click += new System.EventHandler(this.registrarPartidosYGallosToolStripMenuItem_Click_1);
+            // 
+            // derbysAterioresToolStripMenuItem
+            // 
+            this.derbysAterioresToolStripMenuItem.Name = "derbysAterioresToolStripMenuItem";
+            resources.ApplyResources(this.derbysAterioresToolStripMenuItem, "derbysAterioresToolStripMenuItem");
             // 
             // iniciarSesiónToolStripMenuItem
             // 
@@ -109,6 +116,12 @@
             this.skinEngine1.SkinFile = null;
             this.skinEngine1.SkinStreamMain = ((System.IO.Stream)(resources.GetObject("skinEngine1.SkinStreamMain")));
             // 
+            // derbysAnterioresToolStripMenuItem
+            // 
+            this.derbysAnterioresToolStripMenuItem.Image = global::Menu.Properties.Resources.kappfinder;
+            this.derbysAnterioresToolStripMenuItem.Name = "derbysAnterioresToolStripMenuItem";
+            resources.ApplyResources(this.derbysAnterioresToolStripMenuItem, "derbysAnterioresToolStripMenuItem");
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -135,6 +148,7 @@
         public System.Windows.Forms.ToolStripMenuItem peleasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consultorToolStripMenuItem;
         private Sunisoft.IrisSkin.SkinEngine skinEngine1;
+        private System.Windows.Forms.ToolStripMenuItem derbysAnterioresToolStripMenuItem;
     }
 }
 

@@ -375,18 +375,24 @@ namespace Menu
                             f += 2;
                         }
                         //comienza etiqueta |C|
-                        else if (peleaPeso[gallo1, gallo2] == false) //No pueden pelaer por diferencia de pesos
+                        else if (peleaPeso[gallo1, gallo2] == false) // SI
+                        //No pueden pelaer por diferencia de pesos
                         {
-                            if (ronda == 0 && f == 0) //SI
+                            if (ronda == 3) // ¿ultima ronda?
                             {
-                                if (peleaPartido[gallo1, gallo2] == false) //los partidos no pueden pelear
-                                {
-                                    MessageBox.Show("si es SI,\nEtiqueta |H|");
-                                }
-                                else
-                                {
-                                    MessageBox.Show("si es NO,\nEtiqueta |G|");
-                                }
+                                MessageBox.Show("Es la ultima ronda, estamos en proceso de CONSTRUCCIÓN \n Etiqueta |L|");
+                            }
+                            else if (ronda == 0 && f == 0) //SI
+                            {
+                                String nomPartidoGallo = diccionarioPartidos[rondas2[0, 3]].ToString();
+                                String numAnilloGallo = diccionarioAnillos[rondas2[0, 2]].ToString();
+                                //El primer gallo de la primera ronda es muy liviano no hay contrincante
+                                MessageBox.Show("No hay solución, el peso " + rondas2[0, 1] + "Kg del gallo: \n"
+                                    + "     -> No. " + (gallo1 + 1) + ",\n"
+                                    + "     -> con No. anillo " + numAnilloGallo + ",\n"
+                                    + "     -> del partido " + nomPartidoGallo + ",\n"
+                                    + " es muy liviano \n" +
+                                    "\n\n Modifica el peso y vuelve a intentar");
                             }
                             //Verifica el gallo del mismo partido que se encuentre en la sig ronda
                             //para ver si da el peso con el gallo2, si es true, los intercambia
@@ -453,6 +459,7 @@ namespace Menu
                             }
                         }
                         else // NO
+                        // Conflicto entre los equipos (peleaPeso=No y YaPelearon=Si)
                         {
                             gallo1 = rondas2[NP * ronda + f, 2];
                             gallo2 = rondas2[NP * ronda + f + 1, 2];
@@ -461,7 +468,6 @@ namespace Menu
                             int[,] cambio3;
                             cambio3 = new int[1, 3];
 
-                            // Conflicto entre los equipos (peleaPeso=No y YaPelearon=Si)
                             // MessageBox.Show("conflicto con los equpos\nEtiqueta |H|");
                             if (m >= 0) //m >= 0   //f >= 0
                             {
@@ -500,16 +506,25 @@ namespace Menu
 
                                     }
                                     else // No
-                                    // Buscamos atras
                                     {
-                                        if (m < f)
+                                        if (m < f) //Si
+                                        // Buscamos atras
                                         {
                                             f -= 2;
                                         }
-                                        else
+                                        else //No
                                         // Buscamos adelante
                                         {
-                                            MessageBox.Show("Buscamos adelante\nEtiqueta |K|");
+                                            //MessageBox.Show("Buscamos adelante\nEtiqueta |K|");
+                                            m += 2;
+                                            if (m < NP-1) // Si
+                                            {
+                                                // aqui tengo que volver arriba donde esta gallo3 y gallo4
+                                            }
+                                            else //No
+                                            {
+                                                MessageBox.Show("Buscamos adelante\nEtiqueta |J|");
+                                            }
                                         }
                                     }
                                 }
@@ -612,8 +627,7 @@ namespace Menu
                         //MessageBox.Show("Termina ronda: " + ronda);
                         f = 0;
                     }
-                } //fin while 
-
+                } //fin while
             }
 
             String message = "Cotejo finalizado de manera exitosa\n¿Quieres descargar el archivo PDF?";

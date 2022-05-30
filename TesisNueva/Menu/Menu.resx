@@ -129,43 +129,46 @@
     <value>Maiandra GD, 12pt, style=Bold</value>
   </data>
   <data name="nuevoDerbyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 26</value>
+    <value>350, 28</value>
   </data>
   <data name="nuevoDerbyToolStripMenuItem.Text" xml:space="preserve">
     <value>Nuevo Derby</value>
   </data>
   <data name="registrarPartidosYGallosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 26</value>
+    <value>350, 28</value>
   </data>
   <data name="registrarPartidosYGallosToolStripMenuItem.Text" xml:space="preserve">
     <value>Registrar Partidos y Gallos</value>
   </data>
   <data name="peleasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 57</value>
+    <value>174, 57</value>
   </data>
   <data name="peleasToolStripMenuItem.Text" xml:space="preserve">
     <value>Nuevo Derby</value>
   </data>
-  <data name="derbysAterioresToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 57</value>
+  <data name="derbysAnterioresToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 57</value>
   </data>
-  <data name="derbysAterioresToolStripMenuItem.Text" xml:space="preserve">
+  <data name="derbysAnterioresToolStripMenuItem.Text" xml:space="preserve">
     <value>Derbys Anteriores</value>
   </data>
+  <data name="derbysAterioresToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 57</value>
+  </data>
   <data name="administradorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 26</value>
+    <value>313, 28</value>
   </data>
   <data name="administradorToolStripMenuItem.Text" xml:space="preserve">
     <value>Administrador</value>
   </data>
   <data name="consultorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 26</value>
+    <value>313, 28</value>
   </data>
   <data name="consultorToolStripMenuItem.Text" xml:space="preserve">
     <value>Agregar Administrador</value>
   </data>
   <data name="iniciarSesiónToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 57</value>
+    <value>170, 57</value>
   </data>
   <data name="iniciarSesiónToolStripMenuItem.Text" xml:space="preserve">
     <value>Iniciar Sesión</value>
@@ -4906,6 +4909,12 @@
   </data>
   <data name="&gt;&gt;skinEngine1.Type" xml:space="preserve">
     <value>Sunisoft.IrisSkin.SkinEngine, IrisSkin2, Version=2006.3.22.45, Culture=neutral, PublicKeyToken=f4d76dd8d689a256</value>
+  </data>
+  <data name="&gt;&gt;derbysAnterioresToolStripMenuItem.Name" xml:space="preserve">
+    <value>derbysAnterioresToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;derbysAnterioresToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Form1</value>
